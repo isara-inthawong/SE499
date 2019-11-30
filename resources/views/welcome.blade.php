@@ -86,23 +86,25 @@
             <div class="title m-b-md">
                 Laravel
                 <br>
-                @php
+                <span id="times">
+                    @php
                     echo date("d M H:i:s");
-                @endphp
+                    @endphp
+                </span>
             </div>
 
             <div class="links">
-                <a href="https://laravel.com/docs">Docs</a>
-                <a href="https://laracasts.com">Laracasts</a>
-                <a href="https://laravel-news.com">News</a>
-                <a href="https://blog.laravel.com">Blog</a>
-                <a href="https://nova.laravel.com">Nova</a>
-                <a href="https://forge.laravel.com">Forge</a>
-                <a href="https://vapor.laravel.com">Vapor</a>
-                <a href="https://github.com/laravel/laravel">GitHub</a>
+                <a href="https://github.com/isara5678/SE499" target="_blank">GitHub</a>
             </div>
         </div>
     </div>
 </body>
+<script type="text/javascript">
+    function showTime() {
+        var date = new Date();
+        document.getElementById('times').innerHTML = date.toLocaleString();
+    }
+    setInterval(showTime, 1000);
+</script>
 
 </html>

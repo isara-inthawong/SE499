@@ -22,6 +22,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Route for normal user
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/LineNotify', 'LineNotifyController@index')->name('LineNotify.index');
+    Route::post('/LineNotify', 'LineNotifyController@sent')->name('LineNotify.sent');
 });
 //Route for admin
 Route::group(['prefix' => 'admin'], function () {
