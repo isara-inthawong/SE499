@@ -69,6 +69,6 @@ For the versions available, see the [tags on this repository](https://github.com
 
 ## Authors
 
-* **Isara Intawong** - *Initial work* - [Bell](https://github.com/isara5678)
+* **Bell** - *Initial work* - [isara5678](https://github.com/isara5678)
 
 See also the list of [contributors](https://github.com/isara5678/SE499/contributors) who participated in this project.
