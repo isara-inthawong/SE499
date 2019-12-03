@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Route::get('/', 'admin\TestController@testAlert')->name('test.alert');
+
 Auth::routes();
 
 
@@ -35,3 +37,5 @@ Route::group(['prefix' => 'admin'], function () {
         // Route::get('/activity', 'admin\ActivityController@index')->name('Activity.index');
     });
 });
+
+

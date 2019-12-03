@@ -4,9 +4,14 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+Use Alert;
 
-class UserController extends Controller
+class TestController extends Controller
 {
+    public function testAlert(){
+        Alert::warning('Warning Title', 'Warning Message');
+        return view('welcome');
+    }
     /**
      * Display a listing of the resource.
      *
