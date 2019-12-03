@@ -17,18 +17,21 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 //Route for normal user
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/LineNotify', 'LineNotifyController@index')->name('LineNotify.index');
     Route::post('/LineNotify', 'LineNotifyController@sent')->name('LineNotify.sent');
+    Route::get('/activity', 'admin\ActivityController@index')->name('Activity.index');
+    Route::post('/activity', 'admin\ActivityController@store')->name('Activity.store');
 });
 //Route for admin
 Route::group(['prefix' => 'admin'], function () {
     Route::group(['middleware' => ['admin']], function () {
-        Route::get('/dashboard', 'admin\AdminController@index')
-            ->name('dashboard');
+        Route::get('/dashboard', 'admin\AdminController@index')->name('dashboard');
+        // Route::get('/LineNotify', 'admin\LineNotifyController@index')->name('LineNotify.index');
+        // Route::post('/LineNotify', 'admin\LineNotifyController@sent')->name('LineNotify.sent');
+        // Route::get('/activity', 'admin\ActivityController@index')->name('Activity.index');
     });
 });

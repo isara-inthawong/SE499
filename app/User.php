@@ -16,8 +16,17 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'last_name', 'email', 'password',
     ];
+
+    public $table = "users";
+
+    protected $primaryKey = 'user_id';
+
+    public function history()
+    {
+        return $this->hasMany('App\History', 'user_id', 'user_id')->withDefault();
+    }
 
     /**
      * The attributes that should be hidden for arrays.

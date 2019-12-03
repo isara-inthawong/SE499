@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 // use Illuminate\Support\Facades\Crypt;
 
 class CreateUsersTable extends Migration
@@ -16,8 +17,9 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
+            $table->bigIncrements('user_id');
+            $table->string('first_name');
+            $table->string('last_name');
             $table->string('email')->unique();
             $table->string('password');
             $table->enum('role', ['member', 'admin'])->default('member');
@@ -28,14 +30,16 @@ class CreateUsersTable extends Migration
         DB::table('users')->insert(
             [
                 [
-                    'name' => 'Admin',
+                    'first_name' => 'FAdmin',
+                    'last_name' => 'LAdmin',
                     'email' => 'admin@admin.com',
                     'password' => Hash::make('qqqqwwww'), //password is ”qqqqwwww”
                     // 'password' => Crypt::encryptString('qqqqwwww'), //password is ”qqqqwwww”
                     'role' => 'admin',
                 ],
                 [
-                    'name' => 'Member',
+                    'first_name' => 'FMember',
+                    'last_name' => 'LMember',
                     'email' => 'member@member.com',
                     'password' => Hash::make('qqqqwwww'), //password is ”qqqqwwww”
                     // 'password' => Crypt::encryptString('qqqqwwww'), //password is ”qqqqwwww”

@@ -4,8 +4,11 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+// Use Alert;
+use RealRashid\SweetAlert\Facades\Alert;
 
-class AdminController extends Controller
+
+class ActivityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +17,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.admin-dashboard');
+        return view('activity');
     }
 
     /**
@@ -35,7 +38,27 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(
+            $request,
+            [
+                'activity_name' => 'required',
+                'activity_detail' => 'required',
+                'activity_address' => 'required',
+                'activity_datetime' => 'required',
+                'activity_image' => 'required',
+                'activity_image' => 'required|image|mimes:jpeg,png,jpg|max:15360‬'
+            ]
+        );
+
+        $FileImagerun = $request->image_map;
+        $imageName = null;
+
+        if ($FileImagerun != null) {
+            $imageName = time() . '.' . $FileImagerun->getClientOriginalExtension();
+            $FileImagerun->move(public_path('images'), $imageName);
+        }
+        Alert::warning('คุณเคยสร้างกิจกรรมนี้แล้ว!');
+        return redirect()->back();
     }
 
     /**

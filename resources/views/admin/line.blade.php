@@ -1,4 +1,4 @@
-@extends('layouts.app-layout')
+@extends('layouts.admin-layout')
 
 @section('title','Send message to line')
 
