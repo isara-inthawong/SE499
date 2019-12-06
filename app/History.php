@@ -3,16 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class History extends Model
 {
+    use SoftDeletes;
     protected $fillable = [
         'activity_id', 'user_id',
     ];
 
     public $table = "histories";
 
-    protected $primaryKey = 'history_id';
+    protected $primaryKey = ['user_id', 'activity_id'];
 
     public function activity()
     {

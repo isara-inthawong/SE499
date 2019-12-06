@@ -8,9 +8,9 @@ Use Alert;
 
 class TestController extends Controller
 {
-    public function testAlert(){
+    public function alert(){
         Alert::warning('Warning Title', 'Warning Message');
-        return view('welcome');
+        return back();
     }
     /**
      * Display a listing of the resource.

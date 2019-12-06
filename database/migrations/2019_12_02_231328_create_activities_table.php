@@ -15,12 +15,15 @@ class CreateActivitiesTable extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->bigIncrements('activity_id');
-            $table->string('activity_name',50)->unique();
-            $table->string('activity_detail')->unique();
+            $table->string('activity_name')->unique();
             $table->string('activity_address')->nullable();
-            $table->dateTime('activity_datetime')->nullable();
+            $table->date('activity_date')->nullable();
+            $table->time('activity_time')->nullable();
+            $table->string('hour')->nullable();
+            $table->string('activity_detail')->nullable();
             $table->string('activity_image')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

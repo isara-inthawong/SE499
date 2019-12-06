@@ -1,4 +1,5 @@
 @extends('layouts.admin-layout')
+@section('title', 'Home')
 @section('content')
 <div class="row">
     <ol class="breadcrumb">
@@ -89,7 +90,7 @@
                 </span></div>
             <div class="panel-body">
                 <div class="canvas-wrapper">
-                    <canvas class="chart" id="line-chart" height="200" width="600"></canvas>
+                    <canvas class="chart" id="line-chart" height="200" ></canvas>
                 </div>
             </div>
         </div>

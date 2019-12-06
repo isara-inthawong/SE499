@@ -3,16 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Activity extends Model
 {
+    use SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'activity_name', 'activity_detail', 'activity_address', 'activity_datetime', 'activity_image',
+        'activity_name', 'activity_address', 'activity_date', 'activity_time','hour','activity_detail', 'activity_image',
     ];
 
     public $table = "activities";

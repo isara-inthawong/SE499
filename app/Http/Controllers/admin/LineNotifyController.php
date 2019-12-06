@@ -12,7 +12,7 @@ class LineNotifyController extends Controller
     function index()
     {
         $collection = MoonJamesModel::all();
-        return view('line', compact('collection'));
+        return view('admin.line', compact('collection'));
     }
     function sent(Request $request)
     {
