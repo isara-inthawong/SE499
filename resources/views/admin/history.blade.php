@@ -1,7 +1,16 @@
-@extends('layouts.app-layout')
+@extends('layouts.admin-layout')
 @section('title','History')
 @section('content')
 <div class="container">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="#">
+                    <em class="fa fa-home"></em>
+                </a></li>
+            <li class="active">History</li>
+        </ol>
+    </div>
+    <!--/.row-->
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

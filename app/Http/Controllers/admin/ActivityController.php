@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Activity;
 // Use Alert;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -17,7 +18,10 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        return view('activity');
+        if (session('success_message')) {
+            Alert::success(session('success_message'));
+        }
+        return view('admin.activity');
     }
 
     /**
@@ -44,9 +48,10 @@ class ActivityController extends Controller
                 'activity_name' => 'required',
                 'activity_detail' => 'required',
                 'activity_address' => 'required',
-                'activity_datetime' => 'required',
-                'activity_image' => 'required',
-                'activity_image' => 'required|image|mimes:jpeg,png,jpg|max:15360‬'
+                'activity_date' => 'required',
+                'activity_time' => 'required',
+                'hour' => 'requred|integer|',
+                'activity_image' => 'required|image|mimes:jpeg,png,jpg|max:15360‬',
             ]
         );
 
@@ -55,10 +60,29 @@ class ActivityController extends Controller
 
         if ($FileImagerun != null) {
             $imageName = time() . '.' . $FileImagerun->getClientOriginalExtension();
-            $FileImagerun->move(public_path('images'), $imageName);
+            $FileImagerun->move(public_path('images/activity'), $imageName);
         }
-        Alert::warning('คุณเคยสร้างกิจกรรมนี้แล้ว!');
-        return redirect()->back();
+
+        $activity_name = $request->get('activity_name');
+        $exists = Activity::where('activity_name', '=', $activity_name)->first();
+
+        if (!$exists) {
+            $dataActivity = array(
+                'activity_name' => $activity_name,
+                'activity_detail' => $request->get('activity_detail'),
+                'activity_address' => $request->get('activity_address'),
+                'activity_date' => $request->get('activity_date'),
+                'activity_time' => $request->get('activity_time'),
+                'hour' => $request->get('hour'),
+                'activity_image' => $imageName
+            );
+            Activity::create($dataActivity);
+
+            return redirect('admin/activity')->withSuccessMessage('สร้างชื่อกิจกรรมวิ่งสำเร็จแล้ว');
+        }
+        Alert::warning('คุณเคยสร้างชื่อกิจกรรมนี้แล้ว!');
+
+        return redirect()->back()->withInput(input());
     }
 
     /**
@@ -80,7 +104,8 @@ class ActivityController extends Controller
      */
     public function edit($id)
     {
-        //
+        $activity = Activity::find($id);
+        return view('admin.edi-activity', compact('activities'));
     }
 
     /**
@@ -92,7 +117,64 @@ class ActivityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(
+            $request,
+            [
+                'activity_name' => 'required',
+                'activity_detail' => 'required',
+                'activity_address' => 'required',
+                'activity_date' => 'required',
+                'activity_time' => 'required',
+                'hour' => 'requred|integer',
+                // 'activity_image' => 'required|image|mimes:jpeg,png,jpg|max:15360‬',
+            ]
+        );
+
+        if ($request->activity_image == null) {
+            $exists = Activity::where('activity_id', '=', $id)->first();
+
+            if ((!$exists) || ($exists->activity_id == $id)) {
+                $activity = Activity::where('activity_id', '=', $id);
+
+                $attr['activity_name'] = $request->get('activity_name');
+                $attr['activity_detail'] = $request->get('activity_detail');
+                $attr['activity_address'] = $request->get('activity_address');
+                $attr['activity_date'] = $request->get('activity_date');
+                $attr['activity_time'] = $request->get('activity_time');
+                $attr['hour'] = $request->get('hour');
+                $activity->update($attr);
+
+                return redirect('admin/activity')->withSuccessMessage('แก้ไขกิจกรรมสำเร็จแล้ว');
+            }
+            Alert::warning('คุณเคยสร้างกิจกรรมนี้แล้ว!');
+            return redirect()->back()->withInput(input());
+        }
+        $FileImagerun = $request->activity_image;
+        $imageName = null;
+
+        if ($FileImagerun != null) {
+            $imageName = time() . '.' . $FileImagerun->getClientOriginalExtension();
+            $FileImagerun->move(public_path('images/activity'), $imageName);
+        }
+
+        $exists = Activity::where('activity_id', '=', $id)->first();
+
+        if ((!$exists) || ($exists->activity_id == $id)) {
+            $activity = Activity::where('activity_id', '=', $activity_id);
+
+            $attr['activity_name'] = $request->get('activity_name');
+            $attr['activity_detail'] = $request->get('activity_detail');
+            $attr['activity_address'] = $request->get('activity_address');
+            $attr['activity_date'] = $request->get('activity_date');
+            $attr['activity_time'] = $request->get('activity_time');
+            $attr['hour'] = $request->get('hour');
+            $attr['activity_image'] = $imageName;
+            $activity->update($attr);
+
+            return redirect('admin/activity')->withSuccessMessage('แก้ไขกิจกรรมสำเร็จแล้ว');
+        }
+        Alert::warning('คุณเคยสร้างกิจกรรมนี้แล้ว!');
+        return redirect()->back()->withInput(input());
     }
 
     /**
@@ -103,6 +185,7 @@ class ActivityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Activity::find($id)->delete();
+        return redirect('admin/activity')->withSuccessMessage('ลบข้อมูลสำเร็จแล้ว');
     }
 }

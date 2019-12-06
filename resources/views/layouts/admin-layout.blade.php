@@ -117,8 +117,14 @@
             </form>
             <ul class="nav menu">
                 <li class="{{ (request()->is('admin/home')) ? 'active' : '' }}">
-                    <a href="{{route('admin.home')}}"><em class="fas fa-tachometer-alt">&nbsp;</em>Dashboard</a>
+                    <a href="{{route('admin.home')}}"><em class="fas fa-tachometer-alt">&nbsp;</em> Dashboard</a>
                 </li>
+
+                <li class="{{ (request()->is('admin/activity')) ? 'active' : '' }}">
+                    <a href="{{route('activity.index')}}"><em class="fab fa-line">&nbsp;</em> Activity</a>
+                </li>
+
+
                 <li class="{{ (request()->is('admin/linenotify')) ? 'active' : '' }}">
                     <a href="{{route('linenotify.index')}}"><em class="fab fa-line">&nbsp;</em> Line</a>
                 </li>
