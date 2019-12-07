@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Alert;
 
 class LoginController extends Controller
 {
@@ -19,6 +20,21 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+    /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm()
+    {
+        if (session('success')) {
+            Alert::success(session('success'));
+        }
+        if (session('error')) {
+            Alert::error(session('error'));
+        }
+        return view('auth.login');
+    }
 
     /**
      * Where to redirect users after login.

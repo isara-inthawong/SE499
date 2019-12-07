@@ -15,7 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('sweet', 'admin\TestController@alert')->name('sweet.alert');
 //Route for normal user
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
@@ -27,6 +26,12 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/linenotify', 'admin\LineNotifyController@index')->name('linenotify.index');
         Route::post('/linenotify', 'admin\LineNotifyController@sent')->name('linenotify.sent');
         Route::resource('/activity', 'admin\ActivityController');
+        Route::resource('/users', 'admin\UserController');
+
+        // Test
+        Route::get('sweet', 'admin\TestController@alert')->name('sweet.alert');
+        Route::get('/create_dummy_user', 'admin\TestController@create_dummy_user');
+        Route::get('/create_dummy_activity', 'admin\TestController@create_dummy_activity');
     });
 });
 

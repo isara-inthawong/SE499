@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Alert;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (session('success')) {
+            Alert::success(session('success'));
+        }
+        if (session('error')) {
+            Alert::error(session('error'));
+        }
         if (auth()->user()->isAdmin()) {
             return view('admin.dashboard');
         } else {

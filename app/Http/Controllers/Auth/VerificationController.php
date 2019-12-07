@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Alert;
+use Illuminate\Http\Request;
 
 class VerificationController extends Controller
 {
@@ -19,6 +21,31 @@ class VerificationController extends Controller
     */
 
     use VerifiesEmails;
+    /**
+     * Show the email verification notice.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request)
+    {
+        if (session('verified')) {
+            Alert::success(session('verified'));
+        }
+        if (session('success')) {
+            Alert::success(session('success'));
+        }
+        if (session('error')) {
+            Alert::error(session('error'));
+        }
+        if (session('status')) {
+            Alert::success(session('status'));
+        }
+
+        return $request->user()->hasVerifiedEmail()
+                        ? redirect($this->redirectPath())
+                        : view('auth.verify');
+    }
 
     /**
      * Where to redirect users after verification.

@@ -5,9 +5,6 @@
     <div class="container-login100">
         <div class="wrap-login100">
             <div class="login100-form-title" style="background-image: url(./images/auth/bg-01.jpg);">
-                {{-- <div class="login100-form-title" style="background-image: url(./images/auth/bg-02.jpg);"> --}}
-                {{-- <div class="login100-form-title" style="background-image: url(./images/auth/bg-03.jpg);"> --}}
-                {{-- <div class="login100-form-title" style="background-image: url(./images/auth/bg-04.jpg);"> --}}
                 <span class="login100-form-title-1">
                     {{ __('Login') }}
                 </span>

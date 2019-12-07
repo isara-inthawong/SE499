@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
+use Alert;
 
 class RegisterController extends Controller
 {
@@ -24,6 +25,22 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        if (session('success')) {
+            Alert::success(session('success'));
+        }
+        if (session('error')) {
+            Alert::error(session('error'));
+        }
+        return view('auth.register');
+    }
 
     /**
      * Where to redirect users after registration.
@@ -53,10 +70,11 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-            'tel' => ['required', 'string', 'max:10'],
+            'tel' => ['required', 'string', 'min:10', 'max:10'],
             'major' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'user_image',
         ]);
     }
 
@@ -75,6 +93,7 @@ class RegisterController extends Controller
             'major' => $data['major'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'user_image' => 'profile-default.jpg',
             'role' => User::DEFAULT_TYPE,
         ]);
     }

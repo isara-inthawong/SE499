@@ -38,20 +38,11 @@
         font-size: 50px;
     }
 </style>
-<div class="row">
-    <ol class="breadcrumb">
-        <li><a href="#">
-                <em class="fa fa-home"></em>
-            </a></li>
-        <li class="active">Line</li>
-    </ol>
-</div>
 <div class="content">
     <a href="/" class="text-center">
         <h1 class="title"><b>SE499-Test Line</b></h1>
     </a>
     <h3 class="text-center">Test send message to <img src="{{url('./STK/line.svg')}}" width="30px">line group</h3>
-
     <form action="{{route('linenotify.sent')}} " method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group row">

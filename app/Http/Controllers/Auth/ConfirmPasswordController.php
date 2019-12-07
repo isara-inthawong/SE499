@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
+use Alert;
 
 class ConfirmPasswordController extends Controller
 {
@@ -19,6 +20,22 @@ class ConfirmPasswordController extends Controller
     */
 
     use ConfirmsPasswords;
+
+    /**
+     * Display the password confirmation view.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showConfirmForm()
+    {
+        if (session('success')) {
+            Alert::success(session('success'));
+        }
+        if (session('error')) {
+            Alert::error(session('error'));
+        }
+        return view('auth.passwords.confirm');
+    }
 
     /**
      * Where to redirect users when the intended url fails.

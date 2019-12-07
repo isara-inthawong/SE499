@@ -19,7 +19,7 @@ class CreateActivitiesTable extends Migration
             $table->string('activity_address')->nullable();
             $table->date('activity_date')->nullable();
             $table->time('activity_time')->nullable();
-            $table->string('hour')->nullable();
+            $table->integer('hour')->nullable();
             $table->string('activity_detail')->nullable();
             $table->string('activity_image')->nullable();
             $table->timestamps();

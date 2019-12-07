@@ -34,9 +34,9 @@ class CreateUsersTable extends Migration
         DB::table('users')->insert(
             [
                 [
-                    'first_name' => 'FAdmin',
-                    'last_name' => 'LAdmin',
-                    'email' => 'admin@admin.com',
+                    'first_name' => 'Admin',
+                    'last_name' => 'lastNameAdmin',
+                    'email' => 'bell7672@gmail.com',
                     'major' => 'SE',
                     'tel' => '0864351412',
                     'password' => Hash::make('qqqqwwww'), //password is ”qqqqwwww”
@@ -45,8 +45,8 @@ class CreateUsersTable extends Migration
                     'user_image' => 'profile-default.jpg',
                 ],
                 [
-                    'first_name' => 'FMember',
-                    'last_name' => 'LMember',
+                    'first_name' => 'FirstNameMember',
+                    'last_name' => 'LastNameMember',
                     'email' => 'member@member.com',
                     'major' => 'SE',
                     'tel' => '0864351412',

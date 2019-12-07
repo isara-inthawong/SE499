@@ -9,11 +9,6 @@
                     {{ __('Reset Password') }}
                 </span>
             </div>
-            @if (session('status'))
-            <div class="alert alert-success" role="alert">
-                {{ session('status') }}
-            </div>
-            @endif
             <form class="login100-form" method="POST" action="{{ route('password.email') }}">
                 @csrf
 

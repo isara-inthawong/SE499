@@ -5,9 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Activity;
-// Use Alert;
-use RealRashid\SweetAlert\Facades\Alert;
-
+use Alert;
 
 class ActivityController extends Controller
 {
@@ -18,10 +16,14 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        if (session('success_message')) {
-            Alert::success(session('success_message'));
+        if (session('success')) {
+            Alert::success(session('success'));
         }
-        return view('admin.activity');
+        if (session('error')) {
+            Alert::error(session('error'));
+        }
+        $activity = Activity::paginate(10);;
+        return view('admin.activity', compact('activity'));
     }
 
     /**
@@ -31,7 +33,13 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        //
+        if (session('success')) {
+            Alert::success(session('success'));
+        }
+        if (session('error')) {
+            Alert::error(session('error'));
+        }
+        return view('admin.activity-create');
     }
 
     /**
@@ -45,17 +53,17 @@ class ActivityController extends Controller
         $this->validate(
             $request,
             [
-                'activity_name' => 'required',
-                'activity_detail' => 'required',
-                'activity_address' => 'required',
-                'activity_date' => 'required',
+                'activity_name' => 'required|string',
+                'activity_detail' => 'required|string',
+                'activity_address' => 'required|string|max:500',
+                'activity_date' => 'required|date',
                 'activity_time' => 'required',
-                'hour' => 'requred|integer|',
+                'activity_hour' => 'required|integer',
                 'activity_image' => 'required|image|mimes:jpeg,png,jpg|max:15360‬',
             ]
         );
 
-        $FileImagerun = $request->image_map;
+        $FileImagerun = $request->activity_image;
         $imageName = null;
 
         if ($FileImagerun != null) {
@@ -73,16 +81,14 @@ class ActivityController extends Controller
                 'activity_address' => $request->get('activity_address'),
                 'activity_date' => $request->get('activity_date'),
                 'activity_time' => $request->get('activity_time'),
-                'hour' => $request->get('hour'),
+                'hour' => $request->get('activity_hour'),
                 'activity_image' => $imageName
             );
             Activity::create($dataActivity);
 
-            return redirect('admin/activity')->withSuccessMessage('สร้างชื่อกิจกรรมวิ่งสำเร็จแล้ว');
+            return redirect('admin/activity')->with('success','Create Successfully');
         }
-        Alert::warning('คุณเคยสร้างชื่อกิจกรรมนี้แล้ว!');
-
-        return redirect()->back()->withInput(input());
+        return redirect()->back()->with('error', 'Create Failed');
     }
 
     /**
@@ -105,7 +111,7 @@ class ActivityController extends Controller
     public function edit($id)
     {
         $activity = Activity::find($id);
-        return view('admin.edi-activity', compact('activities'));
+        return view('admin.activity-edit', compact('activity'));
     }
 
     /**
@@ -120,12 +126,12 @@ class ActivityController extends Controller
         $this->validate(
             $request,
             [
-                'activity_name' => 'required',
-                'activity_detail' => 'required',
-                'activity_address' => 'required',
+                'activity_name' => 'required|string',
+                'activity_detail' => 'required|string',
+                'activity_address' => 'required|string|max:500',
                 'activity_date' => 'required',
                 'activity_time' => 'required',
-                'hour' => 'requred|integer',
+                'activity_hour' => 'requred|integer',
                 // 'activity_image' => 'required|image|mimes:jpeg,png,jpg|max:15360‬',
             ]
         );
@@ -141,13 +147,12 @@ class ActivityController extends Controller
                 $attr['activity_address'] = $request->get('activity_address');
                 $attr['activity_date'] = $request->get('activity_date');
                 $attr['activity_time'] = $request->get('activity_time');
-                $attr['hour'] = $request->get('hour');
+                $attr['hour'] = $request->get('activity_hour');
                 $activity->update($attr);
 
-                return redirect('admin/activity')->withSuccessMessage('แก้ไขกิจกรรมสำเร็จแล้ว');
+                return redirect('admin/activity')->with('success', 'Update Successfully');
             }
-            Alert::warning('คุณเคยสร้างกิจกรรมนี้แล้ว!');
-            return redirect()->back()->withInput(input());
+            return redirect()->back()->with('error', 'Update Failed');
         }
         $FileImagerun = $request->activity_image;
         $imageName = null;
@@ -167,14 +172,13 @@ class ActivityController extends Controller
             $attr['activity_address'] = $request->get('activity_address');
             $attr['activity_date'] = $request->get('activity_date');
             $attr['activity_time'] = $request->get('activity_time');
-            $attr['hour'] = $request->get('hour');
+            $attr['hour'] = $request->get('activity_hour');
             $attr['activity_image'] = $imageName;
             $activity->update($attr);
 
-            return redirect('admin/activity')->withSuccessMessage('แก้ไขกิจกรรมสำเร็จแล้ว');
+            return redirect('admin/activity')->with('success', 'Update Successfully');
         }
-        Alert::warning('คุณเคยสร้างกิจกรรมนี้แล้ว!');
-        return redirect()->back()->withInput(input());
+        return redirect()->back()->with('error', 'Update Failed');
     }
 
     /**
@@ -186,6 +190,6 @@ class ActivityController extends Controller
     public function destroy($id)
     {
         Activity::find($id)->delete();
-        return redirect('admin/activity')->withSuccessMessage('ลบข้อมูลสำเร็จแล้ว');
+        return redirect('admin/activity')->with('success', 'Delete Successfully');
     }
 }

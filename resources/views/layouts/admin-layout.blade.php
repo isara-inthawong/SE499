@@ -31,11 +31,12 @@
         <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+                    <a href="#" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                        <span class="icon-bar"></span></button>
+                        <span class="icon-bar"></span>
+                    </a>
                     <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name') }}</a>
                     <ul class="nav navbar-top-links navbar-right">
                         {{-- <li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
@@ -100,8 +101,7 @@
             <div class="profile-sidebar">
                 <div class="profile-userpic">
                     {{-- <img src="./images/profile-pic-1.jpg" width="50" class="img-responsive" alt=""> --}}
-                <img src="{{url('./images/profile-default.jpg')}}"
-                        width="50" class="img-responsive" alt="" />
+                    <img src="{{url('./images/profile-default.jpg')}}" width="50" class="img-responsive" alt="" />
                 </div>
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name">{{ Auth::user()->first_name }}</div>
@@ -119,59 +119,66 @@
                 <li class="{{ (request()->is('admin/home')) ? 'active' : '' }}">
                     <a href="{{route('admin.home')}}"><em class="fas fa-tachometer-alt">&nbsp;</em> Dashboard</a>
                 </li>
-
+                <li class="{{ (request()->is('admin/users')) ? 'active' : '' }}">
+                    <a href="{{route('users.index')}}"><em class="fas fa-users">&nbsp;</em> User List</a>
+                </li>
+                <li class="{{ (request()->is('admin/activity/create')) ? 'active' : '' }}">
+                    <a href="{{route('activity.create')}}"><em class="fas fa-calendar-plus">&nbsp;</em> Create
+                        Activity</a>
+                </li>
                 <li class="{{ (request()->is('admin/activity')) ? 'active' : '' }}">
-                    <a href="{{route('activity.index')}}"><em class="fab fa-line">&nbsp;</em> Activity</a>
+                    <a href="{{route('activity.index')}}"><em class="fas fa-calendar-alt">&nbsp;</em> Activity List</a>
                 </li>
+                {{-- <li class="{{ (request()->is('admin/edit-activity')) ? 'active' : '' }}">
+                <a href="{{route('edit-activity.index')}}">
+                    <i class="fas fa-edit">&nbsp;</i> Edit Activity</a>
+                </li> --}}
 
-
-                <li class="{{ (request()->is('admin/linenotify')) ? 'active' : '' }}">
-                    <a href="{{route('linenotify.index')}}"><em class="fab fa-line">&nbsp;</em> Line</a>
-                </li>
-                <li class="{{ (request()->is('admin/alert')) ? 'active' : '' }}">
-                    <a href="{{route('sweet.alert')}}"><em class="fab fa-line">&nbsp;</em> Alert</a>
-                </li>
-                {{-- <li><a href="#"><em class="fa fa-calendar">&nbsp;</em> Widgets</a></li>
-                <li><a href="#"><em class="fa fa-bar-chart">&nbsp;</em> Charts</a></li>
-                <li><a href="#"><em class="fa fa-hand-pointer-o">&nbsp;</em> Buttons</a></li>
-                <li><a href="#"><em class="fa fa-pencil-square-o">&nbsp;</em> Forms</a></li>
-                <li><a href="#"><em class="fa fa-table">&nbsp;</em> Tables</a></li>
-                <li><a href="#"><em class="fa fa-clone">&nbsp;</em> Alerts &amp; Panels</a></li>
-                <li><a href="#"><em class="fa fa-star-o">&nbsp;</em> Icons</a></li>
-                <li class="parent "><a data-toggle="collapse" href="#sub-item-1">
-                        <em class="fa fa-file-o">&nbsp;</em> Pages <span data-toggle="collapse" href="#sub-item-1"
-                            class="icon pull-right"><i class="fa fa-plus"></i></span>
+                <li
+                    class="parent {{ (request()->is('admin/linenotify')||request()->is('admin/alert')) ? 'active' : '' }}">
+                    <a data-toggle="collapse" href="#sub-item-1">
+                        <i class="fas fa-hand-middle-finger">&nbsp;</i> Pages <span data-toggle="collapse"
+                            href="#sub-item-1" class="icon pull-right"><i class="fa fa-plus"></i></span>
                     </a>
                     <ul class="children collapse" id="sub-item-1">
-                        <li><a class="" href="#">
-                                Gallery
-                                <li><a class="" href="#">
-                                    Search
-                                </a></li>
-                                <li><a class="" href="#">
-                                    </a></li>
-                                Login
-                            </a></li>
-                        <li><a class="" href="#">
-                                Error 404
-                            </a></li>
+                        <li class="{{ (request()->is('admin/linenotify')) ? 'active' : '' }}">
+                            <a href="{{route('linenotify.index')}}"><em class="fab fa-line">&nbsp;</em> Line</a>
+                        </li>
+                        <li class="{{ (request()->is('admin/alert')) ? 'active' : '' }}">
+                            <a href="{{route('sweet.alert')}}"><em class="fas fa-exclamation-circle">&nbsp;</em>
+                                Alert</a>
+                        </li>
                     </ul>
-                </li> --}}
+                </li>
+
                 <li><a href="{{ route('logout') }}"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><em
-                            class="fas fa-sign-out-alt">&nbsp;</em> {{ __('Logout') }}</a></li>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <em class="fas fa-sign-out-alt">&nbsp;</em> {{ __('Logout') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
             </ul>
         </div>
         <!--/.sidebar-->
 
         <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+            <div class="row">
+                <ol class="breadcrumb">
+                    <li><a href="#">
+                            <em class="fa fa-home"></em>
+                        </a></li>
+                    <li class="active">@yield('title')</li>
+                </ol>
+            </div>
             @yield('content')
         </div>
+        <div class="col-sm-12">
+            <p class="back-link">Development by <a href="https://web.facebook.com/Isara.Intawong" target="__blank">B&B
+                    Soft</a></p>
+        </div><!-- /.row -->
     </div>
-
     {{-- sweetalert --}}
     @include('sweetalert::alert')
     <!-- JQuery -->

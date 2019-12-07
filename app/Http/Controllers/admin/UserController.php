@@ -4,6 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\User;
+use Alert;
 
 class UserController extends Controller
 {
@@ -14,7 +16,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        if (session('success')) {
+            Alert::success(session('success'));
+        }
+        if (session('error')) {
+            Alert::error(session('error'));
+        }
+        $users = User::paginate(10);
+        return view('admin.users', compact('users'));
     }
 
     /**
@@ -24,7 +33,12 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        if (session('success')) {
+            Alert::success(session('success'));
+        }
+        if (session('error')) {
+            Alert::error(session('error'));
+        }
     }
 
     /**

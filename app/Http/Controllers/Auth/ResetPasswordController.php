@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Str;
 use Illuminate\Auth\Events\PasswordReset;
+use Alert;
+use Illuminate\Http\Request;
 
 class ResetPasswordController extends Controller
 {
@@ -21,6 +23,31 @@ class ResetPasswordController extends Controller
     */
 
     use ResetsPasswords;
+
+    /**
+     * Display the password reset view for the given token.
+     *
+     * If no token is present, display the link request form.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string|null  $token
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showResetForm(Request $request, $token = null)
+    {
+        if (session('success')) {
+            Alert::success(session('success'));
+        }
+        if (session('error')) {
+            Alert::error(session('error'));
+        }
+        if (session('status')) {
+            Alert::success(session('status'));
+        }
+        return view('auth.passwords.reset')->with(
+            ['token' => $token, 'email' => $request->email]
+        );
+    }
 
     /**
      * Where to redirect users after resetting their password.

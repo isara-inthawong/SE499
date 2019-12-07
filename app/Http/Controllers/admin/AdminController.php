@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Alert;
 
 class AdminController extends Controller
 {
@@ -14,6 +15,12 @@ class AdminController extends Controller
      */
     public function index()
     {
+        if (session('success')) {
+            Alert::success(session('success'));
+        }
+        if (session('error')) {
+            Alert::error(session('error'));
+        }
         return view('admin.dashboard');
     }
 
@@ -24,7 +31,12 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        if (session('success')) {
+            Alert::success(session('success'));
+        }
+        if (session('error')) {
+            Alert::error(session('error'));
+        }
     }
 
     /**
