@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title', 'Edit Activity')
+@section('title', 'Activity')
 @section('content')
 <div class="row">
     <div class="col-lg-12">
@@ -12,9 +12,10 @@
         <div class="panel panel-default">
             <div class="panel-heading clearfix">Edit Activity</div>
             <div class="panel-body">
-                <form class="form-horizontal row-border was-validated" method="PUT"
-                    action="{{route('activity.update',$activity->activity_id)}}" enctype="multipart/form-data">
+                <form class="form-horizontal row-border was-validated" method="post"
+                    action="{{route('activity-update.update', $activity->activity_id)}}" enctype="multipart/form-data">
                     @csrf
+                    @method('put')
                     <div class="form-group">
                         <label for="activity_name" class="col-md-3 control-label">Activity Name</label>
                         <div class="col-md-8">

@@ -51,8 +51,9 @@
                     <label class="label-input100" for="major">{{ __('Major') }}</label>
                     <select class="form-control" name="major" id="major" class="@error('major') is-invalid @enderror"
                         name="major" value="{{ old('major') }}" required autocomplete="major" autofocus>
+                        {{ (request()->is('admin/activity/create')||request()->is('admin/activity')) ? 'active' : '' }}
                         <option selected>Your Major</option>
-                        <option value="SE">Software Engineering</option>
+                        <option value="SE">SE</option>
                         <option value="CS">CS</option>
                         <option value="FS">FS</option>
                     </select>

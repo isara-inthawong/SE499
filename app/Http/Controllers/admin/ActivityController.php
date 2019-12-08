@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Activity;
 use Alert;
+use KS\Line\LineNotify;
 
 class ActivityController extends Controller
 {
@@ -50,6 +51,10 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
+        /* line config */
+        $token = '7J81Hhjpsw6YhWjJsxNMsZahzgqBexoFMoLoFg7XTvM';
+        $ln = new LineNotify($token);
+
         $this->validate(
             $request,
             [
@@ -86,9 +91,16 @@ class ActivityController extends Controller
             );
             Activity::create($dataActivity);
 
-            return redirect('admin/activity')->with('success','Create Successfully');
+            $image_path = './images/activity/' . $imageName; //Line notify allow only jpeg and png file
+            $text = 'กิจกรรม ' . $activity_name
+            . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date') . ', เวลา ' . $request->get('activity_time').' น.'
+            . ', ที่ ' . $request->get('activity_address') . ', รายละเอียด ' . $request->get('activity_detail');
+
+            $ln->send($text, $image_path); // sent
+
+            return redirect('admin/activity')->with('success', 'Create Successfully');
         }
-        return redirect()->back()->with('error', 'Create Failed');
+        return redirect()->back()->withInput($request->input())->with('error', 'Create Failed');
     }
 
     /**
@@ -129,10 +141,9 @@ class ActivityController extends Controller
                 'activity_name' => 'required|string',
                 'activity_detail' => 'required|string',
                 'activity_address' => 'required|string|max:500',
-                'activity_date' => 'required',
+                'activity_date' => 'required|date',
                 'activity_time' => 'required',
-                'activity_hour' => 'requred|integer',
-                // 'activity_image' => 'required|image|mimes:jpeg,png,jpg|max:15360‬',
+                'activity_hour' => 'required|integer',
             ]
         );
 
@@ -140,7 +151,7 @@ class ActivityController extends Controller
             $exists = Activity::where('activity_id', '=', $id)->first();
 
             if ((!$exists) || ($exists->activity_id == $id)) {
-                $activity = Activity::where('activity_id', '=', $id);
+                $activity = Activity::where('activity_id', '=', $id)->first();
 
                 $attr['activity_name'] = $request->get('activity_name');
                 $attr['activity_detail'] = $request->get('activity_detail');
@@ -152,7 +163,7 @@ class ActivityController extends Controller
 
                 return redirect('admin/activity')->with('success', 'Update Successfully');
             }
-            return redirect()->back()->with('error', 'Update Failed');
+            return redirect()->back()->withInput($request->input())->with('error', 'Update Failed');
         }
         $FileImagerun = $request->activity_image;
         $imageName = null;
@@ -165,7 +176,7 @@ class ActivityController extends Controller
         $exists = Activity::where('activity_id', '=', $id)->first();
 
         if ((!$exists) || ($exists->activity_id == $id)) {
-            $activity = Activity::where('activity_id', '=', $activity_id);
+            $activity = Activity::where('activity_id', '=', $id)->first();
 
             $attr['activity_name'] = $request->get('activity_name');
             $attr['activity_detail'] = $request->get('activity_detail');
@@ -178,7 +189,7 @@ class ActivityController extends Controller
 
             return redirect('admin/activity')->with('success', 'Update Successfully');
         }
-        return redirect()->back()->with('error', 'Update Failed');
+        return redirect()->back()->withInput($request->input())->with('error', 'Update Failed');
     }
 
     /**

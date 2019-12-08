@@ -6,7 +6,7 @@
 <style>
     .content {
         width: 90%;
-        margin: 5%;
+        margin: 2% 5% 5% 5%;
         padding: 5%;
         border-radius: 10px;
         -webkit-box-shadow: 5px 5px 15px 5px #000000;
@@ -37,6 +37,9 @@
     .title {
         font-size: 50px;
     }
+    .img_size{
+        width: 50px;
+    }
 </style>
 <div class="content">
     <a href="/" class="text-center">
@@ -58,7 +61,7 @@
                 @foreach ($collection as $key => $item)
                 <label>
                     <input type="radio" name="stkid" value="{{$item->sticker_id}}" />
-                    <img src="{{url('./STK/MoonJames')}}/{{$item->sticker_id}}.jpg" />
+                    <img src="{{url('./STK/MoonJames')}}/{{$item->sticker_id}}.jpg" class="img_size" />
                 </label>
                 @endforeach
             </div>
@@ -69,7 +72,6 @@
             <div class="col-sm-10">
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" name="image" id="image" accept=".png, .jpeg, .jpg">
-                    <label class="custom-file-label" for="image">Choose file...</label>
                 </div>
             </div>
         </div>

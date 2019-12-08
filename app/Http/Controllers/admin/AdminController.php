@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Alert;
+use App\Activity;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -21,7 +23,13 @@ class AdminController extends Controller
         if (session('error')) {
             Alert::error(session('error'));
         }
-        return view('admin.dashboard');
+        $activity = Activity::get()->count();
+        $user = User::get()->count();
+        $countData = [
+            'activity' => $activity,
+            'user' => $user,
+        ];
+        return view('admin.dashboard', compact('countData'));
     }
 
     /**

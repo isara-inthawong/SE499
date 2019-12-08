@@ -23,6 +23,7 @@
                                 <th>Email</th>
                                 <th>Major</th>
                                 <th>Tel</th>
+                                <th>Profile Picture</th>
                                 <th>Manage</th>
                             </tr>
                         </thead>
@@ -35,6 +36,11 @@
                                 <td>{{ $item->email}}</td>
                                 <td>{{ $item->major}}</td>
                                 <td>{{ $item->tel}}</td>
+                                <td>
+                                    <a href="{{url('./images/profile')}}/{{$item->user_image}}" target="_blank">
+                                        {{ $item->user_image}}
+                                    </a>
+                                </td>
                                 <td>
                                     <a href="#" {{-- <a href="{{ action('admin\UserController@edit', $item->user_id) }}"
                                         --}} class="btn btn-warning">

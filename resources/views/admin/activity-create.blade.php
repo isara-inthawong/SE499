@@ -1,5 +1,5 @@
 @extends('layouts.admin-layout')
-@section('title', 'Create Activity')
+@section('title', 'Activity')
 @section('content')
 <div class="row">
     <div class="col-lg-12">
@@ -19,7 +19,7 @@
                         <label for="activity_name" class="col-md-3 control-label">Activity Name</label>
                         <div class="col-md-8">
                             <input class="form-control" type="text" name="activity_name" id="activity_name"
-                                placeholder="Your Activity Name" required>
+                                placeholder="Your Activity Name" value="{{ old('activity_name') }}" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -32,19 +32,19 @@
                     <div class="form-group">
                         <label for="activity_date" class="col-md-3 control-label">Activity Date</label>
                         <div class="col-md-8">
-                            <input class="form-control" type="date" name="activity_date" id="activity_date" required>
+                            <input class="form-control" type="date" value="{{ old('activity_date') }}" name="activity_date" id="activity_date" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="activity_time" class="col-md-3 control-label">Activity Time</label>
                         <div class="col-md-8">
-                            <input class="form-control" type="time" name="activity_time" id="activity_time" required>
+                            <input class="form-control" type="time" value="{{ old('activity_time') }}" name="activity_time" id="activity_time" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="activity_hour" class="col-md-3 control-label">Activity Hour</label>
                         <div class="col-md-8">
-                            <input class="form-control" type="number" min="0" max="24" name="activity_hour"
+                            <input class="form-control" value="{{ old('activity_hour') }}" type="number" min="0" max="24" name="activity_hour"
                                 id="activity_hour" required placeholder="Your Activity Hour">
                         </div>
                     </div>
@@ -59,14 +59,14 @@
                         <label for="activity_image" class="col-md-3 control-label">Activity Image</label>
                         <div class="col-md-8 costom-file">
                             <input type="file" name="activity_image" class="form-control custom-file-input"
-                                id="activity_image" accept=".png, .jpg, .jpeg" required>
+                                id="activity_image" value="{{ old('activity_image') }}" accept=".png, .jpg, .jpeg" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-12">
                             <center>
-                                <button type="submit" class="btn btn-primary" value="Save">Save</button>
+                                <button type="submit" class="btn btn-primary" value="Save">Create</button>
                                 <button type="reset" class="btn btn-danger">Cancle</button>
                                 {{-- <a href="{{ url('admin/dashboard')}}" class="btn btn-danger">Cancle</a> --}}
                             </center>

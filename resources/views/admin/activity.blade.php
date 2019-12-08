@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Activity</h1>
+        <h1 class="page-header">Activity List</h1>
     </div>
 </div>
 <!--/.row-->
@@ -38,7 +38,11 @@
                                 <td>{{ $item->hour}}</td>
                                 <td>{{ $item->activity_address}}</td>
                                 <td>{{ $item->activity_detail}}</td>
-                                <td>{{ $item->activity_image}}</td>
+                                <td>
+                                    <a href="{{url('./images/activity')}}/{{$item->activity_image}}" target="_blank">
+                                        {{ $item->activity_image}}
+                                    </a>
+                                </td>
                                 <td>
                                     <a href="{{ action('admin\ActivityController@edit', $item->activity_id) }}"
                                         class="btn btn-warning">

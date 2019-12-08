@@ -31,7 +31,7 @@ class HomeController extends Controller
             Alert::error(session('error'));
         }
         if (auth()->user()->isAdmin()) {
-            return view('admin.dashboard');
+            return redirect('/admin/home');
         } else {
             return view('member.home');
         }

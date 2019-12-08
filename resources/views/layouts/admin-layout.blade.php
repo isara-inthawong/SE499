@@ -39,42 +39,8 @@
                     </a>
                     <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name') }}</a>
                     <ul class="nav navbar-top-links navbar-right">
-                        {{-- <li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                <em class="fa fa-envelope"></em><span class="label label-info">15</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-messages">
-                                <li>
-                                    <div class="dropdown-messages-box"><a href="profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="./images/profile-pic-2.jpg"
-                                                width="40">
-                                        </a>
-                                        <div class="message-body"><small class="pull-right">3 mins ago</small>
-                                            <a href="#"><strong>John Doe</strong> commented on <strong>your
-                                                    photo</strong>.</a>
-                                            <br /><small class="text-muted">1:24 pm - 25/03/2015</small></div>
-                                    </div>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <div class="dropdown-messages-box"><a href="profile.html" class="pull-left">
-                                            <img alt="image" class="img-circle" src="./images/profile-pic-1.jpg"
-                                                width="40">
-                                        </a>
-                                        <div class="message-body"><small class="pull-right">1 hour ago</small>
-                                            <a href="#">New message from <strong>Jane Doe</strong>.</a>
-                                            <br /><small class="text-muted">12:27 pm - 25/03/2015</small></div>
-                                    </div>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <div class="all-button"><a href="#">
-                                            <em class="fa fa-inbox"></em> <strong>All Messages</strong>
-                                        </a></div>
-                                </li>
-                            </ul>
-                        </li> --}}
                         <li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                <em class="fa fa-bell"></em><span class="label label-primary">5</span>
+                                <em class="fa fa-bell"></em><span class="label label-primary">3</span>
                             </a>
                             <ul class="dropdown-menu dropdown-alerts">
                                 <li><a href="#">
@@ -100,8 +66,8 @@
         <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
             <div class="profile-sidebar">
                 <div class="profile-userpic">
-                    {{-- <img src="./images/profile-pic-1.jpg" width="50" class="img-responsive" alt=""> --}}
-                    <img src="{{url('./images/profile-default.jpg')}}" width="50" class="img-responsive" alt="" />
+                    <img src="{{url('./images/profile')}}/{{Auth::user()->user_image}}" width="50"
+                        class="img-responsive" />
                 </div>
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name">{{ Auth::user()->first_name }}</div>
@@ -119,28 +85,37 @@
                 <li class="{{ (request()->is('admin/home')) ? 'active' : '' }}">
                     <a href="{{route('admin.home')}}"><em class="fas fa-tachometer-alt">&nbsp;</em> Dashboard</a>
                 </li>
+                <li class="{{ (request()->is('admin/profile')) ? 'active' : '' }}">
+                    <a href="{{route('profile.index')}}"><em class="fas fa-user">&nbsp;</em> Profile</a>
+                </li>
                 <li class="{{ (request()->is('admin/users')) ? 'active' : '' }}">
                     <a href="{{route('users.index')}}"><em class="fas fa-users">&nbsp;</em> User List</a>
                 </li>
-                <li class="{{ (request()->is('admin/activity/create')) ? 'active' : '' }}">
-                    <a href="{{route('activity.create')}}"><em class="fas fa-calendar-plus">&nbsp;</em> Create
-                        Activity</a>
-                </li>
-                <li class="{{ (request()->is('admin/activity')) ? 'active' : '' }}">
-                    <a href="{{route('activity.index')}}"><em class="fas fa-calendar-alt">&nbsp;</em> Activity List</a>
-                </li>
-                {{-- <li class="{{ (request()->is('admin/edit-activity')) ? 'active' : '' }}">
-                <a href="{{route('edit-activity.index')}}">
-                    <i class="fas fa-edit">&nbsp;</i> Edit Activity</a>
-                </li> --}}
 
                 <li
-                    class="parent {{ (request()->is('admin/linenotify')||request()->is('admin/alert')) ? 'active' : '' }}">
+                    class="parent {{ (request()->is('admin/activity/create')||request()->is('admin/activity')) ? 'active' : '' }}">
                     <a data-toggle="collapse" href="#sub-item-1">
-                        <i class="fas fa-hand-middle-finger">&nbsp;</i> Pages <span data-toggle="collapse"
+                        <i class="far fa-calendar-alt">&nbsp;</i> Activity <span data-toggle="collapse"
                             href="#sub-item-1" class="icon pull-right"><i class="fa fa-plus"></i></span>
                     </a>
                     <ul class="children collapse" id="sub-item-1">
+                        <li class="{{ (request()->is('admin/activity')) ? 'active' : '' }}">
+                            <a href="{{route('activity.index')}}"><em class="fas fa-calendar-alt">&nbsp;</em> Activity
+                                List</a>
+                        </li>
+                        <li class="{{ (request()->is('admin/activity/create')) ? 'active' : '' }}">
+                            <a href="{{route('activity.create')}}"><em class="far fa-calendar-plus">&nbsp;</em> Create
+                                Activity</a>
+                        </li>
+                    </ul>
+                </li>
+                <li
+                    class="parent {{ (request()->is('admin/linenotify')||request()->is('admin/alert')) ? 'active' : '' }}">
+                    <a data-toggle="collapse" href="#sub-item-2">
+                        <i class="fas fa-bug">&nbsp;</i> Test <span data-toggle="collapse"
+                            href="#sub-item-2" class="icon pull-right"><i class="fa fa-plus"></i></span>
+                    </a>
+                    <ul class="children collapse" id="sub-item-2">
                         <li class="{{ (request()->is('admin/linenotify')) ? 'active' : '' }}">
                             <a href="{{route('linenotify.index')}}"><em class="fab fa-line">&nbsp;</em> Line</a>
                         </li>

@@ -26,7 +26,15 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/linenotify', 'admin\LineNotifyController@index')->name('linenotify.index');
         Route::post('/linenotify', 'admin\LineNotifyController@sent')->name('linenotify.sent');
         Route::resource('/activity', 'admin\ActivityController');
+        Route::match(
+            ['put', 'patch', 'post'],
+            '/activity_update/{id}',
+            'admin\ActivityController@update'
+        )->name('activity-update.update');
+
         Route::resource('/users', 'admin\UserController');
+        Route::resource('/profile', 'admin\ProfileController');
+        Route::match(['put', 'patch', 'post'], '/profile', 'admin\ProfileController@update')->name('profile.update');
 
         // Test
         Route::get('sweet', 'admin\TestController@alert')->name('sweet.alert');

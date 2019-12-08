@@ -14,7 +14,7 @@
             <div class="panel panel-teal panel-widget border-right">
                 <div class="row no-padding">
                     <i class="far fa-xl fa-calendar-alt color-blue"></i>
-                    <div class="large">120</div>
+                    <div class="large">{{ $countData['activity'] }}</div>
                     <div class="text-muted">All Activity</div>
                 </div>
             </div>
@@ -22,23 +22,23 @@
         <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
             <div class="panel panel-orange panel-widget border-right">
                 <div class="row no-padding"><em class="fa fa-xl fa-users color-teal"></em>
-                    <div class="large">50</div>
+                    <div class="large">{{ $countData['user'] }}</div>
                     <div class="text-muted">All Users</div>
                 </div>
             </div>
         </div>
         <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
             <div class="panel panel-blue panel-widget border-right">
-                <div class="row no-padding"><em class="fa fa-xl fa-comments color-orange"></em>
-                    <div class="large">32</div>
+                <div class="row no-padding"><em class="far fa-xl ar fa-question-circle color-orange"></em>
+                    <div class="large">เอาไรใส่ดีพี่</div>
                     <div class="text-muted">????</div>
                 </div>
             </div>
         </div>
         <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
             <div class="panel panel-red panel-widget ">
-                <div class="row no-padding"><em class="fa fa-xl fa-search color-red"></em>
-                    <div class="large">25.2k</div>
+                <div class="row no-padding"><em class="fa fa-xl ar fa-question-circle color-orange color-red"></em>
+                    <div class="large">เอาไรใส่ดีพี่</div>
                     <div class="text-muted">???</div>
                 </div>
             </div>
@@ -46,6 +46,45 @@
     </div>
     <!--/.row-->
 </div>
+
+<div class="row">
+    <div class="col-xs-6 col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-body easypiechart-panel">
+                <h4>New Activity</h4>
+                <div class="easypiechart" id="easypiechart-blue" data-percent="92"><span class="percent">92%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6 col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-body easypiechart-panel">
+                <h4>New Member</h4>
+                <div class="easypiechart" id="easypiechart-orange" data-percent="65"><span class="percent">65%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6 col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-body easypiechart-panel">
+                <h4>New ??</h4>
+                <div class="easypiechart" id="easypiechart-teal" data-percent="56"><span class="percent">56%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6 col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-body easypiechart-panel">
+                <h4>Visitors</h4>
+                <div class="easypiechart" id="easypiechart-red" data-percent="27"><span class="percent">27%</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/.row-->
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
@@ -90,42 +129,4 @@
 </div>
 <!--/.row-->
 
-<div class="row">
-    <div class="col-xs-6 col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-body easypiechart-panel">
-                <h4>New Orders</h4>
-                <div class="easypiechart" id="easypiechart-blue" data-percent="92"><span class="percent">92%</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-body easypiechart-panel">
-                <h4>Comments</h4>
-                <div class="easypiechart" id="easypiechart-orange" data-percent="65"><span class="percent">65%</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-body easypiechart-panel">
-                <h4>New Users</h4>
-                <div class="easypiechart" id="easypiechart-teal" data-percent="56"><span class="percent">56%</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-body easypiechart-panel">
-                <h4>Visitors</h4>
-                <div class="easypiechart" id="easypiechart-red" data-percent="27"><span class="percent">27%</span></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--/.row-->
 @endsection

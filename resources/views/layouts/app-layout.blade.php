@@ -65,7 +65,7 @@
                     <li class="nav-item avatar dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                    <img src="{{url('images/profile-default.jpg')}}"
+                    <img src="{{url('images/profile')}}/{{ Auth::user()->user_image}}"
                                 class="rounded-circle z-depth-0" alt="avatar image" width="30"
                                 height="30">{{' '}}{{ Auth::user()->first_name }}
                         </a>
