@@ -89,7 +89,6 @@ class ProfileController extends Controller
                 'email' => 'required|string|email|max:255',
             ]
         );
-        dd($id);
 
         if ($request->user_image == null) {
             $exists = User::where('user_id', '=', $id)->first();

@@ -13,8 +13,8 @@
         <div class="panel panel-default">
             <div class="panel-heading">Activity Table</div>
             <div class="panel-body btn-margins">
-                <div class="col-md-12">
-                    <table class="table table-striped table-responsive">
+                <div class="col-md-12 table-responsive">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -62,8 +62,8 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $activity->onEachSide(1)->links() }}
                 </div>
+                {{ $activity->onEachSide(1)->links() }}
             </div>
         </div><!-- /.panel-->
     </div><!-- /.col-->

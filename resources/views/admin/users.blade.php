@@ -60,8 +60,8 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $users->onEachSide(1)->links() }}
                 </div>
+                {{ $users->onEachSide(1)->links() }}
             </div>
         </div><!-- /.panel-->
     </div><!-- /.col-->
