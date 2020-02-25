@@ -26,7 +26,6 @@ html, body {
     height: 100%;
 }
 
-
 body.demos .section {
     background: url(images/bg.png) repeat top center #f2f3f5;
 }
@@ -72,7 +71,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0 0 10px 0;
     font-weight: normal;
     line-height: 120% !important;
-    color: #333333;
+    color: #018fd6;
     margin: 0
 }
 
@@ -277,14 +276,18 @@ a img.aligncenter {
 -------------------------------------------------------------------*/
 
 .navbar-dark .navbar-nav .nav-link {
-    color: #ffffff;
+    color: #000;
+    /* -webkit-text-stroke-width: 0.2px;
+    -webkit-text-stroke-color: #fff; */
     letter-spacing: 1px;
     font-size: 14px;
     position: relative;
 }
 
 .navbar-dark .navbar-nav .nav-link:hover {
-    color: #ffffff;
+    color: #000;
+    /* -webkit-text-stroke-width: 0.2px;
+    -webkit-text-stroke-color: #fff; */
 }
 
 .navbar-dark .navbar-nav .nav-link.active {
@@ -334,13 +337,15 @@ a img.aligncenter {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #000;
+    /* background-color: #000; */
     z-index: 0;
     opacity: .6;
 }
 
 .heading {
-    color: #fff;
+    color: #ffaa00;
+    -webkit-text-stroke-width: 0.2px;
+    -webkit-text-stroke-color: black;
     display: table-cell;
     vertical-align: middle;
     position: relative;
@@ -348,7 +353,10 @@ a img.aligncenter {
 }
 
 .heading h1 {
-    color: #ffffff;
+    /* color: #ffffff; */
+    color: #ffaa00;
+    -webkit-text-stroke-width: 0.2px;
+    -webkit-text-stroke-color: black;
     font-weight: 700;
     font-size: 62px;
     text-transform: uppercase;
@@ -360,7 +368,10 @@ a img.aligncenter {
 }
 
 .heading h3 {
-    color: ffffff;
+    /* color: #ffffff; */
+    color: #ffaa00;
+    -webkit-text-stroke-width: 0.2px;
+    -webkit-text-stroke-color: black;
 }
 
 .cd-words-wrapper {
@@ -398,7 +409,10 @@ xclip
 .cd-headline.clip span {
     display: inline-block;
     padding: .2em 0;
-    color: #ffffff;
+    /* color: #ffffff; */
+    color: #ffaa00;
+    -webkit-text-stroke-width: 0.2px;
+    -webkit-text-stroke-color: black;
     font-size: 30px;
 }
 
@@ -433,7 +447,7 @@ xclip
 #mainNav.navbar-shrink {
     padding-top: 10px;
     padding-bottom: 10px;
-    background-color: #333333;
+    background-color: #018fd6;
 }
 
 #clouds {
@@ -550,13 +564,13 @@ xclip
 }
 
 .btn-hover-new {
-    color: #333333;
+    color: #018fd6;
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
     -o-transition: all 0.5s;
     transition: all 0.5s;
     position: relative;
-    border: 1px solid #333333;
+    border: 1px solid #018fd6;
     overflow: hidden;
     padding: 0px 18px;
     display: inline-block;
@@ -597,7 +611,7 @@ xclip
 
 .btn-hover-new:hover {
     color: #ffffff;
-    background-color: #333333;
+    background-color: #018fd6;
 }
 
 .btn-hover-new:hover>span {
@@ -649,7 +663,7 @@ xclip
 
 .ser-icon i {
     font-size: 50px;
-    color: #333333;
+    color: #018fd6;
 }
 
 .services-inner-box h2 {
@@ -822,7 +836,7 @@ xclip
 
 .testimonial h4 {
     font-size: 18px;
-    color: #333333;
+    color: #018fd6;
     padding: 13px 0 0;
 }
 
@@ -1083,7 +1097,7 @@ xclip
 }
 
 .event_dit ul li a:hover {
-    color: #333333;
+    color: #018fd6;
 }
 
 .service-widget h3 {
@@ -1099,7 +1113,7 @@ xclip
 }
 
 .participate-wrap figure::before {
-    background-color: #333333;
+    background-color: #018fd6;
     content: "";
     position: absolute;
     border-radius: 100%;
@@ -1253,7 +1267,7 @@ xclip
 }
 
 .hoverbutton {
-    background-color: #333333;
+    background-color: #018fd6;
     position: absolute;
     color: #ffffff !important;
     top: 70%;
@@ -1397,7 +1411,7 @@ hr.invis1 {
 }
 
 .filter-button-group button.active {
-    background: #333333;
+    background: #018fd6;
     color: #fff;
     box-shadow: 2px 20px 45px 5px rgba(0, 0, 0, .2);
 }
@@ -1459,7 +1473,7 @@ hr.invis1 {
     position: absolute;
     top: 15px;
     right: 15px;
-    background: #333333;
+    background: #018fd6;
     color: #fff;
     padding: 10px 15px;
     text-align: center;
@@ -1695,7 +1709,7 @@ hr.invis1 {
 }
 
 .bootstrap-select .dropdown-toggle:focus {
-    outline: thin dotted #333333 !important;
+    outline: thin dotted #018fd6 !important;
     outline: 5px auto -webkit-focus-ring-color !important;
     outline-offset: -2px;
 }
@@ -1994,7 +2008,7 @@ select.mobile-device {
 }
 
 .contact_form .form-control {
-    background-color: #333333;
+    background-color: #018fd6;
     margin-bottom: 30px;
     border: 1px solid #ebebeb;
     box-sizing: border-box;
@@ -2029,7 +2043,7 @@ select.mobile-device {
 }
 
 #contact {
-    background: url(images/bg.png) no-repeat center center #333333;
+    background: url(images/bg.png) no-repeat center center #018fd6;
 }
 
 #contact .section-title p {
@@ -2114,11 +2128,11 @@ select.mobile-device {
 }
 
 .footer-links a {
-    color: #999;
+    color: #000;
 }
 
 .footer-links a:hover, .footer a:hover {
-    color: #333333 !important;
+    color: #018fd6 !important;
 }
 
 .footer-links li {
@@ -2154,7 +2168,7 @@ select.mobile-device {
 
 .copyrights {
     border-top: 1px dashed rgba(255, 255, 255, 0.1);
-    background-color: #1f1f1f;
+    background-color: #018fd6;
     box-sizing: border-box;
     width: 100%;
     text-align: left;
@@ -2182,9 +2196,10 @@ select.mobile-device {
 }
 
 .footer-distributed .footer-company-name {
-    font-weight: 300;
+    /* font-weight: 300; */
+    font-weight: bold;
     margin: 0 10px;
-    color: #666;
+    color: #000;
     padding: 0;
 }
 
@@ -2247,11 +2262,11 @@ select.mobile-device {
 }
 
 .footer-distributed .footer-company-name a {
-    color: #ffffff;
+    color: #000;
 }
 
 .footer-distributed .footer-company-name a:hover {
-    color: #cccccc;
+    color: #000;
 }
 
 /*------------------------------------------------------------------
@@ -2336,7 +2351,7 @@ select.mobile-device {
     right: 0;
     bottom: 0;
     left: 0;
-    background: #333333;
+    background: #018fd6;
     z-index: 11000;
     position: fixed;
     display: block

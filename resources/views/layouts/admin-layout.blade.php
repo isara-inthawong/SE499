@@ -38,8 +38,9 @@
                         <span class="icon-bar"></span>
                     </a>
                     <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name') }}</a>
-                    <ul class="nav navbar-top-links navbar-right">
-                        <li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                    <!-- <ul class="nav navbar-top-links navbar-right">
+                        <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                                 <em class="fa fa-bell"></em><span class="label label-primary">3</span>
                             </a>
                             <ul class="dropdown-menu dropdown-alerts">
@@ -59,7 +60,7 @@
                                     </a></li>
                             </ul>
                         </li>
-                    </ul>
+                    </ul> -->
                 </div>
             </div><!-- /.container-fluid -->
         </nav>
@@ -71,64 +72,62 @@
                 </div>
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name">{{ Auth::user()->first_name }}</div>
-                    <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+                    <!-- <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div> -->
                 </div>
                 <div class="clear"></div>
             </div>
             <div class="divider"></div>
-            <form role="search">
+            <!-- <form role="search">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search">
                 </div>
-            </form>
+            </form> -->
             <ul class="nav menu">
                 <li class="{{ (request()->is('admin/home')) ? 'active' : '' }}">
-                    <a href="{{route('admin.home')}}"><em class="fas fa-tachometer-alt">&nbsp;</em> Dashboard</a>
+                    <a href="{{route('admin.home')}}"><em class="fas fa-tachometer-alt">&nbsp;</em> แดชบอร์ด</a>
                 </li>
                 <li class="{{ (request()->is('admin/profile')) ? 'active' : '' }}">
-                    <a href="{{route('profile.index')}}"><em class="fas fa-user">&nbsp;</em> Profile</a>
+                    <a href="{{route('profile.index')}}"><em class="fas fa-user">&nbsp;</em> โปรไฟล์</a>
                 </li>
                 <li class="{{ (request()->is('admin/users')) ? 'active' : '' }}">
-                    <a href="{{route('users.index')}}"><em class="fas fa-users">&nbsp;</em> User List</a>
+                    <a href="{{route('users.index')}}"><em class="fas fa-users">&nbsp;</em> รายการผู้ใช้</a>
                 </li>
 
                 <li
                     class="parent {{ (request()->is('admin/activity/create')||request()->is('admin/activity')) ? 'active' : '' }}">
                     <a data-toggle="collapse" href="#sub-item-1">
-                        <i class="far fa-calendar-alt">&nbsp;</i> Activity <span data-toggle="collapse"
+                        <i class="far fa-calendar-alt">&nbsp;</i> กิจกรรม <span data-toggle="collapse"
                             href="#sub-item-1" class="icon pull-right"><i class="fa fa-plus"></i></span>
                     </a>
                     <ul class="children collapse" id="sub-item-1">
                         <li class="{{ (request()->is('admin/activity')) ? 'active' : '' }}">
-                            <a href="{{route('activity.index')}}"><em class="fas fa-calendar-alt">&nbsp;</em> Activity
-                                List</a>
+                            <a href="{{route('activity.index')}}"><em class="fas fa-calendar-alt">&nbsp;</em> รายการกิจกรรม</a>
                         </li>
                         <li class="{{ (request()->is('admin/activity/create')) ? 'active' : '' }}">
-                            <a href="{{route('activity.create')}}"><em class="far fa-calendar-plus">&nbsp;</em> Create
-                                Activity</a>
+                            <a href="{{route('activity.create')}}"><em class="far fa-calendar-plus">&nbsp;</em> สร้างกิจกรรม</a>
                         </li>
                     </ul>
                 </li>
                 <li
                     class="parent {{ (request()->is('admin/linenotify')||request()->is('admin/alert')) ? 'active' : '' }}">
                     <a data-toggle="collapse" href="#sub-item-2">
-                        <i class="fas fa-bug">&nbsp;</i> Test <span data-toggle="collapse"
+                        <i class="fas fa-bug">&nbsp;</i> ทดสอบ <span data-toggle="collapse"
                             href="#sub-item-2" class="icon pull-right"><i class="fa fa-plus"></i></span>
                     </a>
                     <ul class="children collapse" id="sub-item-2">
                         <li class="{{ (request()->is('admin/linenotify')) ? 'active' : '' }}">
-                            <a href="{{route('linenotify.index')}}"><em class="fab fa-line">&nbsp;</em> Line</a>
+                            <a href="{{route('linenotify.index')}}"><em class="fab fa-line">&nbsp;</em> ไลน์</a>
                         </li>
                         <li class="{{ (request()->is('admin/alert')) ? 'active' : '' }}">
                             <a href="{{route('sweet.alert')}}"><em class="fas fa-exclamation-circle">&nbsp;</em>
-                                Alert</a>
+                                แจ้งเตือน</a>
                         </li>
                     </ul>
                 </li>
 
                 <li><a href="{{ route('logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <em class="fas fa-sign-out-alt">&nbsp;</em> {{ __('Logout') }}
+                        <em class="fas fa-sign-out-alt">&nbsp;</em> {{ __('ออกจากระบบ') }}
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
@@ -150,7 +149,7 @@
             @yield('content')
         </div>
         <div class="col-sm-12">
-            <p class="back-link">Development by <a href="https://web.facebook.com/Isara.Intawong" target="__blank">B&B
+            <p class="back-link">พัฒนาโดย <a href="https://web.facebook.com/Isara.Intawong" target="__blank">B&B
                     Soft</a></p>
         </div><!-- /.row -->
     </div>

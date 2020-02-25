@@ -6,19 +6,19 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Notifications\ResetPassword as ResetPasswordNotification;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use SoftDeletes;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'major', 'tel','email', 'password', 'user_image'
+        'first_name', 'last_name', 'major', 'tel', 'email', 'password', 'user_image'
     ];
 
     public $table = "users";
@@ -53,5 +53,11 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->role === self::ADMIN_TYPE;
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        // Your your own implementation.
+        $this->notify(new ResetPasswordNotification($token));
     }
 }

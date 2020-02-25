@@ -18,6 +18,8 @@ Route::get('/', function () {
 //Route for normal user
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::resource('/profile', 'ProfileController');
+    Route::match(['put', 'patch', 'post'], '/profile', 'ProfileController@update')->name('useer-profile.update');
 });
 //Route for admin
 Route::group(['prefix' => 'admin'], function () {

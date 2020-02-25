@@ -49,15 +49,15 @@
                         @if (Route::has('login'))
                         @auth
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="{{ url('/home') }}">Home</a>
+                            <a class="nav-link js-scroll-trigger color_head" href="{{ url('/home') }}"><b>หน้าหลัก</b></a>
                         </li>
                         @else
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="{{ route('login') }}">Login</a>
+                            <a class="nav-link js-scroll-trigger color_head" href="{{ route('login') }}"><b>เข้าสู่ระบบ</b></a>
                         </li>
                         @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="{{ route('register') }}">Register</a>
+                            <a class="nav-link js-scroll-trigger color_head" href="{{ route('register') }}"><b>สมัครสมาชิก</b></a>
                         </li>
                         @endif
                         @endauth
@@ -67,7 +67,7 @@
             </div>
         </nav>
 
-        <section id="home" class="main-banner parallaxie" style="background: url('images/welcome/banner-03.jpg')">
+        <section id="home" class="main-banner parallaxie" style="background: url('images/welcome/bg1.png')">
             <div class="heading">
                 <h1>Hello Scientists</h1>
                 <p>"เว็บแอพพลิเคชันสำหรับบริหารกิจกรรมสโมสรนักศึกษาคณะวิทยาศาสตร์"<br>Activity Management For
@@ -118,21 +118,21 @@
                         <p class="footer-links">
                             @if (Route::has('login'))
                             @auth
-                            <a href="{{ url('/home') }}">Home</a>
+                            <a href="{{ url('/home') }}"><b>หน้าหลัก</b></a>
                             @else
 
-                            <a href="{{ route('login') }}">Login</a>
+                            <a href="{{ route('login') }}"><b>เข้าสู่ระบบ</b></a>
 
                             @if (Route::has('register'))
 
-                            <a href="{{ route('register') }}">Register</a>
+                            <a href="{{ route('register') }}"><b>สมัครสมาชิก</b></a>
 
                             @endif
                             @endauth
                             @endif
                         </p>
                         <p class="footer-company-name">© 2019 Copyright:
-                            <a href="https://www.facebook.com/Isara.Intawong" target="_blank">Isara Intawong</a></p>
+                            <a href="https://www.facebook.com/Isara.Intawong" target="_blank">B&B Soft</a></p>
                     </div>
                 </div>
             </div><!-- end container -->

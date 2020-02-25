@@ -35,16 +35,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('./home')}}">Home
+                        <a class="nav-link" href="{{url('./home')}}">หน้าหลัก
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    {{-- <li class="nav-item">
-                        <a class="nav-link" href="">Line</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">111</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href=" {{url('/activity')}} ">Activity</a>
-                    </li> --}}
+                        <a class="nav-link" href="">222</a>
+                    </li>
                 </ul>
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto nav-flex-icons">
@@ -52,13 +52,13 @@
                     <!-- Authentication Links -->
                     @guest
                     <li class="nav-item">
-                        <a class="nav-link waves-effect waves-light" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="nav-link waves-effect waves-light" href="{{ route('login') }}">{{ __('เข้าสู่ระบบ') }}</a>
                     </li>
 
                     @if (Route::has('register'))
                     <li class="nav-item">
                         <a class="nav-link waves-effect waves-light"
-                            href="{{ route('register') }}">{{ __('Register') }}</a>
+                            href="{{ route('register') }}">{{ __('สมัครสมาชิก') }}</a>
                     </li>
                     @endif
                     @else
@@ -71,11 +71,11 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
                             aria-labelledby="navbarDropdownMenuLink-55">
-                            <a class="dropdown-item" href="#">Profile</a>
-                            <a class="dropdown-item" href="#">History</a>
+                            <a class="dropdown-item" href="#">โปรไฟล์</a>
+                            <a class="dropdown-item" href="#">ประวัติการเข้าร่วมกิจกรรม</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}</a>
+                                {{ __('ออกจากระบบ') }}</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
