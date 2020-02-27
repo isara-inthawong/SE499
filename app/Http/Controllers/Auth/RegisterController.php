@@ -90,7 +90,7 @@ class RegisterController extends Controller
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'tel' => $data['tel'],
-            'major' => $data['major'],
+            'major_id' => $data['major'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'user_image' => 'profile-default.jpg',

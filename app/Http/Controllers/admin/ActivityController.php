@@ -98,9 +98,9 @@ class ActivityController extends Controller
 
             $ln->send($text, $image_path); // sent
 
-            return redirect('admin/activity')->with('success', 'Create Successfully');
+            return redirect('admin/activity')->with('success', 'สร้างสำเร็จ');
         }
-        return redirect()->back()->withInput($request->input())->with('error', 'Create Failed');
+        return redirect()->back()->withInput($request->input())->with('error', 'สร้างล้มเหลว!');
     }
 
     /**
@@ -161,9 +161,9 @@ class ActivityController extends Controller
                 $attr['hour'] = $request->get('activity_hour');
                 $activity->update($attr);
 
-                return redirect('admin/activity')->with('success', 'Update Successfully');
+                return redirect('admin/activity')->with('success', 'อัปเดตสำเร็จ');
             }
-            return redirect()->back()->withInput($request->input())->with('error', 'Update Failed');
+            return redirect()->back()->withInput($request->input())->with('error', 'การอัพเดทล้มเหลว!');
         }
         $FileImagerun = $request->activity_image;
         $imageName = null;
@@ -187,9 +187,9 @@ class ActivityController extends Controller
             $attr['activity_image'] = $imageName;
             $activity->update($attr);
 
-            return redirect('admin/activity')->with('success', 'Update Successfully');
+            return redirect('admin/activity')->with('success', 'อัปเดตสำเร็จ');
         }
-        return redirect()->back()->withInput($request->input())->with('error', 'Update Failed');
+        return redirect()->back()->withInput($request->input())->with('error', 'การอัพเดทล้มเหลว!');
     }
 
     /**
@@ -201,6 +201,6 @@ class ActivityController extends Controller
     public function destroy($id)
     {
         Activity::find($id)->delete();
-        return redirect('admin/activity')->with('success', 'Delete Successfully');
+        return redirect('admin/activity')->with('success', 'ลบสำเร็จ');
     }
 }

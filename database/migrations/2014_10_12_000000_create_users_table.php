@@ -18,41 +18,44 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('user_id');
+            $table->string('student_id')->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('major')->nullable();
             $table->string('tel')->nullable();
+            $table->string('major_id')->nullable();
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('role', ['member', 'admin'])->default('member');
-            $table->string('user_image')->nullable();
+            $table->string('role_id')->default('0');
+            $table->string('user_image')->default('profile-default.jpg');
             $table->timestamp('email_verified_at')->nullable();
-            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
         DB::table('users')->insert(
             [
                 [
+                    'student_id' => '6001260052',
                     'first_name' => 'Admin',
                     'last_name' => 'lastNameAdmin',
-                    'email' => 'bell7672@gmail.com',
-                    'major' => 'SE',
                     'tel' => '0864351412',
+                    'major_id' => '0',
+                    'email' => 'bell7672@gmail.com',
                     'password' => Hash::make('qqqqwwww'), //password is ”qqqqwwww”
                     // 'password' => Crypt::encryptString('qqqqwwww'), //password is ”qqqqwwww”
-                    'role' => 'admin',
+                    'role' => '1',
                     'user_image' => 'profile-default.jpg',
                 ],
                 [
+                    'student_id' => '5901260052',
                     'first_name' => 'FirstNameMember',
                     'last_name' => 'LastNameMember',
-                    'email' => 'member@member.com',
-                    'major' => 'SE',
                     'tel' => '0864351412',
+                    'major_id' => '0',
+                    'email' => 'member@member.com',
                     'password' => Hash::make('qqqqwwww'), //password is ”qqqqwwww”
                     // 'password' => Crypt::encryptString('qqqqwwww'), //password is ”qqqqwwww”
-                    'role' => 'member',
+                    'role' => '0',
                     'user_image' => 'profile-default.jpg',
                 ]
             ]

@@ -102,9 +102,9 @@ class ProfileController extends Controller
                 $attr['major'] = $request->get('major');
                 $attr['email'] = $request->get('email');
                 $user->update($attr);
-                return redirect('admin/home')->with('success', 'Update Successfully');
+                return redirect('admin/home')->with('success', 'อัปเดตสำเร็จ');
             }
-            return redirect()->back()->withInput($request->input())->with('error', 'Update Failed');
+            return redirect()->back()->withInput($request->input())->with('error', 'การอัพเดทล้มเหลว!');
         }
 
         $FileImagerun = $request->user_image;
@@ -128,9 +128,9 @@ class ProfileController extends Controller
             $attr['user_image'] = $imageName;
             $user->update($attr);
 
-            return redirect('admin/home')->with('success', 'Update Successfully');
+            return redirect('admin/home')->with('success', 'อัปเดตสำเร็จ');
         }
-        return redirect()->back()->withInput($request->input())->with('error', 'Update Failed');
+        return redirect()->back()->withInput($request->input())->with('error', 'การอัพเดทล้มเหลว!');
     }
 
     /**

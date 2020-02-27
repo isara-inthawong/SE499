@@ -14,7 +14,7 @@
     <link href="{{ asset('css/admin/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    {{-- <link href="css/font-awesome.min.css" rel="stylesheet"> --}}
+    <!-- <link href="css/font-awesome.min.css" rel="stylesheet"> -->
 
     <link href="{{ asset('css/admin/datepicker3.css') }}" rel="stylesheet">
     <link href="{{ asset('css/admin/styles.css') }}" rel="stylesheet">

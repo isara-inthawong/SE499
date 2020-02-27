@@ -9,7 +9,7 @@ class History extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'activity_id', 'user_id',
+        'activity_id', 'user_id', 'rate'
     ];
 
     public $table = "histories";

@@ -18,7 +18,15 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'major', 'tel', 'email', 'password', 'user_image'
+        'student_id',
+        'first_name',
+        'last_name',
+        'tel',
+        'major_id',
+        'role_id',
+        'email',
+        'password',
+        'user_image'
     ];
 
     public $table = "users";
@@ -28,6 +36,14 @@ class User extends Authenticatable
     public function history()
     {
         return $this->hasMany('App\History', 'user_id', 'user_id')->withDefault();
+    }
+    public function role()
+    {
+        return $this->hasOne('App\Role', 'role_id', 'role_id')->withDefault();
+    }
+    public function major()
+    {
+        return $this->hasMany('App\Major', 'major_id', 'major_id')->withDefault();
     }
 
     /**
@@ -48,8 +64,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    const ADMIN_TYPE = 'admin';
-    const DEFAULT_TYPE = 'member';
+    const ADMIN_TYPE = '1';
+    const DEFAULT_TYPE = '0';
     public function isAdmin()
     {
         return $this->role === self::ADMIN_TYPE;
