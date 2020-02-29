@@ -11,15 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ViewsController@welcome');
 
 //Route for normal user
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/home', 'HomeController@index')->name('home');
-    Route::resource('/profile', 'ProfileController');
-    Route::match(['put', 'patch', 'post'], '/profile', 'ProfileController@update')->name('useer-profile.update');
+    Route::get('/home', 'Member\HomeController@index')->name('home');
+    Route::resource('/profile', 'Member\ProfileController');
+    Route::match(['put', 'patch', 'post'], '/profile', 'Member\ProfileController@update')->name('useer-profile.update');
 });
 //Route for admin
 Route::group(['prefix' => 'admin'], function () {
@@ -39,7 +37,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::match(['put', 'patch', 'post'], '/profile', 'admin\ProfileController@update')->name('profile.update');
 
         // Test
-        Route::get('sweet', 'admin\TestController@alert')->name('sweet.alert');
+        // Route::get('sweet', 'admin\TestController@alert')->name('sweet.alert');
         Route::get('/create_dummy_user', 'admin\TestController@create_dummy_user');
         Route::get('/create_dummy_activity', 'admin\TestController@create_dummy_activity');
     });
