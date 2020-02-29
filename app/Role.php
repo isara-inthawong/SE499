@@ -12,7 +12,7 @@ class Role extends Model
 
     public $table = "roles";
 
-    protected $primaryKey = ['role_id'];
+    protected $primaryKey = 'role_id';
 
     public function user()
     {

@@ -12,6 +12,14 @@ use App\Activity;
 
 class TestController extends Controller
 {
+
+    //give private declaration
+    private $numOfLoop;
+    public function __construct()
+    {
+        $this->numOfLoop = 30;
+    }
+
     public function alert()
     {
         Alert::warning('Warning Title', 'Warning Message');
@@ -25,19 +33,19 @@ class TestController extends Controller
         }
         $faker = Factory::create();
 
-        for ($i = 0; $i < 100; $i++) {
+        $numOfLoop = $this->numOfLoop;
+        for ($i = 0; $i < $numOfLoop; $i++) {
             $num = array('06', '08', '09');
-            $major =  array('SE', 'CS', 'FS');
+            $major =  array('1', '2', '3');
             $num1 = array_rand($num);
             $major1 = array_rand($major);
             $num = $num[$num1];
             $major = $major[$major1];
-
             $userData = array(
                 'first_name' => $faker->firstName('male' | 'female'),
                 'last_name' => $faker->lastName,
                 'tel' => $num . $faker->ean8,
-                'major' => $major,
+                'major_id' => $major,
                 'email' => $faker->email,
                 'password' => Hash::make('qqqqwwww'),
                 'user_image' => 'profile-default.jpg',
@@ -56,8 +64,8 @@ class TestController extends Controller
     {
         $faker = Factory::create();
 
-        for ($i = 0; $i < 50; $i++) {
-
+        $numOfLoop = $this->numOfLoop;
+        for ($i = 0; $i < $numOfLoop; $i++) {
             $activityData = array(
                 'activity_name' => $faker->userName,
                 'activity_address' => $faker->address,

@@ -20,6 +20,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/css/mdb.min.css" rel="stylesheet">
     {{-- Fonts --}}
     <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <link href="{{ asset('css/all-style.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -52,7 +55,8 @@
                     <!-- Authentication Links -->
                     @guest
                     <li class="nav-item">
-                        <a class="nav-link waves-effect waves-light" href="{{ route('login') }}">{{ __('เข้าสู่ระบบ') }}</a>
+                        <a class="nav-link waves-effect waves-light"
+                            href="{{ route('login') }}">{{ __('เข้าสู่ระบบ') }}</a>
                     </li>
 
                     @if (Route::has('register'))
@@ -65,7 +69,7 @@
                     <li class="nav-item avatar dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                    <img src="{{url('images/profile')}}/{{ Auth::user()->user_image}}"
+                            <img src="{{url('images/profile')}}/{{ Auth::user()->user_image}}"
                                 class="rounded-circle z-depth-0" alt="avatar image" width="30"
                                 height="30">{{' '}}{{ Auth::user()->first_name }}
                         </a>
@@ -102,6 +106,9 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/js/mdb.min.js">
     </script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    @yield('script')
 </body>
 
 </html>

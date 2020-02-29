@@ -2,9 +2,9 @@
 @section('title', 'Register')
 @section('content')
 <style>
-.selecct_color{
-    color: #dbdbdb;
-}
+    .selecct_color {
+        color: #dbdbdb;
+    }
 </style>
 <div class="limiter">
     <div class="container-login100">
@@ -16,6 +16,19 @@
             </div>
             <form class="login100-form was-validated" method="POST" action="{{ route('register') }}">
                 @csrf
+                <div class="wrap-input100 m-b-10">
+                    <label class="label-input100" for="student_id">{{ __('รหัสนักศึกษา') }}</label>
+                    <input id="student_id" type="number"
+                        class="student_id form-control @error('student_id') is-invalid @enderror" name="student_id"
+                        value="{{ old('student_id') }}" minlength="10" maxlength="10" placeholder="รหัสนักศึกษาของคุณ"
+                        required autocomplete="student_id" autofocus>
+                    @error('student_id')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
                 <div class="wrap-input100 m-b-10">
                     <label class="label-input100" for="first_name">{{ __('ชื่อ') }}</label>
                     <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror"
@@ -43,8 +56,8 @@
                 <div class="wrap-input100 m-b-10">
                     <label class="label-input100" for="tel">{{ __('เบอร์โทรศัพท์') }}</label>
                     <input id="tel" type="number" class="form-control @error('tel') is-invalid @enderror" name="tel"
-                        value="{{ old('tel') }}" minlength="10" maxlength="10" placeholder="เบอร์โทรศัพท์ของคุณ" required
-                        autocomplete="tel" autofocus>
+                        value="{{ old('tel') }}" minlength="10" maxlength="10" placeholder="เบอร์โทรศัพท์ของคุณ"
+                        required autocomplete="tel" autofocus>
                     @error('tel')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -58,9 +71,9 @@
                         name="major" value="{{ old('major') }}" required autocomplete="major" autofocus>
                         {{ (request()->is('admin/activity/create')||request()->is('admin/activity')) ? 'active' : '' }}
                         <option selected class="selecct_color">สาขาวิชาของคุณ</option>
-                        <option value="SE">SE</option>
-                        <option value="CS">CS</option>
-                        <option value="FS">FS</option>
+                        <option value="1">วิศวกรรมซอฟต์แวร์</option>
+                        <option value="2">วิทยาการคอมพิวเตอร์</option>
+                        <option value="3">วิทยาศาสตร์และเทคโนโลยีอาหาร</option>
                     </select>
                     @error('major')
                     <span class="invalid-feedback" role="alert">

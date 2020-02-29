@@ -15,7 +15,7 @@ class CreateMoonJamesTable extends Migration
     public function up()
     {
         Schema::create('moon_james', function (Blueprint $table) {
-            $table->bigIncrements('#');
+            $table->bigIncrements('id');
             $table->string('sticker_id');
             $table->integer('sticker_grouup');
             $table->integer('sticker_version')->nullable();

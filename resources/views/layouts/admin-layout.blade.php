@@ -24,6 +24,10 @@
 
     <!--Custom Font-->
     <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <link href="{{ asset('css/all-style.css') }}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -101,28 +105,35 @@
                     </a>
                     <ul class="children collapse" id="sub-item-1">
                         <li class="{{ (request()->is('admin/activity')) ? 'active' : '' }}">
-                            <a href="{{route('activity.index')}}"><em class="fas fa-calendar-alt">&nbsp;</em> รายการกิจกรรม</a>
+                            <a href="{{route('activity.index')}}"><em class="fas fa-calendar-alt">&nbsp;</em>
+                                รายการกิจกรรม</a>
                         </li>
                         <li class="{{ (request()->is('admin/activity/create')) ? 'active' : '' }}">
-                            <a href="{{route('activity.create')}}"><em class="far fa-calendar-plus">&nbsp;</em> สร้างกิจกรรม</a>
+                            <a href="{{route('activity.create')}}"><em class="far fa-calendar-plus">&nbsp;</em>
+                                สร้างกิจกรรม</a>
                         </li>
                     </ul>
                 </li>
-                <li
+
+                {{-- <li
                     class="parent {{ (request()->is('admin/linenotify')||request()->is('admin/alert')) ? 'active' : '' }}">
                     <a data-toggle="collapse" href="#sub-item-2">
-                        <i class="fas fa-bug">&nbsp;</i> ทดสอบ <span data-toggle="collapse"
-                            href="#sub-item-2" class="icon pull-right"><i class="fa fa-plus"></i></span>
+                        <i class="fas fa-bug">&nbsp;</i> ทดสอบ <span data-toggle="collapse" href="#sub-item-2"
+                            class="icon pull-right"><i class="fa fa-plus"></i></span>
                     </a>
                     <ul class="children collapse" id="sub-item-2">
                         <li class="{{ (request()->is('admin/linenotify')) ? 'active' : '' }}">
-                            <a href="{{route('linenotify.index')}}"><em class="fab fa-line">&nbsp;</em> ไลน์</a>
+                            <a href="{{route('linenotify.index')}}"><em class="fab fa-line">&nbsp;</em> ไลน์บรอดแคส</a>
                         </li>
                         <li class="{{ (request()->is('admin/alert')) ? 'active' : '' }}">
                             <a href="{{route('sweet.alert')}}"><em class="fas fa-exclamation-circle">&nbsp;</em>
                                 แจ้งเตือน</a>
                         </li>
                     </ul>
+                </li> --}}
+
+                <li class="{{ (request()->is('admin/linenotify')) ? 'active' : '' }}">
+                    <a href="{{route('linenotify.index')}}"><em class="fab fa-line">&nbsp;</em> ไลน์บรอดแคส</a>
                 </li>
 
                 <li><a href="{{ route('logout') }}"
@@ -164,6 +175,9 @@
     <script src="{{asset('js/admin/easypiechart-data.js')}}"></script>
     <script src="{{asset('js/admin/bootstrap-datepicker.js')}}"></script>
     <script src="{{asset('js/admin/custom.js')}}"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    @yield('script')
 </body>
 
 </html>

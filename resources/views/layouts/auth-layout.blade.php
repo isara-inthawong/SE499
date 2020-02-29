@@ -16,6 +16,9 @@
     <link href="{{ asset('css/auth/util.css') }}" rel="stylesheet">
     {{-- Fonts --}}
     <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <link href="{{ asset('css/all-style.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -24,6 +27,9 @@
     </div>
     {{-- sweetalert --}}
     @include('sweetalert::alert')
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    @yield('script')
 </body>
 
 </html>

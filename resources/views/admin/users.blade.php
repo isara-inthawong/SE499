@@ -34,7 +34,7 @@
                                 <td>{{ $item->first_name}}</td>
                                 <td>{{ $item->last_name}}</td>
                                 <td>{{ $item->email}}</td>
-                                <td>{{ $item->major}}</td>
+                                <td>{{ $item->major->major}}</td>
                                 <td>{{ $item->tel}}</td>
                                 <td>
                                     <a href="{{url('./images/profile')}}/{{$item->user_image}}" target="_blank">
@@ -43,7 +43,7 @@
                                 </td>
                                 <td>
                                     <a href="#" {{-- <a href="{{ action('admin\UserController@edit', $item->user_id) }}"
-                                        --}} class="btn btn-warning">
+                                        --}} class="btn-size btn btn-warning">
                                         <i class="fas fa-pencil-alt"><b> Edit</b></i>
                                     </a>
                                     {{-- <form method="post" class="delete_form" id="deleteData"
@@ -51,7 +51,7 @@
                                     enctype="multipart/form-data">
                                     @csrf
                                     <input type="hidden" name="_method" value="DELETE" />
-                                    <button type="submit" class="btn btn-danger" onclick="confirmDel()">
+                                    <button type="submit" class="btn-size btn btn-danger" onclick="confirmDel()">
                                         <i class="fas fa-trash-alt"><b> Delete</b></i>
                                     </button>
                                     </form> --}}

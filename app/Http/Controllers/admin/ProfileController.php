@@ -24,6 +24,7 @@ class ProfileController extends Controller
             Alert::error(session('error'));
         }
         $user = User::where('user_id', '=', Auth::user()->user_id)->first();
+        // dd($user->role, $user->major);
         return view('admin.user-profile-edit', compact('user'));
     }
 
@@ -82,6 +83,7 @@ class ProfileController extends Controller
         $this->validate(
             $request,
             [
+                'student_id' => 'required|string|max:10',
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'tel' => 'required',
@@ -96,15 +98,16 @@ class ProfileController extends Controller
             if ((!$exists) || ($exists->user_id == $id)) {
                 $user = User::where('user_id', '=', $id)->first();
 
+                $attr['student_id'] = $request->get('student_id');
                 $attr['first_name'] = $request->get('first_name');
                 $attr['last_name'] = $request->get('last_name');
                 $attr['tel'] = $request->get('tel');
-                $attr['major'] = $request->get('major');
+                $attr['major_id'] = $request->get('major');
                 $attr['email'] = $request->get('email');
                 $user->update($attr);
-                return redirect('admin/home')->with('success', 'Update Successfully');
+                return redirect('admin/home')->with('success', 'อัปเดตสำเร็จ');
             }
-            return redirect()->back()->withInput($request->input())->with('error', 'Update Failed');
+            return redirect()->back()->withInput($request->input())->with('error', 'การอัพเดทล้มเหลว!');
         }
 
         $FileImagerun = $request->user_image;
@@ -128,9 +131,9 @@ class ProfileController extends Controller
             $attr['user_image'] = $imageName;
             $user->update($attr);
 
-            return redirect('admin/home')->with('success', 'Update Successfully');
+            return redirect('admin/home')->with('success', 'อัปเดตสำเร็จ');
         }
-        return redirect()->back()->withInput($request->input())->with('error', 'Update Failed');
+        return redirect()->back()->withInput($request->input())->with('error', 'การอัพเดทล้มเหลว!');
     }
 
     /**

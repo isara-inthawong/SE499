@@ -13,5 +13,5 @@ class MoonJamesModel extends Model
         'sticker_version',
     ];
     public $table = "moon_james";
-    protected $primaryKey = '#';
+    protected $primaryKey = 'id';
 }

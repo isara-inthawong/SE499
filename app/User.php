@@ -43,7 +43,7 @@ class User extends Authenticatable
     }
     public function major()
     {
-        return $this->hasMany('App\Major', 'major_id', 'major_id')->withDefault();
+        return $this->hasOne('App\Major', 'major_id', 'major_id')->withDefault();
     }
 
     /**
@@ -64,11 +64,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    const ADMIN_TYPE = '1';
-    const DEFAULT_TYPE = '0';
+    const PROFILE_PIC = 'profile-default.jpg';
+    const ADMIN_TYPE = 1;
+    const DEFAULT_TYPE = 2;
     public function isAdmin()
     {
-        return $this->role === self::ADMIN_TYPE;
+        return $this->role_id === self::ADMIN_TYPE;
     }
 
     public function sendPasswordResetNotification($token)

@@ -82,6 +82,7 @@ class ProfileController extends Controller
         $this->validate(
             $request,
             [
+                'student_id' => 'required|string|max:255',
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'tel' => 'required',
@@ -96,10 +97,11 @@ class ProfileController extends Controller
             if ((!$exists) || ($exists->user_id == $id)) {
                 $user = User::where('user_id', '=', $id)->first();
 
+                $attr['student_id'] = $request->get('student_id');
                 $attr['first_name'] = $request->get('first_name');
                 $attr['last_name'] = $request->get('last_name');
                 $attr['tel'] = $request->get('tel');
-                $attr['major'] = $request->get('major');
+                $attr['major_id'] = $request->get('major');
                 $attr['email'] = $request->get('email');
                 $user->update($attr);
                 return redirect('admin/home')->with('success', 'อัปเดตสำเร็จ');
@@ -120,10 +122,11 @@ class ProfileController extends Controller
         if ((!$exists) || ($exists->user_id == $id)) {
             $user = User::where('user_id', '=', $id)->first();
 
+            $attr['student_id'] = $request->get('student_id');
             $attr['first_name'] = $request->get('first_name');
             $attr['last_name'] = $request->get('last_name');
             $attr['tel'] = $request->get('tel');
-            $attr['major'] = $request->get('major');
+            $attr['major_id'] = $request->get('major');
             $attr['email'] = $request->get('email');
             $attr['user_image'] = $imageName;
             $user->update($attr);

@@ -23,6 +23,6 @@ class Activity extends Model
 
     public function history()
     {
-        return $this->hasMany('App\History', 'activity_id', 'activity_id')->withDefault();
+        return $this->belongsTo('App\History', 'activity_id', 'activity_id')->withDefault();
     }
 }

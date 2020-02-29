@@ -64,20 +64,43 @@ class ActivityController extends Controller
                 'activity_date' => 'required|date',
                 'activity_time' => 'required',
                 'activity_hour' => 'required|integer',
-                'activity_image' => 'required|image|mimes:jpeg,png,jpg|max:15360‬',
+                // 'activity_image' => 'required|image|mimes:jpeg,png,jpg|max:15360‬',
             ]
         );
 
-        $FileImagerun = $request->activity_image;
-        $imageName = null;
-
-        if ($FileImagerun != null) {
-            $imageName = time() . '.' . $FileImagerun->getClientOriginalExtension();
-            $FileImagerun->move(public_path('images/activity'), $imageName);
-        }
-
         $activity_name = $request->get('activity_name');
         $exists = Activity::where('activity_name', '=', $activity_name)->first();
+
+        $FileImage = $request->activity_image;
+        $imageName = null;
+
+        if ($FileImage != null) {
+            $imageName = time() . '.' . $FileImage->getClientOriginalExtension();
+            $FileImage->move(public_path('images/activity'), $imageName);
+        }
+
+        if ($request->activity_image == null) {
+
+            if (!$exists) {
+                $dataActivity = array(
+                    'activity_name' => $activity_name,
+                    'activity_detail' => $request->get('activity_detail'),
+                    'activity_address' => $request->get('activity_address'),
+                    'activity_date' => $request->get('activity_date'),
+                    'activity_time' => $request->get('activity_time'),
+                    'hour' => $request->get('activity_hour'),
+                );
+                Activity::create($dataActivity);
+
+                $text = 'กิจกรรม ' . $activity_name
+                    . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date') . ', เวลา ' . $request->get('activity_time') . ' น.'
+                    . ', ที่ ' . $request->get('activity_address') . ', รายละเอียด ' . $request->get('activity_detail');
+                $ln->send($text); // sent
+
+                return redirect('admin/home')->with('success', 'สร้างสำเร็จ');
+            }
+            return redirect()->back()->withInput($request->input())->with('error', 'สร้างล้มเหลว! มีชื่อกิจกรรมนี้อยู่แล้ว');
+        }
 
         if (!$exists) {
             $dataActivity = array(
@@ -93,14 +116,13 @@ class ActivityController extends Controller
 
             $image_path = './images/activity/' . $imageName; //Line notify allow only jpeg and png file
             $text = 'กิจกรรม ' . $activity_name
-            . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date') . ', เวลา ' . $request->get('activity_time').' น.'
-            . ', ที่ ' . $request->get('activity_address') . ', รายละเอียด ' . $request->get('activity_detail');
-
+                . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date') . ', เวลา ' . $request->get('activity_time') . ' น.'
+                . ', ที่ ' . $request->get('activity_address') . ', รายละเอียด ' . $request->get('activity_detail');
             $ln->send($text, $image_path); // sent
 
             return redirect('admin/activity')->with('success', 'สร้างสำเร็จ');
         }
-        return redirect()->back()->withInput($request->input())->with('error', 'สร้างล้มเหลว!');
+        return redirect()->back()->withInput($request->input())->with('error', 'สร้างล้มเหลว! มีชื่อกิจกรรมนี้อยู่แล้ว');
     }
 
     /**
@@ -135,6 +157,10 @@ class ActivityController extends Controller
      */
     public function update(Request $request, $id)
     {
+        /* line config */
+        $token = '7J81Hhjpsw6YhWjJsxNMsZahzgqBexoFMoLoFg7XTvM';
+        $ln = new LineNotify($token);
+
         $this->validate(
             $request,
             [
@@ -165,12 +191,12 @@ class ActivityController extends Controller
             }
             return redirect()->back()->withInput($request->input())->with('error', 'การอัพเดทล้มเหลว!');
         }
-        $FileImagerun = $request->activity_image;
+        $FileImage = $request->activity_image;
         $imageName = null;
 
-        if ($FileImagerun != null) {
-            $imageName = time() . '.' . $FileImagerun->getClientOriginalExtension();
-            $FileImagerun->move(public_path('images/activity'), $imageName);
+        if ($FileImage != null) {
+            $imageName = time() . '.' . $FileImage->getClientOriginalExtension();
+            $FileImage->move(public_path('images/activity'), $imageName);
         }
 
         $exists = Activity::where('activity_id', '=', $id)->first();
@@ -201,6 +227,7 @@ class ActivityController extends Controller
     public function destroy($id)
     {
         Activity::find($id)->delete();
+
         return redirect('admin/activity')->with('success', 'ลบสำเร็จ');
     }
 }

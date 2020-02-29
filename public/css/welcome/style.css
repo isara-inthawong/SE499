@@ -71,7 +71,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0 0 10px 0;
     font-weight: normal;
     line-height: 120% !important;
-    color: #018fd6;
+    color: #30a5ff;
     margin: 0
 }
 
@@ -337,9 +337,9 @@ a img.aligncenter {
     bottom: 0;
     left: 0;
     right: 0;
-    /* background-color: #000; */
+    background-color: rgb(230, 230, 230);
     z-index: 0;
-    opacity: .6;
+    opacity: .3;
 }
 
 .heading {
@@ -447,7 +447,7 @@ xclip
 #mainNav.navbar-shrink {
     padding-top: 10px;
     padding-bottom: 10px;
-    background-color: #018fd6;
+    background-color: #30a5ff;
 }
 
 #clouds {
@@ -564,13 +564,13 @@ xclip
 }
 
 .btn-hover-new {
-    color: #018fd6;
+    color: #30a5ff;
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
     -o-transition: all 0.5s;
     transition: all 0.5s;
     position: relative;
-    border: 1px solid #018fd6;
+    border: 1px solid #30a5ff;
     overflow: hidden;
     padding: 0px 18px;
     display: inline-block;
@@ -611,7 +611,7 @@ xclip
 
 .btn-hover-new:hover {
     color: #ffffff;
-    background-color: #018fd6;
+    background-color: #30a5ff;
 }
 
 .btn-hover-new:hover>span {
@@ -663,7 +663,7 @@ xclip
 
 .ser-icon i {
     font-size: 50px;
-    color: #018fd6;
+    color: #30a5ff;
 }
 
 .services-inner-box h2 {
@@ -836,7 +836,7 @@ xclip
 
 .testimonial h4 {
     font-size: 18px;
-    color: #018fd6;
+    color: #30a5ff;
     padding: 13px 0 0;
 }
 
@@ -1097,7 +1097,7 @@ xclip
 }
 
 .event_dit ul li a:hover {
-    color: #018fd6;
+    color: #30a5ff;
 }
 
 .service-widget h3 {
@@ -1113,7 +1113,7 @@ xclip
 }
 
 .participate-wrap figure::before {
-    background-color: #018fd6;
+    background-color: #30a5ff;
     content: "";
     position: absolute;
     border-radius: 100%;
@@ -1267,7 +1267,7 @@ xclip
 }
 
 .hoverbutton {
-    background-color: #018fd6;
+    background-color: #30a5ff;
     position: absolute;
     color: #ffffff !important;
     top: 70%;
@@ -1411,7 +1411,7 @@ hr.invis1 {
 }
 
 .filter-button-group button.active {
-    background: #018fd6;
+    background: #30a5ff;
     color: #fff;
     box-shadow: 2px 20px 45px 5px rgba(0, 0, 0, .2);
 }
@@ -1473,7 +1473,7 @@ hr.invis1 {
     position: absolute;
     top: 15px;
     right: 15px;
-    background: #018fd6;
+    background: #30a5ff;
     color: #fff;
     padding: 10px 15px;
     text-align: center;
@@ -1709,7 +1709,7 @@ hr.invis1 {
 }
 
 .bootstrap-select .dropdown-toggle:focus {
-    outline: thin dotted #018fd6 !important;
+    outline: thin dotted #30a5ff !important;
     outline: 5px auto -webkit-focus-ring-color !important;
     outline-offset: -2px;
 }
@@ -2008,7 +2008,7 @@ select.mobile-device {
 }
 
 .contact_form .form-control {
-    background-color: #018fd6;
+    background-color: #30a5ff;
     margin-bottom: 30px;
     border: 1px solid #ebebeb;
     box-sizing: border-box;
@@ -2043,7 +2043,7 @@ select.mobile-device {
 }
 
 #contact {
-    background: url(images/bg.png) no-repeat center center #018fd6;
+    background: url(images/bg.png) no-repeat center center #30a5ff;
 }
 
 #contact .section-title p {
@@ -2132,7 +2132,7 @@ select.mobile-device {
 }
 
 .footer-links a:hover, .footer a:hover {
-    color: #018fd6 !important;
+    color: #30a5ff !important;
 }
 
 .footer-links li {
@@ -2168,7 +2168,7 @@ select.mobile-device {
 
 .copyrights {
     border-top: 1px dashed rgba(255, 255, 255, 0.1);
-    background-color: #018fd6;
+    background-color: #30a5ff;
     box-sizing: border-box;
     width: 100%;
     text-align: left;
@@ -2351,7 +2351,7 @@ select.mobile-device {
     right: 0;
     bottom: 0;
     left: 0;
-    background: #018fd6;
+    background: #30a5ff;
     z-index: 11000;
     position: fixed;
     display: block

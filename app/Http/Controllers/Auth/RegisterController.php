@@ -68,6 +68,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'student_id' => ['required', 'string', 'max:10'],
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'tel' => ['required', 'string', 'min:10', 'max:10'],
@@ -87,14 +88,15 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
+            'student_id' => $data['student_id'],
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'tel' => $data['tel'],
             'major_id' => $data['major'],
+            'role_id' => User::DEFAULT_TYPE,
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'user_image' => 'profile-default.jpg',
-            'role' => User::DEFAULT_TYPE,
+            'user_image' => User::PROFILE_PIC,
         ]);
     }
 
@@ -112,6 +114,7 @@ class RegisterController extends Controller
 
         // $this->guard()->login($user);
 
-        return $this->registered($request, $user) ?: redirect($this->redirectPath());
+        // return $this->registered($request, $user) ?: redirect($this->redirectPath());
+        return redirect('login')->with('success', 'สมัครสมาชิกเสร็จสิ้น');
     }
 }

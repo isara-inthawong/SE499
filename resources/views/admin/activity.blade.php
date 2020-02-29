@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Activity List</h1>
+        <h1 class="page-header">รายการกิจกรรม</h1>
     </div>
 </div>
 <!--/.row-->
@@ -11,21 +11,21 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-heading">Activity Table</div>
+            <div class="panel-heading">รายการกิจกรรม</div>
             <div class="panel-body btn-margins">
                 <div class="col-md-12 table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Hour</th>
-                                <th>Address</th>
-                                <th>Detail</th>
-                                <th>Image</th>
-                                <th>Manage</th>
+                                <th>ลำดับ</th>
+                                <th>ชื่อ</th>
+                                <th>วันที่</th>
+                                <th>เวลา</th>
+                                <th>ชั่วโมง</th>
+                                <th>สถานที่</th>
+                                <th>รายละเอียด</th>
+                                <th>รูปภาพ</th>
+                                <th>จัดการ</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,16 +45,16 @@
                                 </td>
                                 <td>
                                     <a href="{{ action('admin\ActivityController@edit', $item->activity_id) }}"
-                                        class="btn btn-warning">
-                                        <i class="fas fa-pencil-alt"><b> Edit</b></i>
+                                        class="btn-size btn btn-warning">
+                                        <i class="fas fa-pencil-alt"><b> แก้ไข</b></i>
                                     </a>
-                                    <form method="post" class="delete_form" id="deleteData"
+                                    <form method="post" class="delete_form" id="btn-delete"
                                         action="{{ action('admin\ActivityController@destroy', $item->activity_id) }}"
                                         enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="_method" value="DELETE" />
-                                        <button type="submit" class="btn btn-danger" onclick="confirmDel()">
-                                            <i class="fas fa-trash-alt"><b> Delete</b></i>
+                                        <button type="button" class="btn-size btn btn-danger" onclick="confirmDel()">
+                                            <i class="fas fa-trash-alt"><b> ลบ</b></i>
                                         </button>
                                     </form>
                                 </td>
@@ -69,4 +69,25 @@
     </div><!-- /.col-->
 </div>
 <!--/.row-->
+
+{{-- // then listen out for that id in your SA script --}}
+
+
+@endsection
+@section('script')
+<script type="text/javascript">
+    function confirmDel(){
+        const url = $(this).attr('href');
+        swal({
+            title: 'คุณแน่ใจหรือไม่ที่จะลบกิจกรรมนี้?',
+            text: 'คุณจะไม่สามารถกู้คืนข้อมูลนี้ได้อีกหากลบแล้ว!',
+            icon: 'warning',
+            buttons: ["Cancel", "Yes, delete it!"],
+        }).then(function(value) {
+            if (value) {
+                document.getElementById("btn-delete").submit();
+            }
+        });
+    }
+</script>
 @endsection

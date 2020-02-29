@@ -22,10 +22,10 @@ class CreateUsersTable extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('tel')->nullable();
-            $table->string('major_id')->nullable();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('role_id')->default('0');
+            $table->unsignedBigInteger('major_id')->nullable();
+            $table->unsignedBigInteger('role_id')->default(0);
             $table->string('user_image')->default('profile-default.jpg');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
@@ -39,11 +39,11 @@ class CreateUsersTable extends Migration
                     'first_name' => 'Admin',
                     'last_name' => 'lastNameAdmin',
                     'tel' => '0864351412',
-                    'major_id' => '0',
                     'email' => 'bell7672@gmail.com',
                     'password' => Hash::make('qqqqwwww'), //password is ”qqqqwwww”
                     // 'password' => Crypt::encryptString('qqqqwwww'), //password is ”qqqqwwww”
-                    'role' => '1',
+                    'major_id' => 1,
+                    'role_id' => 1,
                     'user_image' => 'profile-default.jpg',
                 ],
                 [
@@ -51,11 +51,11 @@ class CreateUsersTable extends Migration
                     'first_name' => 'FirstNameMember',
                     'last_name' => 'LastNameMember',
                     'tel' => '0864351412',
-                    'major_id' => '0',
                     'email' => 'member@member.com',
                     'password' => Hash::make('qqqqwwww'), //password is ”qqqqwwww”
                     // 'password' => Crypt::encryptString('qqqqwwww'), //password is ”qqqqwwww”
-                    'role' => '0',
+                    'major_id' => 1,
+                    'role_id' => 2,
                     'user_image' => 'profile-default.jpg',
                 ]
             ]

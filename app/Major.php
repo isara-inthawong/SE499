@@ -12,7 +12,7 @@ class Major extends Model
 
     public $table = "majors";
 
-    protected $primaryKey = ['major_id'];
+    protected $primaryKey = 'major_id';
 
     public function user()
     {
