@@ -69,7 +69,7 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <center>
-                                <button type="submit" class="btn btn-primary" value="Save">บันทึก</button>
+                                <button type="submit" class="btn btn-primary" value="Save">อัพเดท</button>
                                 <a href="{{url('admin/activity')}}" class="btn btn-danger">ยกเลิก</a>
                             </center>
                         </div>

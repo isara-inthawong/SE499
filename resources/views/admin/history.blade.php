@@ -1,11 +1,11 @@
 @extends('layouts.admin-layout')
-@section('title','History')
+@section('title','ประวัติการเข้าร่วมกิจกรรม')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">History</div>
+                <div class="card-header">ประวัติการเข้าร่วมกิจกรรม</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,7 +13,7 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    history
+                    ประวัติการเข้าร่วมกิจกรรม
                     <br>
                 </div>
             </div>

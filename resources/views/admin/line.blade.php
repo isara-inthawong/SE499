@@ -1,6 +1,6 @@
 @extends('layouts.admin-layout')
 
-@section('title','Line')
+@section('title','ไลน์')
 
 @section('content')
 <style>
@@ -71,6 +71,7 @@
                         id="img{{$item->id}}" />
                 </label>
                 @endforeach
+                <button type="button" onclick="cancleSTK()">ยกเลิกสติกเกอร์</button>
             </div>
         </div>
 
@@ -85,7 +86,7 @@
 
         <div class="text-center">
             <button type="submit" class="btn btn-primary">
-                <i class="fas fa-paper-plane"> Sent...</i>
+                <i class="fas fa-paper-plane"> ส่ง</i>
             </button>
         </div>
     </form>
@@ -206,5 +207,11 @@ function add_data(id) {
         $('#img' + id).addClass('stk_active');
     });
 }
+
+function cancleSTK(){
+    $('input[name="stkid"]').attr('checked', false);
+    $('.img_size').removeClass('stk_active');
+}
+
 </script>
 @endsection
