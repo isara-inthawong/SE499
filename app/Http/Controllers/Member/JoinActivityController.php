@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Alert;
-use App\Activity;
-use App\User;
 
-class AdminController extends Controller
+class JoinActivityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,19 +14,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        if (session('success')) {
-            Alert::success(session('success'));
-        }
-        if (session('error')) {
-            Alert::error(session('error'));
-        }
-        $activity = Activity::get()->count();
-        $user = User::get()->count();
-        $countData = [
-            'activity' => $activity,
-            'user' => $user,
-        ];
-        return view('admin.dashboard', compact('countData'));
+        //
     }
 
     /**
@@ -50,7 +35,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // 'activity_id', 'user_id', 'datetime_rate','address_rate','rate','suggestion'
     }
 
     /**

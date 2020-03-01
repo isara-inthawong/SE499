@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Alert;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\Console\Input\Input;
 
 class UserController extends Controller
 {
@@ -34,12 +35,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        if (session('success')) {
-            Alert::success(session('success'));
-        }
-        if (session('error')) {
-            Alert::error(session('error'));
-        }
+        //
     }
 
     /**
@@ -72,8 +68,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find(Auth::user()->$user_id);
-        return view('admin.user-profile-edit');
+        $user = User::find($id);
+        return view('admin.user-edit', compact('user'));
     }
 
     /**
@@ -85,7 +81,52 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(
+            $request,
+            [
+                'student_id' => 'required|string|max:10',
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'tel' => 'required',
+                'major' => 'required|string|max:255',
+                'role_id' => 'required',
+                'email' => 'required|string|email|max:255',
+            ]
+        );
+        $users = User::where('user_id', '=', $id)->first();
+
+        $FileImage = $request->user_image;
+        $imageName = null;
+
+        if ($FileImage != null) {
+            $imageName = time() . '.' . $FileImage->getClientOriginalExtension();
+            $FileImage->move(public_path('images/profile'), $imageName);
+        }
+
+        if ($request->user_image == null) {
+            $attr['student_id'] = $request->get('student_id');
+            $attr['first_name'] = $request->get('first_name');
+            $attr['last_name'] = $request->get('last_name');
+            $attr['tel'] = $request->get('tel');
+            $attr['major_id'] = $request->get('major');
+            $attr['role_id'] = $request->get('role_id');
+            $attr['email'] = $request->get('email');
+            $users->update($attr);
+
+            return redirect('admin/users')->with('success', 'สร้างสำเร็จ');
+        } else {
+            $attr['student_id'] = $request->get('student_id');
+            $attr['first_name'] = $request->get('first_name');
+            $attr['last_name'] = $request->get('last_name');
+            $attr['tel'] = $request->get('tel');
+            $attr['major_id'] = $request->get('major');
+            $attr['role_id'] = $request->get('role_id');
+            $attr['email'] = $request->get('email');
+            $attr['user_image'] = $imageName;
+            $users->update($attr);
+
+            return redirect('admin/users')->with('success', 'อัปเดตสำเร็จ');
+        }
     }
 
     /**
@@ -96,6 +137,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::find($id)->delete();
+
+        return redirect('admin/users')->with('success', 'ลบสำเร็จ');
     }
 }

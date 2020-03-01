@@ -24,6 +24,7 @@ class User extends Authenticatable
         'tel',
         'major_id',
         'role_id',
+        'gender',
         'email',
         'password',
         'user_image'

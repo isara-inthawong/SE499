@@ -92,12 +92,10 @@ class ProfileController extends Controller
             ]
         );
 
+        $user = User::where('user_id', '=', Auth::user()->user_id)->first();
+
         if ($request->user_image == null) {
-            $exists = User::where('user_id', '=', $id)->first();
-
-            if ((!$exists) || ($exists->user_id == $id)) {
-                $user = User::where('user_id', '=', $id)->first();
-
+            if ($user) {
                 $attr['student_id'] = $request->get('student_id');
                 $attr['first_name'] = $request->get('first_name');
                 $attr['last_name'] = $request->get('last_name');
@@ -107,7 +105,7 @@ class ProfileController extends Controller
                 $user->update($attr);
                 return redirect('admin/home')->with('success', 'อัปเดตสำเร็จ');
             }
-            return redirect()->back()->withInput($request->input())->with('error', 'การอัพเดทล้มเหลว!');
+            return redirect()->back()->withInput($request->input())->with('error', 'อัพเดทล้มเหลว!');
         }
 
         $FileImagerun = $request->user_image;
@@ -118,11 +116,7 @@ class ProfileController extends Controller
             $FileImagerun->move(public_path('images/profile'), $imageName);
         }
 
-        $exists = User::where('user_id', '=', $id)->first();
-
-        if ((!$exists) || ($exists->user_id == $id)) {
-            $user = User::where('user_id', '=', $id)->first();
-
+        if ($user) {
             $attr['first_name'] = $request->get('first_name');
             $attr['last_name'] = $request->get('last_name');
             $attr['tel'] = $request->get('tel');
@@ -133,7 +127,7 @@ class ProfileController extends Controller
 
             return redirect('admin/home')->with('success', 'อัปเดตสำเร็จ');
         }
-        return redirect()->back()->withInput($request->input())->with('error', 'การอัพเดทล้มเหลว!');
+        return redirect()->back()->withInput($request->input())->with('error', 'อัพเดทล้มเหลว!');
     }
 
     /**

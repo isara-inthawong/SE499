@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('tel')->nullable();
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('gender')->nullable();
             $table->unsignedBigInteger('major_id')->nullable();
             $table->unsignedBigInteger('role_id')->default(2);
             $table->string('user_image')->default('profile-default.jpg');
@@ -42,6 +43,7 @@ class CreateUsersTable extends Migration
                     'email' => 'bell7672@gmail.com',
                     'password' => Hash::make('qqqqwwww'), //password is ”qqqqwwww”
                     // 'password' => Crypt::encryptString('qqqqwwww'), //password is ”qqqqwwww”
+                    'gender' => 'ชาย',
                     'major_id' => 1,
                     'role_id' => 1,
                     'user_image' => 'profile-default.jpg',
@@ -54,6 +56,7 @@ class CreateUsersTable extends Migration
                     'email' => 'member@member.com',
                     'password' => Hash::make('qqqqwwww'), //password is ”qqqqwwww”
                     // 'password' => Crypt::encryptString('qqqqwwww'), //password is ”qqqqwwww”
+                    'gender' => 'หญิง',
                     'major_id' => 1,
                     'role_id' => 2,
                     'user_image' => 'profile-default.jpg',

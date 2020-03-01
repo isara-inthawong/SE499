@@ -1,9 +1,9 @@
 @extends('layouts.admin-layout')
-@section('title', 'Home')
+@section('title', 'แดชบอร์ด')
 @section('content')
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Dashboard</h1>
+        <h1 class="page-header">แดชบอร์ด</h1>
     </div>
 </div>
 <!--/.row-->
@@ -15,7 +15,7 @@
                 <div class="row no-padding">
                     <i class="far fa-xl fa-calendar-alt color-blue"></i>
                     <div class="large">{{ $countData['activity'] }}</div>
-                    <div class="text-muted">All Activity</div>
+                    <div class="text-muted">กิจกรรมทั้งหมด</div>
                 </div>
             </div>
         </div>
@@ -23,7 +23,7 @@
             <div class="panel panel-orange panel-widget border-right">
                 <div class="row no-padding"><em class="fa fa-xl fa-users color-teal"></em>
                     <div class="large">{{ $countData['user'] }}</div>
-                    <div class="text-muted">All Users</div>
+                    <div class="text-muted">ผู้ใช้ทั้งหมด</div>
                 </div>
             </div>
         </div>

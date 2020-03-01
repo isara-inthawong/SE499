@@ -13,7 +13,7 @@
             <div class="panel-heading clearfix">แก้ไขกิจกรรม</div>
             <div class="panel-body">
                 <form class="form-horizontal row-border was-validated" method="post"
-                    action="{{route('activity-update.update', $activity->activity_id)}}" enctype="multipart/form-data">
+                    action="{{route('activity.update', $activity->activity_id)}}" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     <div class="form-group">

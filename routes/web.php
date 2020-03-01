@@ -23,16 +23,31 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['prefix' => 'admin'], function () {
     Route::group(['middleware' => ['admin']], function () {
         Route::get('/home', 'admin\AdminController@index')->name('admin.home');
+
         Route::get('/linenotify', 'admin\LineNotifyController@index')->name('linenotify.index');
         Route::post('/linenotify', 'admin\LineNotifyController@sent')->name('linenotify.sent');
+
         Route::resource('/activity', 'admin\ActivityController');
         Route::match(
             ['put', 'patch', 'post'],
-            '/activity_update/{id}',
+            '/activity/{id}',
             'admin\ActivityController@update'
-        )->name('activity-update.update');
+        )->name('activity.update');
+
+        Route::resource('join_activity', 'admin\JoinActivityController');
+        Route::match(
+            ['put', 'patch', 'post'],
+            '/join_activity/{id}',
+            'admin\UserController@update'
+        )->name('join_activity.update');
 
         Route::resource('/users', 'admin\UserController');
+        Route::match(
+            ['put', 'patch', 'post'],
+            '/users/{id}',
+            'admin\UserController@update'
+        )->name('users.update');
+
         Route::resource('/profile', 'admin\ProfileController');
         Route::match(['put', 'patch', 'post'], '/profile', 'admin\ProfileController@update')->name('profile.update');
 

@@ -9,12 +9,13 @@ class History extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'activity_id', 'user_id', 'rate'
+        'activity_id', 'user_id', 'state', 'datetime_rate', 'address_rate', 'rate', 'suggestion'
     ];
 
     public $table = "histories";
 
     protected $primaryKey = ['user_id', 'activity_id'];
+    public $incrementing = false;
 
     public function activity()
     {

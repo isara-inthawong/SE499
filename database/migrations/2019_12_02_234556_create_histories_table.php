@@ -14,9 +14,13 @@ class CreateHistoriesTable extends Migration
     public function up()
     {
         Schema::create('histories', function (Blueprint $table) {
-            $table->integer('user_id')->nullable();
-            $table->integer('activity_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('activity_id')->nullable();
+            $table->string('state')->nullable();
+            $table->integer('datetime_rate')->nullable();
+            $table->integer('address_rate')->nullable();
             $table->integer('rate')->nullable();
+            $table->string('suggestion')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

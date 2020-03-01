@@ -31,6 +31,7 @@ class HomeController extends Controller
         if (session('error')) {
             Alert::error(session('error'));
         }
+        
         if (auth()->user()->isAdmin()) {
             return redirect('/admin/home');
         } else {

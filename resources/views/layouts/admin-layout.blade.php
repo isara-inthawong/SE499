@@ -96,6 +96,9 @@
                 <li class="{{ (request()->is('admin/users')) ? 'active' : '' }}">
                     <a href="{{route('users.index')}}"><em class="fas fa-users">&nbsp;</em> รายการผู้ใช้</a>
                 </li>
+                <li class="{{ (request()->is('admin/join_activity')) ? 'active' : '' }}">
+                    <a href="{{route('join_activity.index')}}"><em class="fas fa-link">&nbsp;</em> เข้าร่วมกิจกรรม</a>
+                </li>
 
                 <li
                     class="parent {{ (request()->is('admin/activity/create')||request()->is('admin/activity')) ? 'active' : '' }}">
@@ -117,19 +120,19 @@
 
                 {{-- <li
                     class="parent {{ (request()->is('admin/linenotify')||request()->is('admin/alert')) ? 'active' : '' }}">
-                    <a data-toggle="collapse" href="#sub-item-2">
-                        <i class="fas fa-bug">&nbsp;</i> ทดสอบ <span data-toggle="collapse" href="#sub-item-2"
-                            class="icon pull-right"><i class="fa fa-plus"></i></span>
-                    </a>
-                    <ul class="children collapse" id="sub-item-2">
-                        <li class="{{ (request()->is('admin/linenotify')) ? 'active' : '' }}">
-                            <a href="{{route('linenotify.index')}}"><em class="fab fa-line">&nbsp;</em> ไลน์บรอดแคส</a>
-                        </li>
-                        <li class="{{ (request()->is('admin/alert')) ? 'active' : '' }}">
-                            <a href="{{route('sweet.alert')}}"><em class="fas fa-exclamation-circle">&nbsp;</em>
-                                แจ้งเตือน</a>
-                        </li>
-                    </ul>
+                <a data-toggle="collapse" href="#sub-item-2">
+                    <i class="fas fa-bug">&nbsp;</i> ทดสอบ <span data-toggle="collapse" href="#sub-item-2"
+                        class="icon pull-right"><i class="fa fa-plus"></i></span>
+                </a>
+                <ul class="children collapse" id="sub-item-2">
+                    <li class="{{ (request()->is('admin/linenotify')) ? 'active' : '' }}">
+                        <a href="{{route('linenotify.index')}}"><em class="fab fa-line">&nbsp;</em> ไลน์บรอดแคส</a>
+                    </li>
+                    <li class="{{ (request()->is('admin/alert')) ? 'active' : '' }}">
+                        <a href="{{route('sweet.alert')}}"><em class="fas fa-exclamation-circle">&nbsp;</em>
+                            แจ้งเตือน</a>
+                    </li>
+                </ul>
                 </li> --}}
 
                 <li class="{{ (request()->is('admin/linenotify')) ? 'active' : '' }}">

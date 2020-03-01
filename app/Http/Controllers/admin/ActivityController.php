@@ -23,7 +23,7 @@ class ActivityController extends Controller
         if (session('error')) {
             Alert::error(session('error'));
         }
-        $activity = Activity::paginate(10);;
+        $activity = Activity::orderBy('activity_id', 'desc')->paginate(10);
         return view('admin.activity', compact('activity'));
     }
 
@@ -94,10 +94,10 @@ class ActivityController extends Controller
 
                 $text = 'กิจกรรม ' . $activity_name
                     . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date') . ', เวลา ' . $request->get('activity_time') . ' น.'
-                    . ', ที่ ' . $request->get('activity_address') . ', รายละเอียด ' . $request->get('activity_detail');
+                    . ', ที่ ' . $request->get('activity_address') . ', รายละเอียด ' . $request->get('activity_detail').' ถูกสร้างขึ้น';
                 $ln->send($text); // sent
 
-                return redirect('admin/home')->with('success', 'สร้างสำเร็จ');
+                return redirect('admin/activity')->with('success', 'สร้างสำเร็จ');
             }
             return redirect()->back()->withInput($request->input())->with('error', 'สร้างล้มเหลว! มีชื่อกิจกรรมนี้อยู่แล้ว');
         }
@@ -117,7 +117,7 @@ class ActivityController extends Controller
             $image_path = './images/activity/' . $imageName; //Line notify allow only jpeg and png file
             $text = 'กิจกรรม ' . $activity_name
                 . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date') . ', เวลา ' . $request->get('activity_time') . ' น.'
-                . ', ที่ ' . $request->get('activity_address') . ', รายละเอียด ' . $request->get('activity_detail');
+                . ', ที่ ' . $request->get('activity_address') . ', รายละเอียด ' . $request->get('activity_detail').' ถูกสร้างขึ้น';
             $ln->send($text, $image_path); // sent
 
             return redirect('admin/activity')->with('success', 'สร้างสำเร็จ');
@@ -170,27 +170,13 @@ class ActivityController extends Controller
                 'activity_date' => 'required|date',
                 'activity_time' => 'required',
                 'activity_hour' => 'required|integer',
+                // 'activity_image' => 'required|image|mimes:jpeg,png,jpg|max:15360‬',
             ]
         );
 
-        if ($request->activity_image == null) {
-            $exists = Activity::where('activity_id', '=', $id)->first();
+        $activity = Activity::where('activity_id', '=', $id)->first();
+        $old_data = $activity;
 
-            if ((!$exists) || ($exists->activity_id == $id)) {
-                $activity = Activity::where('activity_id', '=', $id)->first();
-
-                $attr['activity_name'] = $request->get('activity_name');
-                $attr['activity_detail'] = $request->get('activity_detail');
-                $attr['activity_address'] = $request->get('activity_address');
-                $attr['activity_date'] = $request->get('activity_date');
-                $attr['activity_time'] = $request->get('activity_time');
-                $attr['hour'] = $request->get('activity_hour');
-                $activity->update($attr);
-
-                return redirect('admin/activity')->with('success', 'อัปเดตสำเร็จ');
-            }
-            return redirect()->back()->withInput($request->input())->with('error', 'การอัพเดทล้มเหลว!');
-        }
         $FileImage = $request->activity_image;
         $imageName = null;
 
@@ -199,11 +185,29 @@ class ActivityController extends Controller
             $FileImage->move(public_path('images/activity'), $imageName);
         }
 
-        $exists = Activity::where('activity_id', '=', $id)->first();
+        if ($request->activity_image == null) {
+            $attr['activity_name'] = $request->get('activity_name');
+            $attr['activity_detail'] = $request->get('activity_detail');
+            $attr['activity_address'] = $request->get('activity_address');
+            $attr['activity_date'] = $request->get('activity_date');
+            $attr['activity_time'] = $request->get('activity_time');
+            $attr['hour'] = $request->get('activity_hour');
+            $activity->update($attr);
 
-        if ((!$exists) || ($exists->activity_id == $id)) {
-            $activity = Activity::where('activity_id', '=', $id)->first();
+            $text = 'กิจกรรม ' . $old_data->activity_name
+                . ' วันที่จัดงาน(ปป/ดด/วว) ' . $old_data->activity_date . ', เวลา ' . $old_data->activity_time . ' น.'
+                . ', ที่ ' . $old_data->activity_address . ', รายละเอียด ' . $old_data->activity_detail
+                . '
 
+                ถูกแก้ไขเป็น
+
+'
+                . 'กิจกรรม ' . $request->get('activity_name') . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date')
+                . ', เวลา ' . $request->get('activity_time') . ' น.' . ', ที่ ' . $request->get('activity_address')
+                . ', รายละเอียด ' . $request->get('activity_detail');
+            $ln->send($text); // sent
+            return redirect('admin/activity')->with('success', 'สร้างสำเร็จ');
+        } else {
             $attr['activity_name'] = $request->get('activity_name');
             $attr['activity_detail'] = $request->get('activity_detail');
             $attr['activity_address'] = $request->get('activity_address');
@@ -213,9 +217,22 @@ class ActivityController extends Controller
             $attr['activity_image'] = $imageName;
             $activity->update($attr);
 
+            $image_path = './images/activity/' . $imageName; //Line notify allow only jpeg and png file
+            $text = 'กิจกรรม ' . $old_data->activity_name
+                . ' วันที่จัดงาน(ปป/ดด/วว) ' . $old_data->activity_date . ', เวลา ' . $old_data->activity_time . ' น.'
+                . ', ที่ ' . $old_data->activity_address . ', รายละเอียด ' . $old_data->activity_detail
+                . '
+
+                ถูกแก้ไขเป็น
+
+'
+                . 'กิจกรรม ' . $request->get('activity_name') . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date')
+                . ', เวลา ' . $request->get('activity_time') . ' น.' . ', ที่ ' . $request->get('activity_address')
+                . ', รายละเอียด ' . $request->get('activity_detail');
+            $ln->send($text, $image_path); // sent
+
             return redirect('admin/activity')->with('success', 'อัปเดตสำเร็จ');
         }
-        return redirect()->back()->withInput($request->input())->with('error', 'การอัพเดทล้มเหลว!');
     }
 
     /**

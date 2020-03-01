@@ -25,7 +25,8 @@
                                 <th>สถานที่</th>
                                 <th>รายละเอียด</th>
                                 <th>รูปภาพ</th>
-                                <th>จัดการ</th>
+                                <th>สถานะ</th>
+                                <th>โหวต</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,10 +48,30 @@
                                     ไม่มีภาพ
                                     @endif
                                 </td>
+                                <td>{{ $item->history->state}}</td>
                                 <td>
-                                    <a href="{{ action('admin\ActivityController@edit', $item->activity_id) }}"
-                                        class="btn-size btn btn-warning">
-                                        <i class="fas fa-pencil-alt"><b> แก้ไข</b></i>
+                                    <form method="post" action="{{ action('admin\JoinActivityController@store') }}"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="hidden" name="activity_id" value="{{ $item->activity_id }}">
+                                        <input type="hidden" name="state" value="เข้าร่วม">
+                                        <button type="submit" class="join-btn-size btn btn-primary">
+                                            <i class="fas fa-check"><b> เข้าร่วม</b></i>
+                                        </button>
+                                    </form>
+                                    <form method="post"
+                                        action="{{ action('admin\JoinActivityController@update', $item->activity_id) }}"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @method('put')
+                                        <input type="hidden" name="state" value="ไม่เข้าร่วม">
+                                        <button type="submit" class="join-btn-size btn btn-danger">
+                                            <i class="fas fa-times"><b> ไม่เข้าร่วม</b></i>
+                                        </button>
+                                    </form>
+                                    {{-- <a href="{{ action('admin\ActivityController@edit', $item->activity_id) }}"
+                                    class="btn-size btn btn-warning">
+                                    <i class="fas fa-pencil-alt"><b> แก้ไข</b></i>
                                     </a>
 
                                     <form method="post" class="delete_form" id="btn-delete{{ $item->activity_id }}"
@@ -58,10 +79,11 @@
                                         enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="_method" value="DELETE" />
-                                        <button type="button" class="btn-size btn btn-danger" onclick="confirmDel({{ $item->activity_id }})">
+                                        <button type="button" class="btn-size btn btn-danger"
+                                            onclick="confirmDel({{ $item->activity_id }})">
                                             <i class="fas fa-trash-alt"><b> ลบ</b></i>
                                         </button>
-                                    </form>
+                                    </form> --}}
                                 </td>
                             </tr>
                             @endforeach

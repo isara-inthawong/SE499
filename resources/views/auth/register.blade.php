@@ -53,6 +53,25 @@
                     @enderror
                 </div>
 
+                <div class="wrap-input100 m-b-10" style="display:inline-block;">
+                    <label class="label-input100">{{ __('เพศ') }}</label>
+                    <div>
+                        <label for="gender1">
+                            <input type="radio" class="@error('tel') is-invalid @enderror" name="gender" id="gender1"
+                                value="ชาย" required> ชาย
+                        </label>
+                        <label for="gender2">
+                            <input type="radio" class="@error('tel') is-invalid @enderror" name="gender" id="gender2"
+                                value="หญิง"> หญิง
+                        </label>
+                    </div>
+                    @error('gender')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
                 <div class="wrap-input100 m-b-10">
                     <label class="label-input100" for="tel">{{ __('เบอร์โทรศัพท์') }}</label>
                     <input id="tel" type="number" class="form-control @error('tel') is-invalid @enderror" name="tel"
@@ -70,7 +89,7 @@
                     <select class="form-control" name="major" id="major" class="@error('major') is-invalid @enderror"
                         name="major" value="{{ old('major') }}" required autocomplete="major" autofocus>
                         {{ (request()->is('admin/activity/create')||request()->is('admin/activity')) ? 'active' : '' }}
-                        <option selected class="selecct_color">สาขาวิชาของคุณ</option>
+                        <option selected class="selecct_color" value="">สาขาวิชาของคุณ</option>
                         <option value="1">วิศวกรรมซอฟต์แวร์</option>
                         <option value="2">วิทยาการคอมพิวเตอร์</option>
                         <option value="3">วิทยาศาสตร์และเทคโนโลยีอาหาร</option>

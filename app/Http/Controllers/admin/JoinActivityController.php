@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Alert;
+use App\History;
 use App\Activity;
-use App\User;
+use Alert;
+use Illuminate\Support\Facades\Auth;
 
-class AdminController extends Controller
+class JoinActivityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,13 +24,8 @@ class AdminController extends Controller
         if (session('error')) {
             Alert::error(session('error'));
         }
-        $activity = Activity::get()->count();
-        $user = User::get()->count();
-        $countData = [
-            'activity' => $activity,
-            'user' => $user,
-        ];
-        return view('admin.dashboard', compact('countData'));
+        $activity = Activity::orderBy('activity_id', 'desc')->paginate(10);
+        return view('admin.join-activity', compact('activity'));
     }
 
     /**
@@ -50,7 +46,39 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd( $request->input());
+        $this->validate(
+            $request,
+            [
+                'activity_id' => 'required|string',
+                'state' => 'required|string',
+            ]
+        );
+        $history = History::where('activity_id', '=', $request->get('activity_id'))
+            ->where('user_id', '=', Auth::user()->user_id)
+            ->first();
+
+        if (!$history) {
+            $dataActivity = array(
+                'activity_id' => $request->get('activity_id'),
+                'user_id' => Auth::user()->user_id,
+                'state' => $request->get('state'),
+            );
+            // dd($dataActivity);
+            History::create($dataActivity);
+
+            // $data = new History(
+            //     [
+            //         'activity_id' => $request->get('activity_id'),
+            //         'user_id' => Auth::user()->user_id,
+            //         'state' => $request->get('state'),
+            //     ]
+            // );
+            // dd($data);
+            // $data->save();
+            return redirect('admin/join_activity')->with('success', 'เข้าร่วมสำเร็จ');
+        }
+        return redirect('admin/join_activity')->with('success', 'เข้าร่วมไม่สำเร็จ');
     }
 
     /**

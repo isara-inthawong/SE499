@@ -22,7 +22,7 @@ class CreateRolesTable extends Migration
         });
 
         DB::table('roles')->insert([
-            ['role' => 'ผู้ใช้'], ['role' => 'ผู้ดูแลระบบ']
+            ['role' => 'ผู้ดูแลระบบ'], ['role' => 'ผู้ใช้']
         ]);
     }
 
