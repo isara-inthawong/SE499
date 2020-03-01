@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Alert;
+use Illuminate\Support\Facades\Auth;
+use App\History;
 
 class HistoryController extends Controller
 {
@@ -21,6 +23,16 @@ class HistoryController extends Controller
         if (session('error')) {
             Alert::error(session('error'));
         }
+        $count_history = History::where('state', '=', 'เข้าร่วม')
+            ->get()
+            ->groupBy('activity_id')
+            ->map(function ($items) {
+                return $items->count();
+            });
+        $history = History::where('state', '=', 'เข้าร่วม')->unique('activity_id');
+
+        dd($history);
+        return view('admin.history', compact('history', 'count_history'));
     }
 
     /**
@@ -30,12 +42,7 @@ class HistoryController extends Controller
      */
     public function create()
     {
-        if (session('success')) {
-            Alert::success(session('success'));
-        }
-        if (session('error')) {
-            Alert::error(session('error'));
-        }
+        //
     }
 
     /**
@@ -46,7 +53,28 @@ class HistoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd( $request->input());
+        $this->validate(
+            $request,
+            [
+                'activity_id' => 'required|string',
+                'state' => 'required|string',
+            ]
+        );
+        $history = History::where('activity_id', '=', $request->get('activity_id'))
+            ->where('user_id', '=', Auth::user()->user_id)
+            ->first();
+
+        if (!$history) {
+            $dataActivity = array(
+                'activity_id' => $request->get('activity_id'),
+                'user_id' => Auth::user()->user_id,
+                'state' => $request->get('state'),
+            );
+            History::create($dataActivity);
+            return redirect('admin/join_activity')->with('success', 'เข้าร่วมสำเร็จ');
+        }
+        return redirect('admin/join_activity')->with('success', 'เข้าร่วมไม่สำเร็จ');
     }
 
     /**
@@ -68,7 +96,10 @@ class HistoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $history = History::where('activity_id', '=', $id)
+            ->where('user_id', '=', Auth::user()->user_id)
+            ->first();
+        return view('admin.satisfaction', compact('history'));
     }
 
     /**

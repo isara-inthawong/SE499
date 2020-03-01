@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\History;
-use App\Activity;
 use Alert;
 use Illuminate\Support\Facades\Auth;
+use App\Activity;
+use App\History;
 
 class JoinActivityController extends Controller
 {
@@ -64,18 +64,7 @@ class JoinActivityController extends Controller
                 'user_id' => Auth::user()->user_id,
                 'state' => $request->get('state'),
             );
-            // dd($dataActivity);
             History::create($dataActivity);
-
-            // $data = new History(
-            //     [
-            //         'activity_id' => $request->get('activity_id'),
-            //         'user_id' => Auth::user()->user_id,
-            //         'state' => $request->get('state'),
-            //     ]
-            // );
-            // dd($data);
-            // $data->save();
             return redirect('admin/join_activity')->with('success', 'เข้าร่วมสำเร็จ');
         }
         return redirect('admin/join_activity')->with('success', 'เข้าร่วมไม่สำเร็จ');
@@ -100,7 +89,10 @@ class JoinActivityController extends Controller
      */
     public function edit($id)
     {
-        //
+        $history = History::where('activity_id', '=', $id)
+            ->where('user_id', '=', Auth::user()->user_id)
+            ->first();
+        return view('admin.satisfaction', compact('history'));
     }
 
     /**

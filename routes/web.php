@@ -38,8 +38,15 @@ Route::group(['prefix' => 'admin'], function () {
         Route::match(
             ['put', 'patch', 'post'],
             '/join_activity/{id}',
-            'admin\UserController@update'
+            'admin\JoinActivityController@update'
         )->name('join_activity.update');
+
+        Route::resource('history', 'admin\HistoryController');
+        Route::match(
+            ['put', 'patch', 'post'],
+            '/history/{id}',
+            'admin\HistoryController@update'
+        )->name('vote.update');
 
         Route::resource('/users', 'admin\UserController');
         Route::match(

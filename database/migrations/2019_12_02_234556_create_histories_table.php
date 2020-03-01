@@ -16,10 +16,11 @@ class CreateHistoriesTable extends Migration
         Schema::create('histories', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('activity_id')->nullable();
+            $table->unsignedBigInteger('date_time_rate')->nullable();
+            $table->unsignedBigInteger('address_rate')->nullable();
+            $table->unsignedBigInteger('overview_rate')->nullable();
             $table->string('state')->nullable();
-            $table->integer('datetime_rate')->nullable();
-            $table->integer('address_rate')->nullable();
-            $table->integer('rate')->nullable();
+            $table->boolean('join')->default(0);
             $table->string('suggestion')->nullable();
             $table->timestamps();
             $table->softDeletes();

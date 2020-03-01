@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Member;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\History;
 
-class JoinActivityController extends Controller
+class VoteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,6 +26,8 @@ class JoinActivityController extends Controller
     public function create()
     {
         //
+        // SELECT SUM(total_payment),province FROM order,users WHERE order_status_id = 5 GROUP BY province
+        // $data = Order::where('user_id','=', $user_id)->where('order_status_id ', '=', 5)->groupBy('province')->sum('total_payment')->get();
     }
 
     /**
@@ -35,7 +38,7 @@ class JoinActivityController extends Controller
      */
     public function store(Request $request)
     {
-        // 'activity_id', 'user_id', 'datetime_rate','address_rate','rate','suggestion'
+        //
     }
 
     /**

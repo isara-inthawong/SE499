@@ -99,6 +99,9 @@
                 <li class="{{ (request()->is('admin/join_activity')) ? 'active' : '' }}">
                     <a href="{{route('join_activity.index')}}"><em class="fas fa-link">&nbsp;</em> เข้าร่วมกิจกรรม</a>
                 </li>
+                <li class="{{ (request()->is('admin/history')) ? 'active' : '' }}">
+                    <a href="{{route('history.index')}}"><em class="fas fa-history">&nbsp;</em> ประวัติกิจกรรม</a>
+                </li>
 
                 <li
                     class="parent {{ (request()->is('admin/activity/create')||request()->is('admin/activity')) ? 'active' : '' }}">

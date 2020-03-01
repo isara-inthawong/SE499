@@ -48,6 +48,13 @@
                                     @endif
                                 </td>
                                 <td>
+                                    <form action="{{route('history.update', $activity->activity_id)}}"
+                                        method="post" enctype="multipart/form-data">
+                                        <button type="submit" class="btn-size btn btn-primary">
+                                            <i class="fas fa-book"><b> เช็คชื่อ</b></i>
+                                        </button>
+                                    </form>
+
                                     <a href="{{ action('admin\ActivityController@edit', $item->activity_id) }}"
                                         class="btn-size btn btn-warning">
                                         <i class="fas fa-pencil-alt"><b> แก้ไข</b></i>
@@ -58,7 +65,8 @@
                                         enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="_method" value="DELETE" />
-                                        <button type="button" class="btn-size btn btn-danger" onclick="confirmDel({{ $item->activity_id }})">
+                                        <button type="button" class="btn-size btn btn-danger"
+                                            onclick="confirmDel({{ $item->activity_id }})">
                                             <i class="fas fa-trash-alt"><b> ลบ</b></i>
                                         </button>
                                     </form>

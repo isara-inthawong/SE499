@@ -93,8 +93,11 @@ class ActivityController extends Controller
                 Activity::create($dataActivity);
 
                 $text = 'กิจกรรม ' . $activity_name
-                    . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date') . ', เวลา ' . $request->get('activity_time') . ' น.'
-                    . ', ที่ ' . $request->get('activity_address') . ', รายละเอียด ' . $request->get('activity_detail').' ถูกสร้างขึ้น';
+                    . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date')
+                    . ', เวลา ' . $request->get('activity_time') . ' น.'
+                    . ', ที่ ' . $request->get('activity_address') . ' .'
+                    . ' จำนวนชั่วโมงกิจกรรม ' . $request->get('activity_hour') . ' ชั่วโมง.'
+                    . ', รายละเอียด ' . $request->get('activity_detail') . ' ถูกสร้างขึ้น';
                 $ln->send($text); // sent
 
                 return redirect('admin/activity')->with('success', 'สร้างสำเร็จ');
@@ -116,8 +119,11 @@ class ActivityController extends Controller
 
             $image_path = './images/activity/' . $imageName; //Line notify allow only jpeg and png file
             $text = 'กิจกรรม ' . $activity_name
-                . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date') . ', เวลา ' . $request->get('activity_time') . ' น.'
-                . ', ที่ ' . $request->get('activity_address') . ', รายละเอียด ' . $request->get('activity_detail').' ถูกสร้างขึ้น';
+                . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date')
+                . ', เวลา ' . $request->get('activity_time') . ' น.'
+                . ', ที่ ' . $request->get('activity_address') . ' .'
+                . ' จำนวนชั่วโมงกิจกรรม ' . $request->get('activity_hour') . ' ชั่วโมง.'
+                . ', รายละเอียด ' . $request->get('activity_detail') . ' ถูกสร้างขึ้น';
             $ln->send($text, $image_path); // sent
 
             return redirect('admin/activity')->with('success', 'สร้างสำเร็จ');
@@ -195,15 +201,21 @@ class ActivityController extends Controller
             $activity->update($attr);
 
             $text = 'กิจกรรม ' . $old_data->activity_name
-                . ' วันที่จัดงาน(ปป/ดด/วว) ' . $old_data->activity_date . ', เวลา ' . $old_data->activity_time . ' น.'
-                . ', ที่ ' . $old_data->activity_address . ', รายละเอียด ' . $old_data->activity_detail
+                . ' วันที่จัดงาน(ปป/ดด/วว) ' . $old_data->activity_date
+                . ', เวลา ' . $old_data->activity_time . ' น.'
+                . ', ที่ ' . $old_data->activity_address .' .'
+                . 'จำนวนชั่วโมงกิจกรรม ' . $old_data->hour . ' ชั่วโมง.'
+                . ', รายละเอียด ' . $old_data->activity_detail
                 . '
 
                 ถูกแก้ไขเป็น
 
 '
-                . 'กิจกรรม ' . $request->get('activity_name') . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date')
-                . ', เวลา ' . $request->get('activity_time') . ' น.' . ', ที่ ' . $request->get('activity_address')
+                . 'กิจกรรม ' . $request->get('activity_name')
+                . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date')
+                . ', เวลา ' . $request->get('activity_time') . ' น.'
+                . ', ที่ ' . $request->get('activity_address') .' .'
+                . ' จำนวนชั่วโมงกิจกรรม ' . $request->get('activity_hour') . ' ชั่วโมง.'
                 . ', รายละเอียด ' . $request->get('activity_detail');
             $ln->send($text); // sent
             return redirect('admin/activity')->with('success', 'สร้างสำเร็จ');
@@ -219,15 +231,21 @@ class ActivityController extends Controller
 
             $image_path = './images/activity/' . $imageName; //Line notify allow only jpeg and png file
             $text = 'กิจกรรม ' . $old_data->activity_name
-                . ' วันที่จัดงาน(ปป/ดด/วว) ' . $old_data->activity_date . ', เวลา ' . $old_data->activity_time . ' น.'
-                . ', ที่ ' . $old_data->activity_address . ', รายละเอียด ' . $old_data->activity_detail
+                . ' วันที่จัดงาน(ปป/ดด/วว) ' . $old_data->activity_date
+                . ', เวลา ' . $old_data->activity_time . ' น.'
+                . ', ที่ ' . $old_data->activity_address .' .'
+                . ' จำนวนชั่วโมงกิจกรรม ' . $old_data->hour . ' ชั่วโมง.'
+                . ', รายละเอียด ' . $old_data->activity_detail
                 . '
 
                 ถูกแก้ไขเป็น
 
 '
-                . 'กิจกรรม ' . $request->get('activity_name') . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date')
-                . ', เวลา ' . $request->get('activity_time') . ' น.' . ', ที่ ' . $request->get('activity_address')
+                . 'กิจกรรม ' . $request->get('activity_name')
+                . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date')
+                . ', เวลา ' . $request->get('activity_time') . ' น.'
+                . ', ที่ ' . $request->get('activity_address') .' .'
+                . ' จำนวนชั่วโมงกิจกรรม ' . $request->get('activity_hour') . ' ชั่วโมง.'
                 . ', รายละเอียด ' . $request->get('activity_detail');
             $ln->send($text, $image_path); // sent
 
