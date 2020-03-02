@@ -16,7 +16,7 @@ $jscomp.polyfill = function (a, b, c, e) { if (b) { c = $jscomp.global; a = a.sp
                 a(b.currentTarget).hasClass("disabled") || k.page() == b.data.action || k.page(b.data.action).draw("page")
             }; var q = 0; for (e = d.length; q < e; q++) {
                 var f = d[q]; if (a.isArray(f)) u(c, f); else {
-                    h = g = ""; switch (f) { case "ellipsis": g = "&#x2026;"; h = "disabled"; break; case "first": g = n.sFirst; h = f + (0 < m ? "" : " disabled"); break; case "previous": g = n.sPrevious; h = f + (0 < m ? "" : " disabled"); break; case "next": g = n.sNext; h = f + (m < r - 1 ? "" : " disabled"); break; case "last": g = n.sLast; h = f + (m < r - 1 ? "" : " disabled"); break; default: g = f + 1, h = m === f ? "active" : "" }if (g) {
+                    h = g = ""; switch (f) { case "ellipsis": g = "&#x2026;"; h = "disabled"; break; case "หน้าแรก": g = n.sFirst; h = f + (0 < m ? "" : " disabled"); break; case "ก่อนหน้า": g = n.sPrevious; h = f + (0 < m ? "" : " disabled"); break; case "ถัดไป": g = n.sNext; h = f + (m < r - 1 ? "" : " disabled"); break; case "หน้าสุดท้าย": g = n.sLast; h = f + (m < r - 1 ? "" : " disabled"); break; default: g = f + 1, h = m === f ? "active" : "" }if (g) {
                         var p =
                             a("<li>", { "class": x.sPageButton + " " + h, id: 0 === v && "string" === typeof f ? b.sTableId + "_" + f : null }).append(a("<a>", { href: "#", "aria-controls": b.sTableId, "aria-label": y[f], "data-dt-idx": t, tabindex: b.iTabIndex, "class": "page-link" }).html(g)).appendTo(c); b.oApi._fnBindAction(p, { action: f }, l); t++
                     }

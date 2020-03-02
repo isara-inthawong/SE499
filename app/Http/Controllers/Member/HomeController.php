@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Member;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Alert;
+use App\Activity;
 
 class HomeController extends Controller
 {
@@ -31,11 +32,12 @@ class HomeController extends Controller
         if (session('error')) {
             Alert::error(session('error'));
         }
-        
+
         if (auth()->user()->isAdmin()) {
             return redirect('/admin/home');
         } else {
-            return view('member.home');
+            $new_activity = Activity::orderBy('activity_id','DESC')->paginate(3);
+            return view('member.home', compact('new_activity'));
         }
     }
 }

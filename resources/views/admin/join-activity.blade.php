@@ -58,7 +58,7 @@
                                 <td>
 
                                     @if ($item->history->state==null)
-                                    <form method="post" action="{{ action('admin\HistoryController@store') }}"
+                                    <form method="post" action="{{ action('Admin\HistoryController@store') }}"
                                         enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="activity_id" value="{{ $item->activity_id }}">
@@ -67,7 +67,7 @@
                                             <i class="fas fa-check"><b> เข้าร่วม</b></i>
                                         </button>
                                     </form>
-                                    <form method="post" action="{{ action('admin\HistoryController@store') }}"
+                                    <form method="post" action="{{ action('Admin\HistoryController@store') }}"
                                         enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="activity_id" value="{{ $item->activity_id }}">

@@ -28,7 +28,7 @@
 <body>
     <div id="app">
         <!--Navbar -->
-        <nav class="mb-1 navbar navbar-expand-lg navbar-dark elegant-color #2E2E2E lighten-1">
+        <nav class="mb-1 navbar navbar-expand-lg navbar-dark lighten-1" style="background-color: #30a5ff;">
             <a class="navbar-brand" href="{{ url('/') }}"> {{ config('app.name') }}</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent-555" aria-controls="navbarSupportedContent-555"
@@ -43,7 +43,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">111</a>
+                        <a class="nav-link" href="{{ url('join_activity') }}">เข้าร่วมกิจกรรม</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="">222</a>
@@ -75,7 +75,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
                             aria-labelledby="navbarDropdownMenuLink-55">
-                            <a class="dropdown-item" href="#">โปรไฟล์</a>
+                            <a class="dropdown-item" href="{{ route('my_profile.index') }}">โปรไฟล์</a>
                             <a class="dropdown-item" href="#">ประวัติการเข้าร่วมกิจกรรม</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

@@ -49,13 +49,13 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ action('admin\ActivityController@edit', $item->activity_id) }}"
+                                    <a href="{{ action('Admin\ActivityController@edit', $item->activity_id) }}"
                                         class="btn-size btn btn-warning">
                                         <i class="fas fa-pencil-alt"><b> แก้ไข</b></i>
                                     </a>
 
                                     <form method="post" class="delete_form" id="btn-delete{{ $item->activity_id }}"
-                                        action="{{ action('admin\ActivityController@destroy', $item->activity_id) }}"
+                                        action="{{ action('Admin\ActivityController@destroy', $item->activity_id) }}"
                                         enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="_method" value="DELETE" />

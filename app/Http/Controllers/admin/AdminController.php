@@ -29,7 +29,10 @@ class AdminController extends Controller
             'activity' => $activity,
             'user' => $user,
         ];
-        return view('admin.dashboard', compact('countData'));
+
+        $new_activity = Activity::orderBy('activity_id','DESC')->paginate(3);
+        // dd($new_activity);
+        return view('admin.dashboard', compact('countData','new_activity'));
     }
 
     /**

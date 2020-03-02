@@ -50,12 +50,12 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ action('admin\UserController@edit', $item->user_id) }}"
+                                    <a href="{{ action('Admin\UserController@edit', $item->user_id) }}"
                                         class="btn-size btn btn-warning">
                                         <i class="fas fa-pencil-alt"><b> แก้ไข</b></i>
                                     </a>
                                     <form method="post" class="delete_form" id="btn-delete{{ $item->user_id }}"
-                                        action="{{ action('admin\UserController@destroy', $item->user_id) }}"
+                                        action="{{ action('Admin\UserController@destroy', $item->user_id) }}"
                                         enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="_method" value="DELETE" />

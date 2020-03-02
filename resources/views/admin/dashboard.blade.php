@@ -10,7 +10,7 @@
 
 <div class="panel panel-container">
     <div class="row">
-        <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+        <div class="col-xs-6 col-md-6 col-lg-6 no-padding">
             <div class="panel panel-teal panel-widget border-right">
                 <div class="row no-padding">
                     <i class="far fa-xl fa-calendar-alt color-blue"></i>
@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+        <div class="col-xs-6 col-md-6 col-lg-6 no-padding">
             <div class="panel panel-orange panel-widget border-right">
                 <div class="row no-padding"><em class="fa fa-xl fa-users color-teal"></em>
                     <div class="large">{{ $countData['user'] }}</div>
@@ -27,106 +27,50 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
-            <div class="panel panel-blue panel-widget border-right">
-                <div class="row no-padding"><em class="far fa-xl ar fa-question-circle color-orange"></em>
-                    <div class="large">เอาไรใส่ดีพี่</div>
-                    <div class="text-muted">????</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
-            <div class="panel panel-red panel-widget ">
-                <div class="row no-padding"><em class="fa fa-xl ar fa-question-circle color-orange color-red"></em>
-                    <div class="large">เอาไรใส่ดีพี่</div>
-                    <div class="text-muted">???</div>
-                </div>
-            </div>
-        </div>
     </div>
     <!--/.row-->
 </div>
-
-<div class="row">
-    <div class="col-xs-6 col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-body easypiechart-panel">
-                <h4>New Activity</h4>
-                <div class="easypiechart" id="easypiechart-blue" data-percent="92"><span class="percent">92%</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-body easypiechart-panel">
-                <h4>New Member</h4>
-                <div class="easypiechart" id="easypiechart-orange" data-percent="65"><span class="percent">65%</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-body easypiechart-panel">
-                <h4>New ??</h4>
-                <div class="easypiechart" id="easypiechart-teal" data-percent="56"><span class="percent">56%</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-body easypiechart-panel">
-                <h4>Visitors</h4>
-                <div class="easypiechart" id="easypiechart-red" data-percent="27"><span class="percent">27%</span></div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--/.row-->
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-default">
+        <div class="panel panel-default articles">
             <div class="panel-heading">
-                Site Traffic Overview
-                <ul class="pull-right panel-settings panel-button-tab-right">
-                    <li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-                            <em class="fa fa-cogs"></em>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li>
-                                <ul class="dropdown-settings">
-                                    <li><a href="#">
-                                            <em class="fa fa-cog"></em> Settings 1
-                                        </a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">
-                                            <em class="fa fa-cog"></em> Settings 2
-                                        </a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">
-                                            <em class="fa fa-cog"></em> Settings 3
-                                        </a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                ข่าวสารกิจกรรม
                 <span class="pull-right clickable panel-toggle panel-button-tab-left">
-                    <em class="fas fa-toggle-on"></em>
-                    <em class="fas fa-toggle-off"></em>
-                </span>
-            </div>
-            <div class="panel-body">
-                <div class="canvas-wrapper">
-                    {{-- <canvas class="chart" id="line-chart" height="200"></canvas> --}}
-                    <img src="{{url('./images/welcome/banner-02.jpg')}}" style="width:100%; height:400px;" alt="">
+                    <i class="far fa-caret-square-up fa-lg"></i>
+                </span></div>
+            <div class="panel-body articles-container">
+                @foreach ($new_activity as $item)
+                <div class="article border-bottom">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="col-xs-2 col-md-2 date">
+                                <div class="large">
+                                    {{ date('d', strtotime($item->activity_date)) }}
+                                </div>
+                                <div class="text-muted">
+                                    {{ date('M-y', strtotime($item->activity_date)) }}
+                                </div>
+                            </div>
+                            <div class="col-xs-10 col-md-10">
+                                <h4>
+                                    <b>{{ $item->activity_name }}</b>
+                                </h4>
+                                <p>{{$item->activity_detail}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
                 </div>
+                <!--End .article-->
+                @endforeach
             </div>
         </div>
+        <!--End .articles-->
     </div>
+    <!--/.col-->
 </div>
 <!--/.row-->
+
+
 
 @endsection
