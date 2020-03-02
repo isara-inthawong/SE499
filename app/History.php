@@ -4,17 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Helpers\PKHelper;
 
-class History extends Model
+class History extends PKHelper
 {
     use SoftDeletes;
     protected $fillable = [
         'activity_id', 'user_id', 'state', 'date_time_rate',
-        'address_rate', 'overview_rate', 'suggestion', 'join'
+        'address_rate', 'overview_rate', 'suggestion',
     ];
 
     public $table = "histories";
-
     protected $primaryKey = ['user_id', 'activity_id'];
     public $incrementing = false;
 

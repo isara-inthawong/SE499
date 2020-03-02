@@ -14,28 +14,167 @@
             <div class="panel-heading">รายการกิจกรรม</div>
             <div class="panel-body btn-margins">
                 <div class="col-md-12 table-responsive">
-                    <table class="table table-striped">
+                    <table id="data_table" class="table table-striped table-bordered">
                         <thead>
                             <tr>
+                                <th>รหัสกิจกรรม</th>
                                 <th>กิจกรรม</th>
                                 <th>จำนวนผู้เข้าร่วม</th>
+                                <th>ความพึงพอใจวันเวลาจัดกิจกรรม</th>
+                                <th>ความพึงพอใจสถานที่จัดกิจกรรม</th>
+                                <th>ความพึงพอใจในภาพรวม</th>
                                 <th>โหวต</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($history as $key => $value)
                             <tr>
+                                <td>{{ $value->activity_id }}</td>
                                 <td>{{ $value->activity->activity_name }}</td>
-                                <td>{{ $count_history[$value->activity_id] }}</td>
+                                <td>{{ $count_join[$value->activity_id] }}</td>
                                 <td>
+                                    <!-- ////////////// STAR RATE CHECKER ////////////// -->
+                                    @if ($sum_date[$value->activity_id]=== 0)
+                                    <p>ยังไม่มีการประเเมิน</p>
+                                    @elseif((($sum_date[$value->activity_id]/$count_join[$value->activity_id]) >= 0.1)
+                                    &&
+                                    (($sum_date[$value->activity_id]/$count_join[$value->activity_id]) <=0.5) ) <i
+                                        class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        @elseif((($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                        >=0.51)
+                                        && (($sum_date[$value->activity_id]/$count_join[$value->activity_id]) <=0.99))
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            @elseif((($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                            >=
+                                            1) && (($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                            <=1.5)) <i class="fas fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                                @elseif((($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                >=1.51) &&
+                                                (($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                <=1.99)) <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star-half-alt"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                    @elseif((($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                    >=2) &&
+                                                    (($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                    <=2.5)) <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="far fa-star"></i>
+                                                        <i class="far fa-star"></i>
+                                                        <i class="far fa-star"></i>
+                                                        @elseif((($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                        >=2.51) &&
+                                                        (($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                        <=2.99)) <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star"></i>
+                                                            <i class="fas fa-star-half-alt"></i>
+                                                            <i class="far fa-star"></i>
+                                                            <i class="far fa-star"></i>
+                                                            @elseif((($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                            >=3) &&
+                                                            (($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                            <=3.5)) <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="far fa-star"></i>
+                                                                <i class="far fa-star"></i>
+                                                                @elseif((($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                                >=3.51) &&
+                                                                (($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                                <=3.99)) <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star"></i>
+                                                                    <i class="fas fa-star-half-alt"></i>
+                                                                    <i class="far fa-star"></i>
+                                                                    @elseif((($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                                    >=4) &&
+                                                                    (($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                                    <=4.5)) <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="fas fa-star"></i>
+                                                                        <i class="far fa-star"></i>
+                                                                        @elseif((($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                                        >=4.51) &&
+                                                                        (($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                                        <=4.99)) <i class="fas fa-star"></i>
+                                                                            <i class="fas fa-star"></i>
+                                                                            <i class="fas fa-star"></i>
+                                                                            <i class="fas fa-star"></i>
+                                                                            <i class="fas fa-star-half-alt"></i>
+                                                                            @elseif(($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                                            >= 5)
+                                                                            <i class="fas fa-star"></i>
+                                                                            <i class="fas fa-star"></i>
+                                                                            <i class="fas fa-star"></i>
+                                                                            <i class="fas fa-star"></i>
+                                                                            <i class="fas fa-star"></i>
+                                                                            @endif
+                                                                            <!-- ///////////////////////////////////////////// -->
 
+                                </td>
+                                <td>{{ $sum_date[$value->activity_id] }}</td>
+                                <td>{{ $count_join[$value->activity_id] }}</td>
+                                <td>
+                                    @if ($value->activity->assessment_status == 0)
+                                    <form method="post" action="{{route('join_activity.update', $value->activity_id)}}"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="hidden" name="join" value="1">
+                                        <button type="submit" class="join-btn-size2 btn btn-primary">
+                                            <i class="fas fa-book"><b> เปิดประเมิน</b></i>
+                                        </button>
+                                    </form>
+                                    @else
+                                    <form method="post" action="{{route('join_activity.update', $value->activity_id)}}"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="hidden" name="join" value="0">
+                                        <button type="submit" class="join-btn-size2 btn btn-danger">
+                                            <i class="fas fa-book"><b> ปิดประเมิน</b></i>
+                                        </button>
+                                    </form>
+                                    @endif
+                                    @if ($value->activity->assessment_status == 1)
+                                    <a href="{{ action('admin\HistoryController@edit', $value->activity_id) }}"
+                                        class="join-btn-size2 btn btn-warning">
+                                        <i class="fas fa-star"><b> ประเมิน</b></i>
+                                    </a>
+                                    @else
+
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>รหัสกิจกรรม</th>
+                                <th>กิจกรรม</th>
+                                <th>จำนวนผู้เข้าร่วม</th>
+                                <th>ความพึงพอใจวันเวลาจัดกิจกรรม</th>
+                                <th>ความพึงพอใจสถานที่จัดกิจกรรม</th>
+                                <th>ความพึงพอใจในภาพรวม</th>
+                                <th>โหวต</th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
-                {{ $history->onEachSide(1)->links() }}
             </div>
         </div><!-- /.panel-->
     </div><!-- /.col-->

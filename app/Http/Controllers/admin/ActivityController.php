@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Activity;
 use Alert;
+use App\History;
 use KS\Line\LineNotify;
 
 class ActivityController extends Controller
@@ -23,7 +24,7 @@ class ActivityController extends Controller
         if (session('error')) {
             Alert::error(session('error'));
         }
-        $activity = Activity::orderBy('activity_id', 'desc')->paginate(10);
+        $activity = Activity::orderBy('activity_id', 'desc')->get();
         return view('admin.activity', compact('activity'));
     }
 
@@ -203,7 +204,7 @@ class ActivityController extends Controller
             $text = 'กิจกรรม ' . $old_data->activity_name
                 . ' วันที่จัดงาน(ปป/ดด/วว) ' . $old_data->activity_date
                 . ', เวลา ' . $old_data->activity_time . ' น.'
-                . ', ที่ ' . $old_data->activity_address .' .'
+                . ', ที่ ' . $old_data->activity_address . ' .'
                 . 'จำนวนชั่วโมงกิจกรรม ' . $old_data->hour . ' ชั่วโมง.'
                 . ', รายละเอียด ' . $old_data->activity_detail
                 . '
@@ -214,7 +215,7 @@ class ActivityController extends Controller
                 . 'กิจกรรม ' . $request->get('activity_name')
                 . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date')
                 . ', เวลา ' . $request->get('activity_time') . ' น.'
-                . ', ที่ ' . $request->get('activity_address') .' .'
+                . ', ที่ ' . $request->get('activity_address') . ' .'
                 . ' จำนวนชั่วโมงกิจกรรม ' . $request->get('activity_hour') . ' ชั่วโมง.'
                 . ', รายละเอียด ' . $request->get('activity_detail');
             $ln->send($text); // sent
@@ -233,7 +234,7 @@ class ActivityController extends Controller
             $text = 'กิจกรรม ' . $old_data->activity_name
                 . ' วันที่จัดงาน(ปป/ดด/วว) ' . $old_data->activity_date
                 . ', เวลา ' . $old_data->activity_time . ' น.'
-                . ', ที่ ' . $old_data->activity_address .' .'
+                . ', ที่ ' . $old_data->activity_address . ' .'
                 . ' จำนวนชั่วโมงกิจกรรม ' . $old_data->hour . ' ชั่วโมง.'
                 . ', รายละเอียด ' . $old_data->activity_detail
                 . '
@@ -244,7 +245,7 @@ class ActivityController extends Controller
                 . 'กิจกรรม ' . $request->get('activity_name')
                 . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date')
                 . ', เวลา ' . $request->get('activity_time') . ' น.'
-                . ', ที่ ' . $request->get('activity_address') .' .'
+                . ', ที่ ' . $request->get('activity_address') . ' .'
                 . ' จำนวนชั่วโมงกิจกรรม ' . $request->get('activity_hour') . ' ชั่วโมง.'
                 . ', รายละเอียด ' . $request->get('activity_detail');
             $ln->send($text, $image_path); // sent

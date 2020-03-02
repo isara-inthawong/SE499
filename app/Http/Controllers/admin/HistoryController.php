@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Alert;
+use App\Activity;
 use Illuminate\Support\Facades\Auth;
 use App\History;
+use Symfony\Component\Console\Input\Input;
 
 class HistoryController extends Controller
 {
@@ -23,16 +25,37 @@ class HistoryController extends Controller
         if (session('error')) {
             Alert::error(session('error'));
         }
-        $count_history = History::where('state', '=', 'เข้าร่วม')
+        $count_join = History::where('state', '=', 'เข้าร่วม')
             ->get()
             ->groupBy('activity_id')
             ->map(function ($items) {
                 return $items->count();
             });
-        $history = History::where('state', '=', 'เข้าร่วม')->unique('activity_id');
 
-        dd($history);
-        return view('admin.history', compact('history', 'count_history'));
+        $sum_date = History::where('state', '=', 'เข้าร่วม')
+            ->get()
+            ->groupBy('activity_id')
+            ->map(function ($items) {
+                return $items->sum('date_time_rate');
+            });
+
+        $collection = History::where('state', '=', 'เข้าร่วม')
+            ->distinct('activity_id')
+            ->get();
+
+        $history = $collection->unique('activity_id');
+
+        if ($_GET == null) {
+            $page = (int)0;
+        } else {
+            $page = $_GET['page'];
+        }
+
+        // dd($page);
+        // $history = $data->forPage($page, 5);
+
+        // dd($history);
+        return view('admin.history', compact('history', 'count_join', 'sum_date'));
     }
 
     /**
@@ -111,7 +134,38 @@ class HistoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->input());
+        $this->validate(
+            $request,
+            [
+                'datetime_rate' => 'required|integer',
+                'address_rate' => 'required|integer',
+                'overview_rate' => 'required|integer',
+            ]
+        );
+
+        $history = History::where('activity_id', '=', $id)
+            ->where('user_id', '=', Auth::user()->user_id)
+            ->first();
+
+        $exits = Activity::where('activity_id', '=', $id)->first();
+        if ($exits->assessment_status == 1) {
+            if ($request->get('suggestion') == null) {
+                $attr['date_time_rate'] = $request->get('datetime_rate');
+                $attr['address_rate'] = $request->get('address_rate');
+                $attr['overview_rate'] = $request->get('overview_rate');
+                $history->update($attr);
+                return redirect('admin/history')->with('success', 'ประเมินสำเร็จ');
+            } else {
+                $attr['date_time_rate'] = $request->get('datetime_rate');
+                $attr['address_rate'] = $request->get('address_rate');
+                $attr['overview_rate'] = $request->get('overview_rate');
+                $attr['suggestion'] = $request->get('suggestion');
+                $history->update($attr);
+                return redirect('admin/history')->with('success', 'ประเมินสำเร็จ');
+            }
+        }
+        return redirect('admin/history')->with('error', 'ไม่สามารถประเมินกิจกรรมนี้ได้ หรือ การประเมินถูกปิด!');
     }
 
     /**

@@ -14,7 +14,7 @@
             <div class="panel-heading">รายการข้อมูลผู้ใช้</div>
             <div class="panel-body btn-margins">
                 <div class="col-md-12 table-responsive">
-                    <table class="table table-striped">
+                    <table id="data_table" class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th>รหัส</th>
@@ -67,9 +67,23 @@
                             </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>รหัส</th>
+                                <th>รหัสนักศึกษา</th>
+                                <th>ชื่อ</th>
+                                <th>นามสกุล</th>
+                                <th>อีเมล</th>
+                                <th>สาขา</th>
+                                <th>สถานะผู้ใช้</th>
+                                <th>เบอร์โทร</th>
+                                <th>รูปภาพ</th>
+                                <th>จัดการ</th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
-                {{ $users->onEachSide(1)->links() }}
+                {{-- {{ $users->onEachSide(1)->links() }} --}}
             </div>
         </div><!-- /.panel-->
     </div><!-- /.col-->

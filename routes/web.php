@@ -34,6 +34,7 @@ Route::group(['prefix' => 'admin'], function () {
             'admin\ActivityController@update'
         )->name('activity.update');
 
+        // เปิดแบบประเมิน
         Route::resource('join_activity', 'admin\JoinActivityController');
         Route::match(
             ['put', 'patch', 'post'],
@@ -41,6 +42,7 @@ Route::group(['prefix' => 'admin'], function () {
             'admin\JoinActivityController@update'
         )->name('join_activity.update');
 
+        // ประเมิน
         Route::resource('history', 'admin\HistoryController');
         Route::match(
             ['put', 'patch', 'post'],

@@ -14,7 +14,9 @@ class Activity extends Model
      * @var array
      */
     protected $fillable = [
-        'activity_name', 'activity_address', 'activity_date', 'activity_time','hour','activity_detail', 'activity_image',
+        'activity_name', 'activity_address', 'activity_date',
+        'activity_time', 'hour', 'activity_detail', 'activity_image',
+        'assessment_status',
     ];
 
     public $table = "activities";

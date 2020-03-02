@@ -24,7 +24,7 @@ class JoinActivityController extends Controller
         if (session('error')) {
             Alert::error(session('error'));
         }
-        $activity = Activity::orderBy('activity_id', 'desc')->paginate(10);
+        $activity = Activity::orderBy('activity_id', 'desc')->get();
         return view('admin.join-activity', compact('activity'));
     }
 
@@ -104,7 +104,23 @@ class JoinActivityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request->input());
+        $this->validate(
+            $request,
+            [
+                'join' => 'required',
+            ]
+        );
+
+        $history = Activity::where('activity_id', '=', $id)->first();
+        $attr['assessment_status'] = $request->get('join');
+        $history->update($attr);
+
+        if ($request->get('join') == 1) {
+            return redirect('admin/history')->with('success', 'เปิดการประเมินสำเร็จ');
+        } else {
+            return redirect('admin/history')->with('error', 'ปิดการประเมินสำเร็จ');
+        }
     }
 
     /**

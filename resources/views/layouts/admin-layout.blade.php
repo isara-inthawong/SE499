@@ -9,25 +9,23 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name') }} - @yield('title')</title>
-
     <!-- Styles -->
-    <link href="{{ asset('css/admin/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/admin/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <!-- <link href="css/font-awesome.min.css" rel="stylesheet"> -->
-
-    <link href="{{ asset('css/admin/datepicker3.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/admin/styles.css') }}" rel="stylesheet">
-
+    {{-- <link href="{{ asset('css/admin/font-awesome.min.css')}}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/admin/datepicker3.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/admin/bootstrap-table.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/dataTables.bootstrap4.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/admin/styles.css')}}" rel="stylesheet">
     <!--Theme-->
     <link href="{{ asset('css/admin/theme-default.css') }}" rel="stylesheet">
-
     <!--Custom Font-->
     <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
-
     <!-- Custom Styles -->
     <link href="{{ asset('css/all-style.css') }}" rel="stylesheet">
 
+    @yield('head')
 </head>
 
 <body>
@@ -121,23 +119,6 @@
                     </ul>
                 </li>
 
-                {{-- <li
-                    class="parent {{ (request()->is('admin/linenotify')||request()->is('admin/alert')) ? 'active' : '' }}">
-                <a data-toggle="collapse" href="#sub-item-2">
-                    <i class="fas fa-bug">&nbsp;</i> ทดสอบ <span data-toggle="collapse" href="#sub-item-2"
-                        class="icon pull-right"><i class="fa fa-plus"></i></span>
-                </a>
-                <ul class="children collapse" id="sub-item-2">
-                    <li class="{{ (request()->is('admin/linenotify')) ? 'active' : '' }}">
-                        <a href="{{route('linenotify.index')}}"><em class="fab fa-line">&nbsp;</em> ไลน์บรอดแคส</a>
-                    </li>
-                    <li class="{{ (request()->is('admin/alert')) ? 'active' : '' }}">
-                        <a href="{{route('sweet.alert')}}"><em class="fas fa-exclamation-circle">&nbsp;</em>
-                            แจ้งเตือน</a>
-                    </li>
-                </ul>
-                </li> --}}
-
                 <li class="{{ (request()->is('admin/linenotify')) ? 'active' : '' }}">
                     <a href="{{route('linenotify.index')}}"><em class="fab fa-line">&nbsp;</em> ไลน์บรอดแคส</a>
                 </li>
@@ -180,7 +161,16 @@
     <script src="{{asset('js/admin/easypiechart.js')}}"></script>
     <script src="{{asset('js/admin/easypiechart-data.js')}}"></script>
     <script src="{{asset('js/admin/bootstrap-datepicker.js')}}"></script>
+    <script src="{{asset('js/admin/bootstrap-table.js')}}"></script>
     <script src="{{asset('js/admin/custom.js')}}"></script>
+
+    <script src="{{asset('js/dataTables.js')}}"></script>
+    <script src="{{asset('js/dataTables.bootstrap4.js')}}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#data_table').DataTable();
+        });
+    </script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @yield('script')

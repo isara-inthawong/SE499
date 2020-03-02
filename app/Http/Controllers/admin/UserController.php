@@ -24,7 +24,7 @@ class UserController extends Controller
         if (session('error')) {
             Alert::error(session('error'));
         }
-        $users = User::paginate(10);
+        $users = User::all();
         return view('admin.users', compact('users'));
     }
 

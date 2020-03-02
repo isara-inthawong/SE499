@@ -14,7 +14,7 @@
             <div class="panel-heading">รายการกิจกรรม</div>
             <div class="panel-body btn-margins">
                 <div class="col-md-12 table-responsive">
-                    <table class="table table-striped">
+                    <table id="data_table" class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th>รหัส</th>
@@ -77,22 +77,29 @@
                                         </button>
                                     </form>
                                     @else
-                                    @if ($item->history->join == 1)
-                                    <a href="{{ action('admin\HistoryController@edit', $item->activity_id) }}"
-                                        class="join-btn-size btn btn-warning">
-                                        <i class="fas fa-star"><b> ประเมิน</b></i>
-                                    </a>
-                                    @else
 
-                                    @endif
                                     @endif
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>รหัส</th>
+                                <th>ชื่อ</th>
+                                <th>วันที่</th>
+                                <th>เวลา</th>
+                                <th>ชั่วโมง</th>
+                                <th>สถานที่</th>
+                                <th>รายละเอียด</th>
+                                <th>รูปภาพ</th>
+                                <th>สถานะ</th>
+                                <th>โหวต</th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
-                {{ $activity->onEachSide(1)->links() }}
+                {{-- {{ $activity->onEachSide(1)->links() }} --}}
             </div>
         </div><!-- /.panel-->
     </div><!-- /.col-->

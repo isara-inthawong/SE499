@@ -30,6 +30,11 @@
     margin-top: 2px;
     margin-bottom: 2px;
 }
+.join-btn-size2 {
+    width: 110px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
 
 select#major.form-control.profile{
     height: 46px;
