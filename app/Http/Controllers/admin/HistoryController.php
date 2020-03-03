@@ -8,7 +8,6 @@ use Alert;
 use App\Activity;
 use Illuminate\Support\Facades\Auth;
 use App\History;
-use Symfony\Component\Console\Input\Input;
 
 class HistoryController extends Controller
 {
@@ -64,6 +63,51 @@ class HistoryController extends Controller
         return view('admin.history', compact('history', 'count_join', 'sum_date', 'sum_address', 'sum_overview'));
     }
 
+    public function index2()
+    {
+        if (session('success')) {
+            Alert::success(session('success'));
+        }
+        if (session('error')) {
+            Alert::error(session('error'));
+        }
+        $count_join = History::where('state', '=', 'เข้าร่วม')
+            ->get()
+            ->groupBy('activity_id')
+            ->map(function ($items) {
+                return $items->count();
+            });
+
+        $sum_date = History::where('state', '=', 'เข้าร่วม')
+            ->get()
+            ->groupBy('activity_id')
+            ->map(function ($items) {
+                return $items->sum('date_time_rate');
+            });
+
+        $sum_address = History::where('state', '=', 'เข้าร่วม')
+            ->get()
+            ->groupBy('activity_id')
+            ->map(function ($items) {
+                return $items->sum('address_rate');
+            });
+
+        $sum_overview = History::where('state', '=', 'เข้าร่วม')
+            ->get()
+            ->groupBy('activity_id')
+            ->map(function ($items) {
+                return $items->sum('overview_rate');
+            });
+
+
+        $history = History::where('state', '!=', null)
+            ->get();
+
+
+        // dd($history);
+        return view('admin.all-history', compact('history', 'count_join', 'sum_date', 'sum_address', 'sum_overview'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -101,9 +145,14 @@ class HistoryController extends Controller
                 'state' => $request->get('state'),
             );
             History::create($dataActivity);
-            return redirect('admin/join_activity')->with('success', 'เข้าร่วมสำเร็จ');
+            if ($request->get('state') == "เข้าร่วม") {
+                return redirect('admin/join_activity')->with('success', 'เข้าร่วมสำเร็จ');
+            }
+            if ($request->get('state') == "ไม่เข้าร่วม") {
+                return redirect('admin/join_activity')->with('error', 'ไม่เข้าร่วม');
+            }
         }
-        return redirect('admin/join_activity')->with('success', 'เข้าร่วมไม่สำเร็จ');
+        return redirect('admin/join_activity')->with('error', 'เข้าร่วมไม่สำเร็จ');
     }
 
     /**

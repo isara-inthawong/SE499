@@ -24,13 +24,13 @@ Route::group(['middleware' => ['auth']], function () {
         ['put', 'patch', 'post'],
         '/join_activity/{id}',
         'Member\JoinActivityController@update'
-    )->name('join_activity.update');
+    )->name('joinActivity.update');
 
     // ประเมิน
-    Route::resource('history', 'Member\HistoryController');
+    Route::resource('my_history', 'Member\HistoryController');
     Route::match(
         ['put', 'patch', 'post'],
-        '/history/{id}',
+        '/my_history/{id}',
         'Member\HistoryController@update'
     )->name('vote.update');
 });
@@ -64,6 +64,8 @@ Route::group(['prefix' => 'admin'], function () {
             '/history/{id}',
             'Admin\HistoryController@update'
         )->name('vote.update');
+        
+        Route::get('all_history', 'Admin\HistoryController@index2')->name('all_history.index2');
 
         Route::resource('/users', 'Admin\UserController');
         Route::match(

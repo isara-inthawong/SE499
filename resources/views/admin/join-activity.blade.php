@@ -57,7 +57,7 @@
                                 </td>
                                 <td>
 
-                                    @if ($item->history->state==null)
+                                    @if ($item->history->user_id != Auth::user()->user_id)
                                     <form method="post" action="{{ action('Admin\HistoryController@store') }}"
                                         enctype="multipart/form-data">
                                         @csrf

@@ -21,6 +21,8 @@
     {{-- Fonts --}}
     <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
 
+    {{-- data table --}}
+    <link href="{{ asset('css/dataTables.bootstrap4.css')}}" rel="stylesheet">
     <!-- Custom Styles -->
     <link href="{{ asset('css/all-style.css') }}" rel="stylesheet">
 </head>
@@ -44,9 +46,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('join_activity') }}">เข้าร่วมกิจกรรม</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">222</a>
                     </li>
                 </ul>
                 <!-- Right Side Of Navbar -->
@@ -76,7 +75,7 @@
                         <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
                             aria-labelledby="navbarDropdownMenuLink-55">
                             <a class="dropdown-item" href="{{ route('my_profile.index') }}">โปรไฟล์</a>
-                            <a class="dropdown-item" href="#">ประวัติการเข้าร่วมกิจกรรม</a>
+                            <a class="dropdown-item" href="{{ url('my_history') }}">ประวัติการเข้าร่วมกิจกรรม</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 {{ __('ออกจากระบบ') }}</a>
@@ -105,6 +104,14 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/js/mdb.min.js">
+    </script>
+
+    <script src="{{asset('js/dataTables.js')}}"></script>
+    <script src="{{asset('js/dataTables.bootstrap4.js')}}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+        $('#data_table').DataTable();
+    });
     </script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

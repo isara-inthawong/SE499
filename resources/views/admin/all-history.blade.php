@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">ประวัติการเข้าร่วมแต่ละกิจกรรม</h1>
+        <h1 class="page-header">ประวัติการเข้าร่วมทุกกิจกรรม</h1>
     </div>
 </div>
 <!--/.row-->
@@ -19,6 +19,7 @@
                             <tr>
                                 <th>รหัสกิจกรรม</th>
                                 <th>กิจกรรม</th>
+                                {{-- <th>รหัสนักศึกษา</th> --}}
                                 <th>จำนวนผู้เข้าร่วม</th>
                                 <th>ความพึงพอใจวันเวลาจัดกิจกรรม</th>
                                 <th>ความพึงพอใจสถานที่จัดกิจกรรม</th>
@@ -32,6 +33,7 @@
                             <tr>
                                 <td>{{ $value->activity_id }}</td>
                                 <td>{{ $value->activity->activity_name }}</td>
+                                {{-- <td>{{ $value->user->user_id }}</td> --}}
                                 <td>{{ $count_join[$value->activity_id] }}</td>
                                 <td style="min-width:125px;">
                                     <!-- ////////////// STAR RATE CHECKER ////////////// -->
@@ -479,6 +481,7 @@
                             <tr>
                                 <th>รหัสกิจกรรม</th>
                                 <th>กิจกรรม</th>
+                                {{-- <th>รหัสนักศึกษา</th> --}}
                                 <th>จำนวนผู้เข้าร่วม</th>
                                 <th>ความพึงพอใจวันเวลาจัดกิจกรรม</th>
                                 <th>ความพึงพอใจสถานที่จัดกิจกรรม</th>

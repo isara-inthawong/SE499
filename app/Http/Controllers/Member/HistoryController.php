@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -8,7 +8,6 @@ use Alert;
 use App\Activity;
 use Illuminate\Support\Facades\Auth;
 use App\History;
-use Symfony\Component\Console\Input\Input;
 
 class HistoryController extends Controller
 {
@@ -25,43 +24,11 @@ class HistoryController extends Controller
         if (session('error')) {
             Alert::error(session('error'));
         }
-        $count_join = History::where('state', '=', 'เข้าร่วม')
-            ->get()
-            ->groupBy('activity_id')
-            ->map(function ($items) {
-                return $items->count();
-            });
 
-        $sum_date = History::where('state', '=', 'เข้าร่วม')
-            ->get()
-            ->groupBy('activity_id')
-            ->map(function ($items) {
-                return $items->sum('date_time_rate');
-            });
-
-        $sum_address = History::where('state', '=', 'เข้าร่วม')
-            ->get()
-            ->groupBy('activity_id')
-            ->map(function ($items) {
-                return $items->sum('address_rate');
-            });
-
-        $sum_overview = History::where('state', '=', 'เข้าร่วม')
-            ->get()
-            ->groupBy('activity_id')
-            ->map(function ($items) {
-                return $items->sum('overview_rate');
-            });
-
-        // dd('date', $sum_date, 'address', $sum_address, 'over', $sum_overview);
-        $collection = History::where('state', '=', 'เข้าร่วม')
-            ->distinct('activity_id')
-            ->get();
-
-        $history = $collection->unique('activity_id');
+        $history = History::where('user_id', '=', Auth::user()->user_id)->get();
 
         // dd($history);
-        return view('admin.history', compact('history', 'count_join', 'sum_date', 'sum_address', 'sum_overview'));
+        return view('member.history', compact('history'));
     }
 
     /**
@@ -101,9 +68,14 @@ class HistoryController extends Controller
                 'state' => $request->get('state'),
             );
             History::create($dataActivity);
-            return redirect('admin/join_activity')->with('success', 'เข้าร่วมสำเร็จ');
+            if ($request->get('state') == "เข้าร่วม") {
+                return redirect('/join_activity')->with('success', 'เข้าร่วมสำเร็จ');
+            }
+            if ($request->get('state') == "ไม่เข้าร่วม") {
+                return redirect('/join_activity')->with('error', 'ไม่เข้าร่วม');
+            }
         }
-        return redirect('admin/join_activity')->with('success', 'เข้าร่วมไม่สำเร็จ');
+        return redirect('/join_activity')->with('error', 'ดำเนินการไม่สำเร็จ');
     }
 
     /**
@@ -128,7 +100,7 @@ class HistoryController extends Controller
         $history = History::where('activity_id', '=', $id)
             ->where('user_id', '=', Auth::user()->user_id)
             ->first();
-        return view('admin.satisfaction', compact('history'));
+        return view('member.satisfaction', compact('history'));
     }
 
     /**
@@ -161,17 +133,17 @@ class HistoryController extends Controller
                 $attr['address_rate'] = $request->get('address_rate');
                 $attr['overview_rate'] = $request->get('overview_rate');
                 $history->update($attr);
-                return redirect('admin/history')->with('success', 'ประเมินสำเร็จ');
+                return redirect('my_history')->with('success', 'ประเมินสำเร็จ');
             } else {
                 $attr['date_time_rate'] = $request->get('datetime_rate');
                 $attr['address_rate'] = $request->get('address_rate');
                 $attr['overview_rate'] = $request->get('overview_rate');
                 $attr['suggestion'] = $request->get('suggestion');
                 $history->update($attr);
-                return redirect('admin/history')->with('success', 'ประเมินสำเร็จ');
+                return redirect('my_history')->with('success', 'ประเมินสำเร็จ');
             }
         }
-        return redirect('admin/history')->with('error', 'ไม่สามารถประเมินกิจกรรมนี้ได้ หรือ การประเมินถูกปิด!');
+        return redirect('my_history')->with('error', 'ไม่สามารถประเมินกิจกรรมนี้ได้ หรือ การประเมินถูกปิด!');
     }
 
     /**

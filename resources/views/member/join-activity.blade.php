@@ -38,7 +38,7 @@
                                                 <td>{{ $item->activity_time}}</td>
                                                 <td>{{ $item->hour}}</td>
                                                 <td>{{ $item->activity_address}}</td>
-                                                <td>{{ $item->activity_detail}}</td>
+                                                <td style="min-width:125px;">{{ $item->activity_detail}}</td>
                                                 <td>
                                                     @if ($item->activity_image)
                                                     <a href="{{url('./images/activity')}}/{{$item->activity_image}}"
@@ -51,14 +51,13 @@
                                                 </td>
                                                 <td>
                                                     @if ($item->history->state)
-                                                    {{ $item->history->state}}
+                                                    {{$item->history->state}}
                                                     @else
                                                     รอ
                                                     @endif
                                                 </td>
                                                 <td>
-
-                                                    @if ($item->history->state==null)
+                                                    @if ($item->user_id != null)
                                                     <form method="post"
                                                         action="{{ action('Member\HistoryController@store') }}"
                                                         enctype="multipart/form-data">
@@ -66,7 +65,7 @@
                                                         <input type="hidden" name="activity_id"
                                                             value="{{ $item->activity_id }}">
                                                         <input type="hidden" name="state" value="เข้าร่วม">
-                                                        <button type="submit" class="join-btn-size btn btn-primary">
+                                                        <button type="submit" class="join-btn-size2 btn btn-primary">
                                                             <i class="fas fa-check"><b> เข้าร่วม</b></i>
                                                         </button>
                                                     </form>
@@ -77,7 +76,7 @@
                                                         <input type="hidden" name="activity_id"
                                                             value="{{ $item->activity_id }}">
                                                         <input type="hidden" name="state" value="ไม่เข้าร่วม">
-                                                        <button type="submit" class="join-btn-size btn btn-danger">
+                                                        <button type="submit" class="join-btn-size2 btn btn-danger">
                                                             <i class="fas fa-times"><b> ไม่เข้าร่วม</b></i>
                                                         </button>
                                                     </form>

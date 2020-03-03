@@ -18,10 +18,13 @@
                                         <div class="row">
                                             <div class="col-xs-2 col-md-2 date">
                                                 <div class="large">
-                                                    {{ date('d', strtotime($item->activity_date)) }}
+                                                    <h2>
+                                                        {{ date('D', strtotime($item->activity_date)) }}
+                                                        {{ date('d', strtotime($item->activity_date)) }}
+                                                    </h2>
                                                 </div>
                                                 <div class="text-muted">
-                                                    {{ date('M-y', strtotime($item->activity_date)) }}
+                                                    {{ date('M-Y', strtotime($item->activity_date)) }}
                                                 </div>
                                             </div>
                                             <div class="col-xs-10 col-md-10">

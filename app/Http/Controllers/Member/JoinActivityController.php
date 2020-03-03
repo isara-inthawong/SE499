@@ -65,9 +65,14 @@ class JoinActivityController extends Controller
                 'state' => $request->get('state'),
             );
             History::create($dataActivity);
-            return redirect('join_activity')->with('success', 'เข้าร่วมสำเร็จ');
+            if ($request->get('state') == "เข้าร่วม") {
+                return redirect('/join_activity')->with('success', 'เข้าร่วมสำเร็จ');
+            }
+            if ($request->get('state') == "ไม่เข้าร่วม") {
+                return redirect('/join_activity')->with('error', 'ไม่เข้าร่วม');
+            }
         }
-        return redirect('join_activity')->with('success', 'เข้าร่วมไม่สำเร็จ');
+        return redirect('join_activity')->with('error', 'เข้าร่วมไม่สำเร็จ');
     }
 
     /**

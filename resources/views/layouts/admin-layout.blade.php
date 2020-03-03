@@ -97,17 +97,31 @@
                 <li class="{{ (request()->is('admin/join_activity')) ? 'active' : '' }}">
                     <a href="{{route('join_activity.index')}}"><em class="fas fa-link">&nbsp;</em> เข้าร่วมกิจกรรม</a>
                 </li>
-                <li class="{{ (request()->is('admin/history')) ? 'active' : '' }}">
-                    <a href="{{route('history.index')}}"><em class="fas fa-history">&nbsp;</em> ประวัติกิจกรรม</a>
-                </li>
 
                 <li
-                    class="parent {{ (request()->is('admin/activity/create')||request()->is('admin/activity')) ? 'active' : '' }}">
+                    class="parent {{ (request()->is('admin/history')||request()->is('admin/all_history')) ? 'active' : '' }}">
                     <a data-toggle="collapse" href="#sub-item-1">
-                        <i class="far fa-calendar-alt">&nbsp;</i> กิจกรรม <span data-toggle="collapse"
+                        <i class="fas fa-history">&nbsp;</i> ประวัติการเข้าร่วม <span data-toggle="collapse"
                             href="#sub-item-1" class="icon pull-right"><i class="fa fa-plus"></i></span>
                     </a>
                     <ul class="children collapse" id="sub-item-1">
+                        <li class="{{ (request()->is('admin/activity')) ? 'active' : '' }}">
+                            <a href="{{route('history.index')}}"><em class="fas fa-history">&nbsp;</em>
+                                แต่ละกิจกรรม</a>
+                        </li>
+                        {{-- <li class="{{ (request()->is('admin/activity/create')) ? 'active' : '' }}">
+                            <a href="{{route('all_history.index2')}}"><em class="fas fa-history">&nbsp;</em>
+                                รายการทั้งหมด</a>
+                        </li> --}}
+                    </ul>
+                </li>
+                <li
+                    class="parent {{ (request()->is('admin/activity/create')||request()->is('admin/activity')) ? 'active' : '' }}">
+                    <a data-toggle="collapse" href="#sub-item-2">
+                        <i class="far fa-calendar-alt">&nbsp;</i> กิจกรรม <span data-toggle="collapse"
+                            href="#sub-item-2" class="icon pull-right"><i class="fa fa-plus"></i></span>
+                    </a>
+                    <ul class="children collapse" id="sub-item-2">
                         <li class="{{ (request()->is('admin/activity')) ? 'active' : '' }}">
                             <a href="{{route('activity.index')}}"><em class="fas fa-calendar-alt">&nbsp;</em>
                                 รายการกิจกรรม</a>
