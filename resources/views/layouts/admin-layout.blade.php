@@ -109,10 +109,10 @@
                             <a href="{{route('history.index')}}"><em class="fas fa-history">&nbsp;</em>
                                 แต่ละกิจกรรม</a>
                         </li>
-                        {{-- <li class="{{ (request()->is('admin/activity/create')) ? 'active' : '' }}">
+                        <li class="{{ (request()->is('admin/activity/create')) ? 'active' : '' }}">
                             <a href="{{route('all_history.index2')}}"><em class="fas fa-history">&nbsp;</em>
                                 รายการทั้งหมด</a>
-                        </li> --}}
+                        </li>
                     </ul>
                 </li>
                 <li

@@ -68,6 +68,7 @@ class User extends Authenticatable
     const PROFILE_PIC = 'profile-default.jpg';
     const ADMIN_TYPE = 1;
     const DEFAULT_TYPE = 2;
+    
     public function isAdmin()
     {
         return $this->role_id === self::ADMIN_TYPE;

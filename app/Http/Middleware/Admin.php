@@ -19,7 +19,7 @@ class Admin
         if (Auth::check() && Auth::user()->isAdmin()) {
             return $next($request);
         } else {
-            abort(403, 'Unauthorized action.');
+            abort(403, 'การกระทำที่ไม่ได้รับอนุญาต.');
         }
     }
 }
