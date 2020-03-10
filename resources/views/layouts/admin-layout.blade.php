@@ -94,9 +94,9 @@
                 <li class="{{ (request()->is('admin/users')) ? 'active' : '' }}">
                     <a href="{{route('users.index')}}"><em class="fas fa-users">&nbsp;</em> รายการผู้ใช้</a>
                 </li>
-                <li class="{{ (request()->is('admin/join_activity')) ? 'active' : '' }}">
+                {{-- <li class="{{ (request()->is('admin/join_activity')) ? 'active' : '' }}">
                     <a href="{{route('join_activity.index')}}"><em class="fas fa-link">&nbsp;</em> เข้าร่วมกิจกรรม</a>
-                </li>
+                </li> --}}
 
                 <li
                     class="parent {{ (request()->is('admin/history')||request()->is('admin/all_history')) ? 'active' : '' }}">

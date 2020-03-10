@@ -17,7 +17,7 @@
                     <table id="data_table" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>รหัส</th>
+                                <th>ลำดับ</th>
                                 <th>รหัสนักศึกษา</th>
                                 <th>ชื่อ</th>
                                 <th>นามสกุล</th>
@@ -69,7 +69,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>รหัส</th>
+                                <th>ลำดับ</th>
                                 <th>รหัสนักศึกษา</th>
                                 <th>ชื่อ</th>
                                 <th>นามสกุล</th>
@@ -95,7 +95,7 @@
     function confirmDel(id){
         const url = $(this).attr('href');
         swal({
-            title: 'คุณแน่ใจหรือไม่ที่จะลบผู้ใช้ รหัส '+id+' นี้?',
+            title: 'คุณแน่ใจหรือไม่ที่จะลบผู้ใช้ ลำดับที่ '+id+' นี้?',
             text: 'คุณจะไม่สามารถกู้คืนข้อมูลนี้ได้อีกหากลบแล้ว!',
             icon: 'warning',
             buttons: ["Cancel", "Yes, delete it!"],

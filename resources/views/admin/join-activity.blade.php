@@ -17,7 +17,7 @@
                     <table id="data_table" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>รหัส</th>
+                                <th>ลำดับ</th>
                                 <th>ชื่อ</th>
                                 <th>วันที่</th>
                                 <th>เวลา</th>
@@ -25,7 +25,7 @@
                                 <th>สถานที่</th>
                                 <th>รายละเอียด</th>
                                 <th>รูปภาพ</th>
-                                <th>สถานะ</th>
+                                {{-- <th>สถานะ</th> --}}
                                 <th>โหวต</th>
                             </tr>
                         </thead>
@@ -48,13 +48,13 @@
                                     ไม่มีภาพ
                                     @endif
                                 </td>
-                                <td>
+                                {{-- <td>
                                     @if ($item->history->state)
                                     {{ $item->history->state}}
                                     @else
                                     รอ
                                     @endif
-                                </td>
+                                </td> --}}
                                 <td>
 
                                     @if ($item->history->user_id != Auth::user()->user_id)
@@ -85,7 +85,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>รหัส</th>
+                                <th>ลำดับ</th>
                                 <th>ชื่อ</th>
                                 <th>วันที่</th>
                                 <th>เวลา</th>
@@ -93,7 +93,7 @@
                                 <th>สถานที่</th>
                                 <th>รายละเอียด</th>
                                 <th>รูปภาพ</th>
-                                <th>สถานะ</th>
+                                {{-- <th>สถานะ</th> --}}
                                 <th>โหวต</th>
                             </tr>
                         </tfoot>

@@ -16,7 +16,7 @@
                                     <table id="data_table" class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>รหัสกิจกรรม</th>
+                                                <th>ลำดับ</th>
                                                 <th>กิจกรรม</th>
                                                 <th>วันจัดกิจกรรม</th>
                                                 <th>สถานะ</th>
@@ -31,15 +31,31 @@
                                                 <td>{{ date('d-M-Y', strtotime($value->activity->activity_date)) }}</td>
                                                 <td>{{ $value->state }}</td>
                                                 <td>
-                                                    @if (($value->activity->assessment_status == 1)&& ($value->date_time_rate == null))
+                                                    @if (($value->activity->assessment_status == 1)&&
+                                                    ($value->date_time_rate == null))
                                                     <a href="{{ action('Member\HistoryController@edit', $value->activity_id) }}"
                                                         class="join-btn-size2 btn btn-warning">
                                                         <i class="fas fa-star"><b> ประเมิน</b></i>
                                                     </a>
                                                     @elseif($value->date_time_rate != null)
-                                                    ประเมินแล้ว
-                                                    @else
-                                                    รอเปิดการประเมิน
+                                                    <p>ประเมินแล้ว</p>
+                                                    @elseif($value->state=="เข้าร่วม")
+                                                    <p>รอเปิดการประเมิน</p>
+                                                    @endif
+
+
+                                                    @if (($value->state=="เข้าร่วม" || $value->state=="ไม่เข้าร่วม")&&$value->date_time_rate == null)
+                                                    <form method="post"
+                                                        action="{{ action('Member\HistoryController@store') }}"
+                                                        enctype="multipart/form-data">
+                                                        @csrf
+                                                        <input type="hidden" name="activity_id"
+                                                            value="{{ $value->activity_id }}">
+                                                        <input type="hidden" name="state" value="ยกเลิก">
+                                                        <button type="submit" class="join-btn-size2 btn btn-danger">
+                                                            <i class="fas fa-times"><b> ยกเลิก</b></i>
+                                                        </button>
+                                                    </form>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -47,7 +63,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>รหัสกิจกรรม</th>
+                                                <th>ลำดับ</th>
                                                 <th>กิจกรรม</th>
                                                 <th>วันจัดกิจกรรม</th>
                                                 <th>สถานะ</th>

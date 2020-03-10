@@ -17,7 +17,7 @@
                                     <table id="data_table" class="table table-striped table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>รหัส</th>
+                                                <th>ลำดับ</th>
                                                 <th>ชื่อ</th>
                                                 <th>วันที่</th>
                                                 <th>เวลา</th>
@@ -25,7 +25,7 @@
                                                 <th>สถานที่</th>
                                                 <th>รายละเอียด</th>
                                                 <th>รูปภาพ</th>
-                                                <th>สถานะ</th>
+                                                {{-- <th>สถานะ</th> --}}
                                                 <th>โหวต</th>
                                             </tr>
                                         </thead>
@@ -49,13 +49,14 @@
                                                     ไม่มีภาพ
                                                     @endif
                                                 </td>
-                                                <td>
-                                                    @if ($item->history->state)
+                                                {{-- <td>
+                                                    @if ($item->history->state&&($item->history->user_id==Auth::user()->user_id))
                                                     {{$item->history->state}}
                                                     @else
+                                                    {{$item->history->user_id}}
                                                     รอ
                                                     @endif
-                                                </td>
+                                                </td> --}}
                                                 <td>
                                                     @if ($item->user_id != null)
                                                     <form method="post"
@@ -81,15 +82,37 @@
                                                         </button>
                                                     </form>
                                                     @else
-
+                                                    {{-- // --}}
                                                     @endif
+                                                    <form method="post"
+                                                        action="{{ action('Member\HistoryController@store') }}"
+                                                        enctype="multipart/form-data">
+                                                        @csrf
+                                                        <input type="hidden" name="activity_id"
+                                                            value="{{ $item->activity_id }}">
+                                                        <input type="hidden" name="state" value="เข้าร่วม">
+                                                        <button type="submit" class="join-btn-size2 btn btn-primary">
+                                                            <i class="fas fa-check"><b> เข้าร่วม</b></i>
+                                                        </button>
+                                                    </form>
+                                                    <form method="post"
+                                                        action="{{ action('Member\HistoryController@store') }}"
+                                                        enctype="multipart/form-data">
+                                                        @csrf
+                                                        <input type="hidden" name="activity_id"
+                                                            value="{{ $item->activity_id }}">
+                                                        <input type="hidden" name="state" value="ไม่เข้าร่วม">
+                                                        <button type="submit" class="join-btn-size2 btn btn-danger">
+                                                            <i class="fas fa-times"><b> ไม่เข้าร่วม</b></i>
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                             @endforeach
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>รหัส</th>
+                                                <th>ลำดับ</th>
                                                 <th>ชื่อ</th>
                                                 <th>วันที่</th>
                                                 <th>เวลา</th>
@@ -97,7 +120,7 @@
                                                 <th>สถานที่</th>
                                                 <th>รายละเอียด</th>
                                                 <th>รูปภาพ</th>
-                                                <th>สถานะ</th>
+                                                {{-- <th>สถานะ</th> --}}
                                                 <th>โหวต</th>
                                             </tr>
                                         </tfoot>

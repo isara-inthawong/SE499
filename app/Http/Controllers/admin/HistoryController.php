@@ -71,51 +71,41 @@ class HistoryController extends Controller
         if (session('error')) {
             Alert::error(session('error'));
         }
-        $count_join = History::where('state', '=', 'เข้าร่วม')
-            ->get()
-            ->groupBy('activity_id')
-            ->map(function ($items) {
-                return $items->count();
-            });
+        // $count_join = History::where('state', '=', 'เข้าร่วม')
+        //     ->get()
+        //     ->groupBy('activity_id')
+        //     ->map(function ($items) {
+        //         return $items->count();
+        //     });
 
-        $sum_date = History::where('state', '=', 'เข้าร่วม')
-            ->get()
-            ->groupBy('activity_id')
-            ->map(function ($items) {
-                return $items->sum('date_time_rate');
-            });
+        // $sum_date = History::where('state', '=', 'เข้าร่วม')
+        //     ->get()
+        //     ->groupBy('activity_id')
+        //     ->map(function ($items) {
+        //         return $items->sum('date_time_rate');
+        //     });
 
-        $sum_address = History::where('state', '=', 'เข้าร่วม')
-            ->get()
-            ->groupBy('activity_id')
-            ->map(function ($items) {
-                return $items->sum('address_rate');
-            });
+        // $sum_address = History::where('state', '=', 'เข้าร่วม')
+        //     ->get()
+        //     ->groupBy('activity_id')
+        //     ->map(function ($items) {
+        //         return $items->sum('address_rate');
+        //     });
 
-        $sum_overview = History::where('state', '=', 'เข้าร่วม')
-            ->get()
-            ->groupBy('activity_id')
-            ->map(function ($items) {
-                return $items->sum('overview_rate');
-            });
+        // $sum_overview = History::where('state', '=', 'เข้าร่วม')
+        //     ->get()
+        //     ->groupBy('activity_id')
+        //     ->map(function ($items) {
+        //         return $items->sum('overview_rate');
+        //     });
 
 
-        $history = History::where('state', '!=', null)
-            ->get();
+        $history = History::all();
 
 
         // dd($history);
-        return view('admin.all-history', compact('history', 'count_join', 'sum_date', 'sum_address', 'sum_overview'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        // return view('admin.all-history', compact('history', 'count_join', 'sum_date', 'sum_address', 'sum_overview'));
+        return view('admin.all-history', compact('history'));
     }
 
     /**
@@ -152,18 +142,58 @@ class HistoryController extends Controller
                 return redirect('admin/join_activity')->with('error', 'ไม่เข้าร่วม');
             }
         }
-        return redirect('admin/join_activity')->with('error', 'เข้าร่วมไม่สำเร็จ');
-    }
+        return redirect('admin/join_activity')->with('error', 'โหวตกิจกรรมนี้แล้ว');
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        // *************************
+        $this->validate(
+            $request,
+            [
+                'activity_id' => 'required|string',
+                'state' => 'required|string',
+            ]
+        );
+        $history = History::where('activity_id', '=', $request->get('activity_id'))
+            ->where('user_id', '=', Auth::user()->user_id)
+            ->first();
+
+        if (!$history) {
+            $dataActivity = array(
+                'activity_id' => $request->get('activity_id'),
+                'user_id' => Auth::user()->user_id,
+                'state' => $request->get('state'),
+            );
+            History::create($dataActivity);
+            if ($request->get('state') == "เข้าร่วม") {
+                return redirect('admin/join_activity')->with('success', 'เข้าร่วมสำเร็จ');
+            }
+            if ($request->get('state') == "ไม่เข้าร่วม") {
+                return redirect('admin/join_activity')->with('error', 'ไม่เข้าร่วม');
+            }
+        }
+        if ($request->get('state') == "ยกเลิก") {
+            $history = History::where('activity_id', '=', $request->get('activity_id'))
+                ->where('user_id', '=', Auth::user()->user_id)
+                ->first();
+
+            $attr['state'] = $request->get('state');
+            $history->update($attr);
+            return redirect('/my_history')->with('success', 'ยกเลิกสำเร็จ');
+        }
+        if ($history->state == "ยกเลิก") {
+            $history = History::where('activity_id', '=', $request->get('activity_id'))
+                ->where('user_id', '=', Auth::user()->user_id)
+                ->first();
+
+            $attr['state'] = $request->get('state');
+            $history->update($attr);
+            if ($request->get('state') == "เข้าร่วม") {
+                return redirect('admin/join_activity')->with('success', 'เข้าร่วมสำเร็จ');
+            }
+            if ($request->get('state') == "ไม่เข้าร่วม") {
+                return redirect('admin/join_activity')->with('error', 'ไม่เข้าร่วม');
+            }
+        }
+        return redirect('admin/join_activity')->with('error', 'โหวตกิจกรรมนี้แล้ว');
     }
 
     /**

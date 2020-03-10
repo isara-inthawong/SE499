@@ -17,7 +17,7 @@
                     <table id="data_table" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>รหัสกิจกรรม</th>
+                                <th>ลำดับ</th>
                                 <th>กิจกรรม</th>
                                 <th>จำนวนผู้เข้าร่วม</th>
                                 <th>ความพึงพอใจวันเวลาจัดกิจกรรม</th>
@@ -463,21 +463,17 @@
                                         </button>
                                     </form>
                                     @endif
-                                    @if ($value->activity->assessment_status == 1)
-                                    <a href="{{ action('Admin\HistoryController@edit', $value->activity_id) }}"
+                                    <a href="{{ action('Admin\HistoryController@show', $value->activity_id) }}"
                                         class="join-btn-size2 btn btn-warning">
-                                        <i class="fas fa-star"><b> ประเมิน</b></i>
+                                        <i class="fas fa-file-pdf"><b> โหลด PDF</b></i>
                                     </a>
-                                    @else
-
-                                    @endif
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>รหัสกิจกรรม</th>
+                                <th>ลำดับ</th>
                                 <th>กิจกรรม</th>
                                 <th>จำนวนผู้เข้าร่วม</th>
                                 <th>ความพึงพอใจวันเวลาจัดกิจกรรม</th>

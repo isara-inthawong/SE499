@@ -17,15 +17,15 @@
                     <table id="data_table" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>รหัสกิจกรรม</th>
+                                <th>ลำดับ</th>
                                 <th>กิจกรรม</th>
                                 {{-- <th>รหัสนักศึกษา</th> --}}
-                                <th>จำนวนผู้เข้าร่วม</th>
+                                <th>ผู้เข้าร่วม</th>
                                 <th>ความพึงพอใจวันเวลาจัดกิจกรรม</th>
                                 <th>ความพึงพอใจสถานที่จัดกิจกรรม</th>
                                 <th>ความพึงพอใจในภาพรวม</th>
                                 <th>ความพึงพอใจกิจกรรม</th>
-                                <th>โหวต</th>
+                                {{-- <th>โหวต</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -33,94 +33,92 @@
                             <tr>
                                 <td>{{ $value->activity_id }}</td>
                                 <td>{{ $value->activity->activity_name }}</td>
-                                {{-- <td>{{ $value->user->user_id }}</td> --}}
-                                <td>{{ $count_join[$value->activity_id] }}</td>
+                                <td>{{ $value->user->first_name }}</td>
+                                {{-- <td>{{ $count_join[$value->activity_id] }}</td> --}}
                                 <td style="min-width:125px;">
                                     <!-- ////////////// STAR RATE CHECKER ////////////// -->
-                                    @if ($sum_date[$value->activity_id]=== 0)
+                                    @if ($value->date_time_rate === null)
                                     <p>ยังไม่มีการประเเมิน</p>
-                                    @elseif((($sum_date[$value->activity_id]/$count_join[$value->activity_id]) >= 0.1)
+                                    @elseif(($value->date_time_rate >= 0.1)
                                     &&
-                                    (($sum_date[$value->activity_id]/$count_join[$value->activity_id]) <=0.5) ) <i
-                                        class="far fa-star"></i>
+                                    ($value->date_time_rate <=0.5) ) <i class="far fa-star"></i>
                                         <i class="far fa-star"></i>
                                         <i class="far fa-star"></i>
                                         <i class="far fa-star"></i>
                                         <i class="far fa-star"></i>
-                                        @elseif((($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                        @elseif(($value->date_time_rate
                                         >=0.51)
-                                        && (($sum_date[$value->activity_id]/$count_join[$value->activity_id]) <=0.99))
-                                            <i class="fas fa-star-half-alt"></i>
+                                        && ($value->date_time_rate <=0.99)) <i class="fas fa-star-half-alt"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
-                                            @elseif((($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                            @elseif(($value->date_time_rate
                                             >=
-                                            1) && (($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                            1) && ($value->date_time_rate
                                             <=1.5)) <i class="fas fa-star"></i>
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
-                                                @elseif((($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                @elseif(($value->date_time_rate
                                                 >=1.51) &&
-                                                (($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                ($value->date_time_rate
                                                 <=1.99)) <i class="fas fa-star"></i>
                                                     <i class="fas fa-star-half-alt"></i>
                                                     <i class="far fa-star"></i>
                                                     <i class="far fa-star"></i>
                                                     <i class="far fa-star"></i>
-                                                    @elseif((($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                    @elseif(($value->date_time_rate
                                                     >=2) &&
-                                                    (($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                    ($value->date_time_rate
                                                     <=2.5)) <i class="fas fa-star"></i>
                                                         <i class="fas fa-star"></i>
                                                         <i class="far fa-star"></i>
                                                         <i class="far fa-star"></i>
                                                         <i class="far fa-star"></i>
-                                                        @elseif((($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                        @elseif(($value->date_time_rate
                                                         >=2.51) &&
-                                                        (($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                        ($value->date_time_rate
                                                         <=2.99)) <i class="fas fa-star"></i>
                                                             <i class="fas fa-star"></i>
                                                             <i class="fas fa-star-half-alt"></i>
                                                             <i class="far fa-star"></i>
                                                             <i class="far fa-star"></i>
-                                                            @elseif((($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                            @elseif(($value->date_time_rate
                                                             >=3) &&
-                                                            (($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                            ($value->date_time_rate
                                                             <=3.5)) <i class="fas fa-star"></i>
                                                                 <i class="fas fa-star"></i>
                                                                 <i class="fas fa-star"></i>
                                                                 <i class="far fa-star"></i>
                                                                 <i class="far fa-star"></i>
-                                                                @elseif((($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                                @elseif(($value->date_time_rate
                                                                 >=3.51) &&
-                                                                (($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                                ($value->date_time_rate
                                                                 <=3.99)) <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star-half-alt"></i>
                                                                     <i class="far fa-star"></i>
-                                                                    @elseif((($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                                    @elseif(($value->date_time_rate
                                                                     >=4) &&
-                                                                    (($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                                    ($value->date_time_rate
                                                                     <=4.5)) <i class="fas fa-star"></i>
                                                                         <i class="fas fa-star"></i>
                                                                         <i class="fas fa-star"></i>
                                                                         <i class="fas fa-star"></i>
                                                                         <i class="far fa-star"></i>
-                                                                        @elseif((($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                                        @elseif(($value->date_time_rate
                                                                         >=4.51) &&
-                                                                        (($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                                        ($value->date_time_rate
                                                                         <=4.99)) <i class="fas fa-star"></i>
                                                                             <i class="fas fa-star"></i>
                                                                             <i class="fas fa-star"></i>
                                                                             <i class="fas fa-star"></i>
                                                                             <i class="fas fa-star-half-alt"></i>
-                                                                            @elseif(($sum_date[$value->activity_id]/$count_join[$value->activity_id])
+                                                                            @elseif($value->date_time_rate
                                                                             >= 5)
                                                                             <i class="fas fa-star"></i>
                                                                             <i class="fas fa-star"></i>
@@ -133,91 +131,90 @@
                                 </td>
                                 <td style="min-width:125px;">
                                     <!-- ////////////// STAR RATE CHECKER ////////////// -->
-                                    @if ($sum_address[$value->activity_id]=== 0)
+                                    @if ($value->address_rate === null)
                                     <p>ยังไม่มีการประเเมิน</p>
-                                    @elseif((($sum_address[$value->activity_id]/$count_join[$value->activity_id]) >=
+                                    @elseif(($value->address_rate >=
                                     0.1)
                                     &&
-                                    (($sum_address[$value->activity_id]/$count_join[$value->activity_id]) <=0.5) ) <i
-                                        class="far fa-star"></i>
+                                    ($value->address_rate <=0.5) ) <i class="far fa-star"></i>
                                         <i class="far fa-star"></i>
                                         <i class="far fa-star"></i>
                                         <i class="far fa-star"></i>
                                         <i class="far fa-star"></i>
-                                        @elseif((($sum_address[$value->activity_id]/$count_join[$value->activity_id])
+                                        @elseif(($value->address_rate
                                         >=0.51)
-                                        && (($sum_address[$value->activity_id]/$count_join[$value->activity_id])
+                                        && ($value->address_rate
                                         <=0.99)) <i class="fas fa-star-half-alt"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
-                                            @elseif((($sum_address[$value->activity_id]/$count_join[$value->activity_id])
+                                            @elseif(($value->address_rate
                                             >=
-                                            1) && (($sum_address[$value->activity_id]/$count_join[$value->activity_id])
+                                            1) && ($value->address_rate
                                             <=1.5)) <i class="fas fa-star"></i>
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
-                                                @elseif((($sum_address[$value->activity_id]/$count_join[$value->activity_id])
+                                                @elseif(($value->address_rate
                                                 >=1.51) &&
-                                                (($sum_address[$value->activity_id]/$count_join[$value->activity_id])
+                                                ($value->address_rate
                                                 <=1.99)) <i class="fas fa-star"></i>
                                                     <i class="fas fa-star-half-alt"></i>
                                                     <i class="far fa-star"></i>
                                                     <i class="far fa-star"></i>
                                                     <i class="far fa-star"></i>
-                                                    @elseif((($sum_address[$value->activity_id]/$count_join[$value->activity_id])
+                                                    @elseif(($value->address_rate
                                                     >=2) &&
-                                                    (($sum_address[$value->activity_id]/$count_join[$value->activity_id])
+                                                    ($value->address_rate
                                                     <=2.5)) <i class="fas fa-star"></i>
                                                         <i class="fas fa-star"></i>
                                                         <i class="far fa-star"></i>
                                                         <i class="far fa-star"></i>
                                                         <i class="far fa-star"></i>
-                                                        @elseif((($sum_address[$value->activity_id]/$count_join[$value->activity_id])
+                                                        @elseif(($value->address_rate
                                                         >=2.51) &&
-                                                        (($sum_address[$value->activity_id]/$count_join[$value->activity_id])
+                                                        ($value->address_rate
                                                         <=2.99)) <i class="fas fa-star"></i>
                                                             <i class="fas fa-star"></i>
                                                             <i class="fas fa-star-half-alt"></i>
                                                             <i class="far fa-star"></i>
                                                             <i class="far fa-star"></i>
-                                                            @elseif((($sum_address[$value->activity_id]/$count_join[$value->activity_id])
+                                                            @elseif(($value->address_rate
                                                             >=3) &&
-                                                            (($sum_address[$value->activity_id]/$count_join[$value->activity_id])
+                                                            ($value->address_rate
                                                             <=3.5)) <i class="fas fa-star"></i>
                                                                 <i class="fas fa-star"></i>
                                                                 <i class="fas fa-star"></i>
                                                                 <i class="far fa-star"></i>
                                                                 <i class="far fa-star"></i>
-                                                                @elseif((($sum_address[$value->activity_id]/$count_join[$value->activity_id])
+                                                                @elseif(($value->address_rate
                                                                 >=3.51) &&
-                                                                (($sum_address[$value->activity_id]/$count_join[$value->activity_id])
+                                                                ($value->address_rate
                                                                 <=3.99)) <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star-half-alt"></i>
                                                                     <i class="far fa-star"></i>
-                                                                    @elseif((($sum_address[$value->activity_id]/$count_join[$value->activity_id])
+                                                                    @elseif(($value->address_rate
                                                                     >=4) &&
-                                                                    (($sum_address[$value->activity_id]/$count_join[$value->activity_id])
+                                                                    ($value->address_rate
                                                                     <=4.5)) <i class="fas fa-star"></i>
                                                                         <i class="fas fa-star"></i>
                                                                         <i class="fas fa-star"></i>
                                                                         <i class="fas fa-star"></i>
                                                                         <i class="far fa-star"></i>
-                                                                        @elseif((($sum_address[$value->activity_id]/$count_join[$value->activity_id])
+                                                                        @elseif(($value->address_rate
                                                                         >=4.51) &&
-                                                                        (($sum_address[$value->activity_id]/$count_join[$value->activity_id])
+                                                                        ($value->address_rate
                                                                         <=4.99)) <i class="fas fa-star"></i>
                                                                             <i class="fas fa-star"></i>
                                                                             <i class="fas fa-star"></i>
                                                                             <i class="fas fa-star"></i>
                                                                             <i class="fas fa-star-half-alt"></i>
-                                                                            @elseif(($sum_address[$value->activity_id]/$count_join[$value->activity_id])
+                                                                            @elseif($value->address_rate
                                                                             >= 5)
                                                                             <i class="fas fa-star"></i>
                                                                             <i class="fas fa-star"></i>
@@ -230,91 +227,90 @@
                                 </td>
                                 <td style="min-width:125px;">
                                     <!-- ////////////// STAR RATE CHECKER ////////////// -->
-                                    @if ($sum_overview[$value->activity_id]=== 0)
+                                    @if ($value->overview_rate === null)
                                     <p>ยังไม่มีการประเเมิน</p>
-                                    @elseif((($sum_overview[$value->activity_id]/$count_join[$value->activity_id]) >=
+                                    @elseif(($value->overview_rate >=
                                     0.1)
                                     &&
-                                    (($sum_overview[$value->activity_id]/$count_join[$value->activity_id]) <=0.5) ) <i
-                                        class="far fa-star"></i>
+                                    ($value->overview_rate <=0.5) ) <i class="far fa-star"></i>
                                         <i class="far fa-star"></i>
                                         <i class="far fa-star"></i>
                                         <i class="far fa-star"></i>
                                         <i class="far fa-star"></i>
-                                        @elseif((($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
+                                        @elseif(($value->overview_rate
                                         >=0.51)
-                                        && (($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
+                                        && ($value->overview_rate
                                         <=0.99)) <i class="fas fa-star-half-alt"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
-                                            @elseif((($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
+                                            @elseif(($value->overview_rate
                                             >=
-                                            1) && (($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
+                                            1) && ($value->overview_rate
                                             <=1.5)) <i class="fas fa-star"></i>
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
-                                                @elseif((($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
+                                                @elseif(($value->overview_rate
                                                 >=1.51) &&
-                                                (($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
+                                                ($value->overview_rate
                                                 <=1.99)) <i class="fas fa-star"></i>
                                                     <i class="fas fa-star-half-alt"></i>
                                                     <i class="far fa-star"></i>
                                                     <i class="far fa-star"></i>
                                                     <i class="far fa-star"></i>
-                                                    @elseif((($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
+                                                    @elseif(($value->overview_rate
                                                     >=2) &&
-                                                    (($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
+                                                    ($value->overview_rate
                                                     <=2.5)) <i class="fas fa-star"></i>
                                                         <i class="fas fa-star"></i>
                                                         <i class="far fa-star"></i>
                                                         <i class="far fa-star"></i>
                                                         <i class="far fa-star"></i>
-                                                        @elseif((($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
+                                                        @elseif(($value->overview_rate
                                                         >=2.51) &&
-                                                        (($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
+                                                        ($value->overview_rate
                                                         <=2.99)) <i class="fas fa-star"></i>
                                                             <i class="fas fa-star"></i>
                                                             <i class="fas fa-star-half-alt"></i>
                                                             <i class="far fa-star"></i>
                                                             <i class="far fa-star"></i>
-                                                            @elseif((($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
+                                                            @elseif(($value->overview_rate
                                                             >=3) &&
-                                                            (($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
+                                                            ($value->overview_rate
                                                             <=3.5)) <i class="fas fa-star"></i>
                                                                 <i class="fas fa-star"></i>
                                                                 <i class="fas fa-star"></i>
                                                                 <i class="far fa-star"></i>
                                                                 <i class="far fa-star"></i>
-                                                                @elseif((($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
+                                                                @elseif(($value->overview_rate
                                                                 >=3.51) &&
-                                                                (($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
+                                                                ($value->overview_rate
                                                                 <=3.99)) <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star-half-alt"></i>
                                                                     <i class="far fa-star"></i>
-                                                                    @elseif((($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
+                                                                    @elseif(($value->overview_rate
                                                                     >=4) &&
-                                                                    (($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
+                                                                    ($value->overview_rate
                                                                     <=4.5)) <i class="fas fa-star"></i>
                                                                         <i class="fas fa-star"></i>
                                                                         <i class="fas fa-star"></i>
                                                                         <i class="fas fa-star"></i>
                                                                         <i class="far fa-star"></i>
-                                                                        @elseif((($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
+                                                                        @elseif(($value->overview_rate
                                                                         >=4.51) &&
-                                                                        (($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
+                                                                        ($value->overview_rate
                                                                         <=4.99)) <i class="fas fa-star"></i>
                                                                             <i class="fas fa-star"></i>
                                                                             <i class="fas fa-star"></i>
                                                                             <i class="fas fa-star"></i>
                                                                             <i class="fas fa-star-half-alt"></i>
-                                                                            @elseif(($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
+                                                                            @elseif($value->overview_rate
                                                                             >= 5)
                                                                             <i class="fas fa-star"></i>
                                                                             <i class="fas fa-star"></i>
@@ -327,115 +323,111 @@
                                 </td>
                                 <td style="min-width:125px;">
                                     <!-- ////////////// STAR RATE CHECKER ////////////// -->
-                                    @if ($sum_overview[$value->activity_id]=== 0)
+                                    @if ($value->date_time_rate === null)
                                     <p>ยังไม่มีการประเเมิน</p>
-                                    @elseif(((($sum_date[$value->activity_id] + $sum_address[$value->activity_id] +
-                                    $sum_overview[$value->activity_id])/3)>=0.1)&&( (($sum_date[$value->activity_id] +
-                                    $sum_address[$value->activity_id] + $sum_overview[$value->activity_id])/3)<=0.5)) <i
-                                        class="far fa-star"></i>
+                                    @elseif(((($value->date_time_rate + $value->address_rate +
+                                    $value->overview_rate)/3)>=0.1)&&( (($value->date_time_rate +
+                                    $value->address_rate +$value->overview_rate)/3)<=0.5)) <i class="far fa-star"></i>
                                         <i class="far fa-star"></i>
                                         <i class="far fa-star"></i>
                                         <i class="far fa-star"></i>
                                         <i class="far fa-star"></i>
-                                        @elseif(((($sum_date[$value->activity_id] + $sum_address[$value->activity_id] +
-                                        $sum_overview[$value->activity_id])/3) >=0.51) &&
-                                        ((($sum_date[$value->activity_id] + $sum_address[$value->activity_id] +
-                                        $sum_overview[$value->activity_id])/3) <=0.99)) <i class="fas fa-star-half-alt">
+                                        @elseif(((($value->date_time_rate + $value->address_rate +
+                                        $value->overview_rate)/3) >=0.51) &&
+                                        ((($value->date_time_rate + $value->address_rate +
+                                        $value->overview_rate)/3) <=0.99)) <i class="fas fa-star-half-alt">
                                             </i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
-                                            @elseif(( (($sum_date[$value->activity_id] +
-                                            $sum_address[$value->activity_id] + $sum_overview[$value->activity_id])/3)>=
-                                            1) && ((($sum_date[$value->activity_id] + $sum_address[$value->activity_id]
-                                            + $sum_overview[$value->activity_id])/3)<=1.5)) <i class="fas fa-star"></i>
+                                            @elseif(( (($value->date_time_rate +
+                                            $value->address_rate +$value->overview_rate)/3)>=
+                                            1) && ((($value->date_time_rate + $value->address_rate
+                                            +$value->overview_rate)/3)<=1.5)) <i class="fas fa-star"></i>
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
-                                                @elseif(( (($sum_date[$value->activity_id] +
-                                                $sum_address[$value->activity_id] +
-                                                $sum_overview[$value->activity_id])/3)>=1.51) &&
-                                                ((($sum_date[$value->activity_id] + $sum_address[$value->activity_id] +
-                                                $sum_overview[$value->activity_id])/3) <=1.99)) <i class="fas fa-star">
+                                                @elseif(( (($value->date_time_rate +
+                                                $value->address_rate +
+                                                $value->overview_rate)/3)>=1.51) &&
+                                                ((($value->date_time_rate + $value->address_rate +
+                                                $value->overview_rate)/3) <=1.99)) <i class="fas fa-star">
                                                     </i>
                                                     <i class="fas fa-star-half-alt"></i>
                                                     <i class="far fa-star"></i>
                                                     <i class="far fa-star"></i>
                                                     <i class="far fa-star"></i>
-                                                    @elseif(((($sum_date[$value->activity_id] +
-                                                    $sum_address[$value->activity_id] +
-                                                    $sum_overview[$value->activity_id])/3) >=2) &&
-                                                    ((($sum_date[$value->activity_id] +
-                                                    $sum_address[$value->activity_id] +
-                                                    $sum_overview[$value->activity_id])/3) <=2.5)) <i
-                                                        class="fas fa-star"></i>
+                                                    @elseif(((($value->date_time_rate +
+                                                    $value->address_rate +
+                                                    $value->overview_rate)/3) >=2) &&
+                                                    ((($value->date_time_rate +
+                                                    $value->address_rate +
+                                                    $value->overview_rate)/3) <=2.5)) <i class="fas fa-star"></i>
                                                         <i class="fas fa-star"></i>
                                                         <i class="far fa-star"></i>
                                                         <i class="far fa-star"></i>
                                                         <i class="far fa-star"></i>
-                                                        @elseif(((($sum_date[$value->activity_id] +
-                                                        $sum_address[$value->activity_id] +
-                                                        $sum_overview[$value->activity_id])/3) >=2.51) && (
-                                                        (($sum_date[$value->activity_id] +
-                                                        $sum_address[$value->activity_id] +
-                                                        $sum_overview[$value->activity_id])/3)<=2.99)) <i
-                                                            class="fas fa-star"></i>
+                                                        @elseif(((($value->date_time_rate +
+                                                        $value->address_rate +
+                                                        $value->overview_rate)/3) >=2.51) && (
+                                                        (($value->date_time_rate +
+                                                        $value->address_rate +
+                                                        $value->overview_rate)/3)<=2.99)) <i class="fas fa-star"></i>
                                                             <i class="fas fa-star"></i>
                                                             <i class="fas fa-star-half-alt"></i>
                                                             <i class="far fa-star"></i>
                                                             <i class="far fa-star"></i>
-                                                            @elseif(((($sum_date[$value->activity_id] +
-                                                            $sum_address[$value->activity_id] +
-                                                            $sum_overview[$value->activity_id])/3) >=3) && (
-                                                            (($sum_date[$value->activity_id] +
-                                                            $sum_address[$value->activity_id] +
-                                                            $sum_overview[$value->activity_id])/3)<=3.5)) <i
-                                                                class="fas fa-star"></i>
+                                                            @elseif(((($value->date_time_rate +
+                                                            $value->address_rate +
+                                                            $value->overview_rate)/3) >=3) && (
+                                                            (($value->date_time_rate +
+                                                            $value->address_rate +
+                                                            $value->overview_rate)/3)<=3.5)) <i class="fas fa-star"></i>
                                                                 <i class="fas fa-star"></i>
                                                                 <i class="fas fa-star"></i>
                                                                 <i class="far fa-star"></i>
                                                                 <i class="far fa-star"></i>
-                                                                @elseif(((($sum_date[$value->activity_id] +
-                                                                $sum_address[$value->activity_id] +
-                                                                $sum_overview[$value->activity_id])/3)>=3.51) && (
-                                                                (($sum_date[$value->activity_id] +
-                                                                $sum_address[$value->activity_id] +
-                                                                $sum_overview[$value->activity_id])/3)<=3.99)) <i
+                                                                @elseif(((($value->date_time_rate +
+                                                                $value->address_rate +
+                                                                $value->overview_rate)/3)>=3.51) && (
+                                                                (($value->date_time_rate +
+                                                                $value->address_rate +
+                                                                $value->overview_rate)/3)<=3.99)) <i
                                                                     class="fas fa-star">
                                                                     </i>
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star"></i>
                                                                     <i class="fas fa-star-half-alt"></i>
                                                                     <i class="far fa-star"></i>
-                                                                    @elseif(((($sum_date[$value->activity_id] +
-                                                                    $sum_address[$value->activity_id] +
-                                                                    $sum_overview[$value->activity_id])/3)>=4) &&
-                                                                    ((($sum_date[$value->activity_id] +
-                                                                    $sum_address[$value->activity_id] +
-                                                                    $sum_overview[$value->activity_id])/3) <=4.5)) <i
+                                                                    @elseif(((($value->date_time_rate +
+                                                                    $value->address_rate +
+                                                                    $value->overview_rate)/3)>=4) &&
+                                                                    ((($value->date_time_rate +
+                                                                    $value->address_rate +
+                                                                    $value->overview_rate)/3) <=4.5)) <i
                                                                         class="fas fa-star">
                                                                         </i>
                                                                         <i class="fas fa-star"></i>
                                                                         <i class="fas fa-star"></i>
                                                                         <i class="fas fa-star"></i>
                                                                         <i class="far fa-star"></i>
-                                                                        @elseif(((($sum_date[$value->activity_id] +
-                                                                        $sum_address[$value->activity_id] +
-                                                                        $sum_overview[$value->activity_id])/3)>=4.51) &&
-                                                                        ((($sum_date[$value->activity_id] +
-                                                                        $sum_address[$value->activity_id] +
-                                                                        $sum_overview[$value->activity_id])/3) <=4.99))
-                                                                            <i class="fas fa-star"></i>
+                                                                        @elseif(((($value->date_time_rate +
+                                                                        $value->address_rate +
+                                                                        $value->overview_rate)/3)>=4.51) &&
+                                                                        ((($value->date_time_rate +
+                                                                        $value->address_rate +
+                                                                        $value->overview_rate)/3) <=4.99)) <i
+                                                                            class="fas fa-star"></i>
                                                                             <i class="fas fa-star"></i>
                                                                             <i class="fas fa-star"></i>
                                                                             <i class="fas fa-star"></i>
                                                                             <i class="fas fa-star-half-alt"></i>
-                                                                            @elseif((($sum_date[$value->activity_id] +
-                                                                            $sum_address[$value->activity_id] +
-                                                                            $sum_overview[$value->activity_id])/3) >= 5)
+                                                                            @elseif((($value->date_time_rate +
+                                                                            $value->address_rate +
+                                                                            $value->overview_rate)/3) >= 5)
                                                                             <i class="fas fa-star"></i>
                                                                             <i class="fas fa-star"></i>
                                                                             <i class="fas fa-star"></i>
@@ -445,41 +437,12 @@
                                                                             <!-- ///////////////////////////////////////////// -->
 
                                 </td>
-                                <td>
-                                    @if ($value->activity->assessment_status == 0)
-                                    <form method="post" action="{{route('join_activity.update', $value->activity_id)}}"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        <input type="hidden" name="join" value="1">
-                                        <button type="submit" class="join-btn-size2 btn btn-primary">
-                                            <i class="fas fa-book"><b> เปิดประเมิน</b></i>
-                                        </button>
-                                    </form>
-                                    @else
-                                    <form method="post" action="{{route('join_activity.update', $value->activity_id)}}"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        <input type="hidden" name="join" value="0">
-                                        <button type="submit" class="join-btn-size2 btn btn-danger">
-                                            <i class="fas fa-book"><b> ปิดประเมิน</b></i>
-                                        </button>
-                                    </form>
-                                    @endif
-                                    @if ($value->activity->assessment_status == 1)
-                                    <a href="{{ action('Admin\HistoryController@edit', $value->activity_id) }}"
-                                        class="join-btn-size2 btn btn-warning">
-                                        <i class="fas fa-star"><b> ประเมิน</b></i>
-                                    </a>
-                                    @else
-
-                                    @endif
-                                </td>
                             </tr>
                             @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>รหัสกิจกรรม</th>
+                                <th>ลำดับ</th>
                                 <th>กิจกรรม</th>
                                 {{-- <th>รหัสนักศึกษา</th> --}}
                                 <th>จำนวนผู้เข้าร่วม</th>
@@ -487,7 +450,7 @@
                                 <th>ความพึงพอใจสถานที่จัดกิจกรรม</th>
                                 <th>ความพึงพอใจในภาพรวม</th>
                                 <th>ความพึงพอใจกิจกรรม</th>
-                                <th>โหวต</th>
+                                {{-- <th>โหวต</th> --}}
                             </tr>
                         </tfoot>
                     </table>

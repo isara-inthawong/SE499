@@ -72,7 +72,7 @@ class JoinActivityController extends Controller
                 return redirect('/join_activity')->with('error', 'ไม่เข้าร่วม');
             }
         }
-        return redirect('join_activity')->with('error', 'เข้าร่วมไม่สำเร็จ');
+        return redirect('join_activity')->with('error', 'โหวตกิจกรรมนี้แล้ว');
     }
 
     /**

@@ -75,7 +75,30 @@ class HistoryController extends Controller
                 return redirect('/join_activity')->with('error', 'ไม่เข้าร่วม');
             }
         }
-        return redirect('/join_activity')->with('error', 'ดำเนินการไม่สำเร็จ');
+        if ($request->get('state') == "ยกเลิก") {
+            $history = History::where('activity_id', '=', $request->get('activity_id'))
+                ->where('user_id', '=', Auth::user()->user_id)
+                ->first();
+
+            $attr['state'] = $request->get('state');
+            $history->update($attr);
+            return redirect('/my_history')->with('success', 'ยกเลิกสำเร็จ');
+        }
+        if ($history->state == "ยกเลิก") {
+            $history = History::where('activity_id', '=', $request->get('activity_id'))
+                ->where('user_id', '=', Auth::user()->user_id)
+                ->first();
+
+            $attr['state'] = $request->get('state');
+            $history->update($attr);
+            if ($request->get('state') == "เข้าร่วม") {
+                return redirect('/join_activity')->with('success', 'เข้าร่วมสำเร็จ');
+            }
+            if ($request->get('state') == "ไม่เข้าร่วม") {
+                return redirect('/join_activity')->with('error', 'ไม่เข้าร่วม');
+            }
+        }
+        return redirect('/join_activity')->with('error', 'โหวตกิจกรรมนี้แล้ว');
     }
 
     /**
