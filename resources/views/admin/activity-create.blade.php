@@ -30,17 +30,31 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="activity_date" class="col-md-3 control-label">วันที่จัดกิจกรรม</label>
+                        <label for="activity_date" class="col-md-3 control-label">วันที่เริ่มจัดกิจกรรม</label>
                         <div class="col-md-8">
                             <input class="form-control" type="date" value="{{ old('activity_date') }}"
                                 name="activity_date" id="activity_date" placeholder="วว/ดด/ปป" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="activity_time" class="col-md-3 control-label">เวลา</label>
+                        <label for="activity_time" class="col-md-3 control-label">เวลาเริ่ม</label>
                         <div class="col-md-8">
                             <input class="form-control" type="time" value="{{ old('activity_time') }}"
                                 name="activity_time" id="activity_time" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="activity_todate" class="col-md-3 control-label">จัดกิจกรรมถึงวันที่</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="date" value="{{ old('activity_todate') }}"
+                                name="activity_todate" id="activity_todate" placeholder="วว/ดด/ปป" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="activity_totime" class="col-md-3 control-label">เวลาจบ</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="time" value="{{ old('activity_totime') }}"
+                                name="activity_totime" id="activity_totime" required>
                         </div>
                     </div>
                     <div class="form-group">

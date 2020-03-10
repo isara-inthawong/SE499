@@ -15,7 +15,8 @@ class Activity extends Model
      */
     protected $fillable = [
         'activity_name', 'activity_address', 'activity_date',
-        'activity_time', 'hour', 'activity_detail', 'activity_image',
+        'activity_time', 'activity_todate',        'activity_totime',
+        'hour', 'activity_detail', 'activity_image',
         'assessment_status',
     ];
 

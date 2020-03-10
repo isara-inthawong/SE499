@@ -8,9 +8,124 @@ use Alert;
 use App\Activity;
 use Illuminate\Support\Facades\Auth;
 use App\History;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class HistoryController extends Controller
 {
+
+
+    public function downloadPDF($id)
+    {
+        $count_alljoin = History::where('activity_id', '=', $id)
+            ->get()
+            ->groupBy('activity_id')
+            ->map(function ($items) {
+                return $items->count();
+            });
+        $count_join = History::where('state', '=', 'เข้าร่วม')
+            ->where('activity_id', '=', $id)
+            ->get()
+            ->groupBy('activity_id')
+            ->map(function ($items) {
+                return $items->count();
+            });
+
+        $count_unjoin = History::where('state', '=', 'ไม่เข้าร่วม')
+            ->where('activity_id', '=', $id)
+            ->get()
+            ->groupBy('activity_id')
+            ->map(function ($items) {
+                return $items->count();
+            });
+        $count_cancle_join = History::where('state', '=', 'ยกเลิก')
+            ->where('activity_id', '=', $id)
+            ->where('activity_id', '=', $id)
+            ->get()
+            ->groupBy('activity_id')
+            ->map(function ($items) {
+                return $items->count();
+            });
+
+        $sum_date_rate = History::where('state', '=', 'เข้าร่วม')
+            ->where('activity_id', '=', $id)
+            ->get()
+            ->groupBy('activity_id')
+            ->map(function ($items) {
+                return $items->sum('date_time_rate');
+            });
+
+        $sum_address_rate = History::where('state', '=', 'เข้าร่วม')
+            ->where('activity_id', '=', $id)
+            ->get()
+            ->groupBy('activity_id')
+            ->map(function ($items) {
+                return $items->sum('address_rate');
+            });
+
+        $sum_overview_rate = History::where('state', '=', 'เข้าร่วม')
+            ->where('activity_id', '=', $id)
+            ->get()
+            ->groupBy('activity_id')
+            ->map(function ($items) {
+                return $items->sum('overview_rate');
+            });
+
+        $history = History::where('state', '=', 'เข้าร่วม')
+            ->where('activity_id', '=', $id)
+            ->get();
+
+        // dd(
+        //     'count_join',
+        //     $count_join,
+        //     'count_unjoin',
+        //     $count_unjoin,
+        //     'count_cancle_join',
+        //     $count_cancle_join,
+        //     'sum_date_rate',
+        //     $sum_date_rate,
+        //     'sum_address_rate',
+        //     $sum_address_rate,
+        //     'sum_overview_rate',
+        //     $sum_overview_rate,
+        //     'history',
+        //     $history
+        // );
+
+
+        $show = History::where('activity_id', '=', $id)->first();
+
+        return view(
+            'admin.pdf',
+            compact(
+                'show',
+                'count_alljoin',
+                'count_join',
+                'count_unjoin',
+                'count_cancle_join',
+                'sum_date_rate',
+                'sum_address_rate',
+                'sum_overview_rate',
+                'history',
+            )
+        );
+
+        // $pdf = PDF::loadView(
+        //     'admin.pdf',
+        //     compact(
+        //         'show',
+        //         'count_join',
+        //         'count_unjoin',
+        //         'count_cancle_join',
+        //         'sum_date_rate',
+        //         'sum_address_rate',
+        //         'sum_overview_rate',
+        //         'history',
+        //     )
+        // );
+
+        // return $pdf->stream('summary_' . $show->activity->activity_id . '.pdf');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,6 +139,7 @@ class HistoryController extends Controller
         if (session('error')) {
             Alert::error(session('error'));
         }
+
         $count_join = History::where('state', '=', 'เข้าร่วม')
             ->get()
             ->groupBy('activity_id')

@@ -71,6 +71,8 @@ class TestController extends Controller
                 'activity_address' => $faker->address,
                 'activity_date' => $faker->date($format = 'Y-m-d', $min = 'now'),
                 'activity_time' => $faker->time($format = 'H:i:s', $min = 'now'),
+                'activity_todate' => $faker->date($format = 'Y-m-d', $min = 'now'),
+                'activity_totime' => $faker->time($format = 'H:i:s', $min = 'now'),
                 'hour' => $faker->randomDigit,
                 'activity_detail' => $faker->realText($maxNbChars = 200, $indexSize = 2),
                 'activity_image' => 'banner-01.jpg',

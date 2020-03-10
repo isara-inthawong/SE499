@@ -20,18 +20,19 @@
                                 <th>ลำดับ</th>
                                 <th>กิจกรรม</th>
                                 {{-- <th>รหัสนักศึกษา</th> --}}
-                                <th>ผู้เข้าร่วม</th>
+                                <th>ชื่อผู้เข้าร่วม</th>
                                 <th>ความพึงพอใจวันเวลาจัดกิจกรรม</th>
                                 <th>ความพึงพอใจสถานที่จัดกิจกรรม</th>
                                 <th>ความพึงพอใจในภาพรวม</th>
                                 <th>ความพึงพอใจกิจกรรม</th>
+                                <th>ข้อเสนอแนะ</th>
                                 {{-- <th>โหวต</th> --}}
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($history as $key => $value)
                             <tr>
-                                <td>{{ $value->activity_id }}</td>
+                                <td>{{ ($key+1) }}</td>
                                 <td>{{ $value->activity->activity_name }}</td>
                                 <td>{{ $value->user->first_name }}</td>
                                 {{-- <td>{{ $count_join[$value->activity_id] }}</td> --}}
@@ -49,7 +50,6 @@
                                         @elseif(($value->date_time_rate
                                         >=0.51)
                                         && ($value->date_time_rate <=0.99)) <i class="fas fa-star-half-alt"></i>
-                                            <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
@@ -149,7 +149,6 @@
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
                                             @elseif(($value->address_rate
                                             >=
                                             1) && ($value->address_rate
@@ -241,7 +240,6 @@
                                         >=0.51)
                                         && ($value->overview_rate
                                         <=0.99)) <i class="fas fa-star-half-alt"></i>
-                                            <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
@@ -341,7 +339,6 @@
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
                                             @elseif(( (($value->date_time_rate +
                                             $value->address_rate +$value->overview_rate)/3)>=
                                             1) && ((($value->date_time_rate + $value->address_rate
@@ -437,6 +434,13 @@
                                                                             <!-- ///////////////////////////////////////////// -->
 
                                 </td>
+                                <td>
+                                    @if ($value->suggestion!=null)
+                                    {{ $value->suggestion }}
+                                    @else
+                                    <center>-</center>
+                                    @endif
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -445,11 +449,12 @@
                                 <th>ลำดับ</th>
                                 <th>กิจกรรม</th>
                                 {{-- <th>รหัสนักศึกษา</th> --}}
-                                <th>จำนวนผู้เข้าร่วม</th>
+                                <th>ชื่อผู้เข้าร่วม</th>
                                 <th>ความพึงพอใจวันเวลาจัดกิจกรรม</th>
                                 <th>ความพึงพอใจสถานที่จัดกิจกรรม</th>
                                 <th>ความพึงพอใจในภาพรวม</th>
                                 <th>ความพึงพอใจกิจกรรม</th>
+                                <th>ข้อเสนอแนะ</th>
                                 {{-- <th>โหวต</th> --}}
                             </tr>
                         </tfoot>

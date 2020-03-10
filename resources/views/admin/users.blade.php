@@ -30,9 +30,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $item)
+                            @foreach ($users as $key => $item)
                             <tr>
-                                <td>{{ $item->user_id}}</td>
+                                <td>{{($key+1)}}</td>
                                 <td>{{ $item->student_id}}</td>
                                 <td>{{ $item->first_name}}</td>
                                 <td>{{ $item->last_name}}</td>
@@ -59,7 +59,7 @@
                                         enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="_method" value="DELETE" />
-                                        <button type="button" class="btn-size btn btn-danger" onclick="confirmDel({{ $item->user_id }})">
+                                        <button type="button" class="btn-size btn btn-danger" onclick="confirmDel({{ ($key+1) }})">
                                             <i class="fas fa-trash-alt"><b> ลบ</b></i>
                                         </button>
                                     </form>

@@ -30,7 +30,7 @@
                         <tbody>
                             @foreach ($history as $key => $value)
                             <tr>
-                                <td>{{ $value->activity_id }}</td>
+                                <td>{{ ($key+1) }}</td>
                                 <td>{{ $value->activity->activity_name }}</td>
                                 <td>{{ $count_join[$value->activity_id] }}</td>
                                 <td style="min-width:125px;">
@@ -49,7 +49,6 @@
                                         >=0.51)
                                         && (($sum_date[$value->activity_id]/$count_join[$value->activity_id]) <=0.99))
                                             <i class="fas fa-star-half-alt"></i>
-                                            <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
@@ -150,7 +149,6 @@
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
                                             @elseif((($sum_address[$value->activity_id]/$count_join[$value->activity_id])
                                             >=
                                             1) && (($sum_address[$value->activity_id]/$count_join[$value->activity_id])
@@ -247,7 +245,6 @@
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
                                             @elseif((($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
                                             >=
                                             1) && (($sum_overview[$value->activity_id]/$count_join[$value->activity_id])
@@ -340,7 +337,6 @@
                                         ((($sum_date[$value->activity_id] + $sum_address[$value->activity_id] +
                                         $sum_overview[$value->activity_id])/3) <=0.99)) <i class="fas fa-star-half-alt">
                                             </i>
-                                            <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
@@ -463,7 +459,8 @@
                                         </button>
                                     </form>
                                     @endif
-                                    <a href="{{ action('Admin\HistoryController@show', $value->activity_id) }}"
+                                    <a href="{{ action('Admin\HistoryController@downloadPDF', $value->activity_id) }}"
+                                        target="_blank"
                                         class="join-btn-size2 btn btn-warning">
                                         <i class="fas fa-file-pdf"><b> โหลด PDF</b></i>
                                     </a>
@@ -500,7 +497,7 @@
     function confirmDel(id){
         const url = $(this).attr('href');
         swal({
-            title: 'คุณแน่ใจหรือไม่ที่จะลบกิจกรรม รหัส '+id+' นี้?',
+            title: 'คุณแน่ใจหรือไม่ที่จะลบกิจกรรม ลำดับที่ '+id+' นี้?',
             text: 'คุณจะไม่สามารถกู้คืนข้อมูลนี้ได้อีกหากลบแล้ว!',
             icon: 'warning',
             buttons: ["Cancel", "Yes, delete it!"],

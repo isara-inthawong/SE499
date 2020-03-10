@@ -20,8 +20,10 @@
                             <tr>
                                 <th>ลำดับ</th>
                                 <th>ชื่อ</th>
-                                <th>วันที่</th>
-                                <th>เวลา</th>
+                                <th>วันที่เริ่มจัด</th>
+                                <th>เวลาเริ่ม</th>
+                                <th>ถึงวันที่</th>
+                                <th>เวลาจบ</th>
                                 <th>ชั่วโมง</th>
                                 <th>สถานที่</th>
                                 <th>รายละเอียด</th>
@@ -32,10 +34,12 @@
                         <tbody>
                             @foreach ($activity as $key => $item)
                             <tr>
-                                <td>{{ $item->activity_id }}</td>
+                                <td>{{ ($key+1) }}</td>
                                 <td>{{ $item->activity_name }}</td>
                                 <td>{{ $item->activity_date }}</td>
                                 <td>{{ $item->activity_time }}</td>
+                                <td>{{ $item->activity_todate }}</td>
+                                <td>{{ $item->activity_totime }}</td>
                                 <td>{{ $item->hour }}</td>
                                 <td>{{ $item->activity_address }}</td>
                                 <td style="min-width:200px">{{ $item->activity_detail }}</td>
@@ -60,7 +64,7 @@
                                         @csrf
                                         <input type="hidden" name="_method" value="DELETE" />
                                         <button type="button" class="btn-size btn btn-danger"
-                                            onclick="confirmDel({{ $item->activity_id }})">
+                                            onclick="confirmDel({{ ($key+1)}})">
                                             <i class="fas fa-trash-alt"><b> ลบ</b></i>
                                         </button>
                                     </form>
@@ -72,8 +76,10 @@
                             <tr>
                                 <th>ลำดับ</th>
                                 <th>ชื่อ</th>
-                                <th>วันที่</th>
-                                <th>เวลา</th>
+                                <th>วันที่เริ่มจัด</th>
+                                <th>เวลาเริ่ม</th>
+                                <th>ถึงวันที่</th>
+                                <th>เวลาจบ</th>
                                 <th>ชั่วโมง</th>
                                 <th>สถานที่</th>
                                 <th>รายละเอียด</th>
@@ -98,7 +104,7 @@
     function confirmDel(id){
         const url = $(this).attr('href');
         swal({
-            title: 'คุณแน่ใจหรือไม่ที่จะลบกิจกรรม ลำดับที่ '+id+' นี้?',
+            title: 'คุณแน่ใจหรือไม่ที่จะลบกิจกรรม ลำดับ '+id+' นี้?',
             text: 'คุณจะไม่สามารถกู้คืนข้อมูลนี้ได้อีกหากลบแล้ว!',
             icon: 'warning',
             buttons: ["Cancel", "Yes, delete it!"],

@@ -19,6 +19,8 @@ class CreateActivitiesTable extends Migration
             $table->string('activity_address')->nullable();
             $table->date('activity_date')->nullable();
             $table->time('activity_time')->nullable();
+            $table->date('activity_todate')->nullable();
+            $table->time('activity_totime')->nullable();
             $table->integer('hour')->nullable();
             $table->boolean('assessment_status')->default(0);
             $table->string('activity_detail')->nullable();

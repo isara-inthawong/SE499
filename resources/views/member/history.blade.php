@@ -26,7 +26,7 @@
                                         <tbody>
                                             @foreach ($history as $key => $value)
                                             <tr>
-                                                <td>{{ $value->activity_id }}</td>
+                                                <td>{{ ($key+1) }}</td>
                                                 <td>{{ $value->activity->activity_name }}</td>
                                                 <td>{{ date('d-M-Y', strtotime($value->activity->activity_date)) }}</td>
                                                 <td>{{ $value->state }}</td>

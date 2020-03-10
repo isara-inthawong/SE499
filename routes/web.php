@@ -38,10 +38,14 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['prefix' => 'admin'], function () {
     Route::group(['middleware' => ['admin']], function () {
         Route::get('/home', 'Admin\AdminController@index')->name('admin.home');
+        // PDF
+        Route::get('/downloadPDF/{id}','Admin\HistoryController@downloadPDF');
 
+        // ไลน์
         Route::get('/linenotify', 'Admin\LineNotifyController@index')->name('linenotify.index');
         Route::post('/linenotify', 'Admin\LineNotifyController@sent')->name('linenotify.sent');
 
+        // กิจกรรม
         Route::resource('/activity', 'Admin\ActivityController');
         Route::match(
             ['put', 'patch', 'post'],
@@ -64,7 +68,7 @@ Route::group(['prefix' => 'admin'], function () {
             '/history/{id}',
             'Admin\HistoryController@update'
         )->name('vote.update');
-        
+
         Route::get('all_history', 'Admin\HistoryController@index2')->name('all_history.index2');
 
         Route::resource('/users', 'Admin\UserController');

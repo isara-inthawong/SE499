@@ -30,9 +30,9 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($activity as $item)
+                                            @foreach ($activity as $key => $item)
                                             <tr>
-                                                <td>{{ $item->activity_id}}</td>
+                                                <td>{{ ($key+1) }}</td>
                                                 <td>{{ $item->activity_name}}</td>
                                                 <td>{{ $item->activity_date}}</td>
                                                 <td>{{ $item->activity_time}}</td>
@@ -52,10 +52,10 @@
                                                 {{-- <td>
                                                     @if ($item->history->state&&($item->history->user_id==Auth::user()->user_id))
                                                     {{$item->history->state}}
-                                                    @else
-                                                    {{$item->history->user_id}}
-                                                    รอ
-                                                    @endif
+                                                @else
+                                                {{$item->history->user_id}}
+                                                รอ
+                                                @endif
                                                 </td> --}}
                                                 <td>
                                                     @if ($item->user_id != null)

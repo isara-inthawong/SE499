@@ -24,7 +24,7 @@ class ActivityController extends Controller
         if (session('error')) {
             Alert::error(session('error'));
         }
-        $activity = Activity::orderBy('activity_id', 'desc')->get();
+        $activity = Activity::all();
         return view('admin.activity', compact('activity'));
     }
 
@@ -64,6 +64,8 @@ class ActivityController extends Controller
                 'activity_address' => 'required|string|max:500',
                 'activity_date' => 'required|date',
                 'activity_time' => 'required',
+                'activity_todate' => 'required|date',
+                'activity_totime' => 'required',
                 'activity_hour' => 'required|integer',
                 // 'activity_image' => 'required|image|mimes:jpeg,png,jpg|max:15360‬',
             ]
@@ -89,13 +91,17 @@ class ActivityController extends Controller
                     'activity_address' => $request->get('activity_address'),
                     'activity_date' => $request->get('activity_date'),
                     'activity_time' => $request->get('activity_time'),
+                    'activity_todate' => $request->get('activity_todate'),
+                    'activity_totime' => $request->get('activity_totime'),
                     'hour' => $request->get('activity_hour'),
                 );
                 Activity::create($dataActivity);
 
                 $text = 'กิจกรรม ' . $activity_name
-                    . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date')
+                    . ' เริ่มวันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date')
                     . ', เวลา ' . $request->get('activity_time') . ' น.'
+                    . ' ถึงวันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_todate')
+                    . ', เวลา ' . $request->get('activity_totime') . ' น.'
                     . ', ที่ ' . $request->get('activity_address') . ' .'
                     . ' จำนวนชั่วโมงกิจกรรม ' . $request->get('activity_hour') . ' ชั่วโมง.'
                     . ', รายละเอียด ' . $request->get('activity_detail') . ' ถูกสร้างขึ้น';
@@ -113,6 +119,8 @@ class ActivityController extends Controller
                 'activity_address' => $request->get('activity_address'),
                 'activity_date' => $request->get('activity_date'),
                 'activity_time' => $request->get('activity_time'),
+                'activity_todate' => $request->get('activity_todate'),
+                'activity_totime' => $request->get('activity_totime'),
                 'hour' => $request->get('activity_hour'),
                 'activity_image' => $imageName
             );
@@ -122,6 +130,8 @@ class ActivityController extends Controller
             $text = 'กิจกรรม ' . $activity_name
                 . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date')
                 . ', เวลา ' . $request->get('activity_time') . ' น.'
+                . ' ถึงวันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_todate')
+                . ', เวลา ' . $request->get('activity_totime') . ' น.'
                 . ', ที่ ' . $request->get('activity_address') . ' .'
                 . ' จำนวนชั่วโมงกิจกรรม ' . $request->get('activity_hour') . ' ชั่วโมง.'
                 . ', รายละเอียด ' . $request->get('activity_detail') . ' ถูกสร้างขึ้น';
@@ -176,6 +186,8 @@ class ActivityController extends Controller
                 'activity_address' => 'required|string|max:500',
                 'activity_date' => 'required|date',
                 'activity_time' => 'required',
+                'activity_todate' => 'required|date',
+                'activity_totime' => 'required',
                 'activity_hour' => 'required|integer',
                 // 'activity_image' => 'required|image|mimes:jpeg,png,jpg|max:15360‬',
             ]
@@ -198,12 +210,16 @@ class ActivityController extends Controller
             $attr['activity_address'] = $request->get('activity_address');
             $attr['activity_date'] = $request->get('activity_date');
             $attr['activity_time'] = $request->get('activity_time');
+            $attr['activity_todate'] = $request->get('activity_todate');
+            $attr['activity_totime'] = $request->get('activity_totime');
             $attr['hour'] = $request->get('activity_hour');
             $activity->update($attr);
 
             $text = 'กิจกรรม ' . $old_data->activity_name
                 . ' วันที่จัดงาน(ปป/ดด/วว) ' . $old_data->activity_date
                 . ', เวลา ' . $old_data->activity_time . ' น.'
+                . ' ถึงวันที่จัดงาน(ปป/ดด/วว) ' . $old_data->activity_todate
+                . ', เวลา ' . $old_data->activity_totime . ' น.'
                 . ', ที่ ' . $old_data->activity_address . ' .'
                 . 'จำนวนชั่วโมงกิจกรรม ' . $old_data->hour . ' ชั่วโมง.'
                 . ', รายละเอียด ' . $old_data->activity_detail
@@ -215,6 +231,8 @@ class ActivityController extends Controller
                 . 'กิจกรรม ' . $request->get('activity_name')
                 . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date')
                 . ', เวลา ' . $request->get('activity_time') . ' น.'
+                . ' ถึงวันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_todate')
+                . ', เวลา ' . $request->get('activity_totime') . ' น.'
                 . ', ที่ ' . $request->get('activity_address') . ' .'
                 . ' จำนวนชั่วโมงกิจกรรม ' . $request->get('activity_hour') . ' ชั่วโมง.'
                 . ', รายละเอียด ' . $request->get('activity_detail');
@@ -226,6 +244,8 @@ class ActivityController extends Controller
             $attr['activity_address'] = $request->get('activity_address');
             $attr['activity_date'] = $request->get('activity_date');
             $attr['activity_time'] = $request->get('activity_time');
+            $attr['activity_todate'] = $request->get('activity_todate');
+            $attr['activity_totime'] = $request->get('activity_totime');
             $attr['hour'] = $request->get('activity_hour');
             $attr['activity_image'] = $imageName;
             $activity->update($attr);
@@ -234,6 +254,8 @@ class ActivityController extends Controller
             $text = 'กิจกรรม ' . $old_data->activity_name
                 . ' วันที่จัดงาน(ปป/ดด/วว) ' . $old_data->activity_date
                 . ', เวลา ' . $old_data->activity_time . ' น.'
+                . ' ถึงวันที่จัดงาน(ปป/ดด/วว) ' . $old_data->activity_todate
+                . ', เวลา ' . $old_data->activity_totime . ' น.'
                 . ', ที่ ' . $old_data->activity_address . ' .'
                 . ' จำนวนชั่วโมงกิจกรรม ' . $old_data->hour . ' ชั่วโมง.'
                 . ', รายละเอียด ' . $old_data->activity_detail
@@ -245,6 +267,8 @@ class ActivityController extends Controller
                 . 'กิจกรรม ' . $request->get('activity_name')
                 . ' วันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_date')
                 . ', เวลา ' . $request->get('activity_time') . ' น.'
+                . ' ถึงวันที่จัดงาน(ปป/ดด/วว) ' . $request->get('activity_todate')
+                . ', เวลา ' . $request->get('activity_totime') . ' น.'
                 . ', ที่ ' . $request->get('activity_address') . ' .'
                 . ' จำนวนชั่วโมงกิจกรรม ' . $request->get('activity_hour') . ' ชั่วโมง.'
                 . ', รายละเอียด ' . $request->get('activity_detail');
