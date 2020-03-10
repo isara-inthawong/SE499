@@ -74,6 +74,223 @@ class HistoryController extends Controller
             ->where('activity_id', '=', $id)
             ->get();
 
+
+
+        $show = History::where('activity_id', '=', $id)->first();
+
+        $join_male_female = History::where('state', '=', 'เข้าร่วม')
+            ->where('activity_id', '=', $id)
+            ->get();
+        $unjoin_male_female = History::where('state', '=', 'ไม่เข้าร่วม')
+            ->where('activity_id', '=', $id)
+            ->get();
+        $cancle_join_male_female = History::where('state', '=', 'ยกเลิก')
+            ->where('activity_id', '=', $id)
+            ->get();
+
+        $j_male = 0;
+        $j_female = 0;
+        $unj_male = 0;
+        $unj_female = 0;
+        $cancle_j_male = 0;
+        $cancle_j_female = 0;
+        $j_se = 0;
+        $j_cs = 0;
+        $j_fs = 0;
+        $uj_se = 0;
+        $uj_cs = 0;
+        $uj_fs = 0;
+        $cj_se = 0;
+        $cj_cs = 0;
+        $cj_fs = 0;
+        foreach ($join_male_female as $key => $value) {
+            if ($value->user->gender == "ชาย") {
+                $j_male += 1;
+            } else {
+                $j_female += 1;
+            }
+
+            if ($value->user->major_id == 1) {
+                $j_se += 1;
+            } elseif ($value->user->major_id == 2) {
+                $j_cs += 1;
+            } else {
+                $j_fs += 1;
+            }
+        }
+        foreach ($unjoin_male_female as $key => $value) {
+            if ($value->user->gender == "ชาย") {
+                $unj_male += 1;
+            } else {
+                $unj_female += 1;
+            }
+            if ($value->user->major_id == 1) {
+                $uj_se += 1;
+            } elseif ($value->user->major_id == 2) {
+                $uj_cs += 1;
+            } else {
+                $uj_fs += 1;
+            }
+        }
+        foreach ($cancle_join_male_female as $key => $value) {
+            if ($value->user->gender == "ชาย") {
+                $cancle_j_male += 1;
+            } else {
+                $cancle_j_female += 1;
+            }
+            if ($value->user->major_id == 1) {
+                $cj_se += 1;
+            } elseif ($value->user->major_id == 2) {
+                $cj_cs += 1;
+            } else {
+                $cj_fs += 1;
+            }
+        }
+
+        $sum_date = History::where('state', '=', 'เข้าร่วม')
+            ->get()
+            ->groupBy('activity_id')
+            ->map(function ($items) {
+                return $items->sum('date_time_rate');
+            });
+
+        $sum_address = History::where('state', '=', 'เข้าร่วม')
+            ->get()
+            ->groupBy('activity_id')
+            ->map(function ($items) {
+                return $items->sum('address_rate');
+            });
+
+        $sum_overview = History::where('state', '=', 'เข้าร่วม')
+            ->get()
+            ->groupBy('activity_id')
+            ->map(function ($items) {
+                return $items->sum('overview_rate');
+            });
+
+        // dd('date', $sum_date, 'address', $sum_address, 'over', $sum_overview);
+        $collection = History::where('state', '=', 'เข้าร่วม')
+            ->distinct('activity_id')
+            ->get();
+
+        $history = $collection->unique('activity_id');
+
+        // dd($unjoin_male_female['items']);
+        // if ($unjoin_male_female->isEmpty()) {
+        //     dd($unjoin_male_female);
+        // }
+
+        // dd(
+        //     'show',
+        //     $show,
+        //     'j_se',
+        //     $j_se,
+        //     'j_cs',
+        //     $j_cs,
+        //     'j_fs',
+        //     $j_fs,
+        //     'uj_se',
+        //     $uj_se,
+        //     'uj_cs',
+        //     $uj_cs,
+        //     'uj_fs',
+        //     $uj_fs,
+        //     'cj_se',
+        //     $cj_se,
+        //     'cj_cs',
+        //     $cj_cs,
+        //     'cj_fs',
+        //     $cj_fs,
+        //     'join_male_female',
+        //     $join_male_female,
+        //     'unjoin_male_female',
+        //     $unjoin_male_female,
+        //     'cancle_join_male_female',
+        //     $cancle_join_male_female,
+        //     'j_male',
+        //     $j_male,
+        //     'j_female',
+        //     $j_female,
+        //     'unj_male',
+        //     $unj_male,
+        //     'unj_female',
+        //     $unj_female,
+        //     'cancle_j_male',
+        //     $cancle_j_male,
+        //     'cancle_j_female',
+        //     $cancle_j_female,
+        //     'count_alljoin',
+        //     $count_alljoin,
+        //     'count_join',
+        //     $count_join,
+        //     'count_unjoin',
+        //     $count_unjoin,
+        //     'count_cancle_join',
+        //     $count_cancle_join,
+        //     'sum_date_rate',
+        //     $sum_date_rate,
+        //     'sum_address_rate',
+        //     $sum_address_rate,
+        //     'sum_overview_rate',
+        //     $sum_overview_rate,
+        //     'history',
+        //     $history,
+        // );
+
+        // $join_male = $join_male::where('state', '=', 'เข้าร่วม')
+        //     ->where('gender', '=', 'ชาย')
+        //     ->where('activity_id', '=', $id)
+        //     ->get()
+        //     ->groupBy('activity_id')
+        //     ->map(function ($items) {
+        //         return $items->count();
+        //     });
+
+        // $join_female = History::where('state', '=', 'เข้าร่วม')
+        //     ->where('gender', '=', 'หญิง')
+        //     ->where('activity_id', '=', $id)
+        //     ->get()
+        //     ->groupBy('activity_id')
+        //     ->map(function ($items) {
+        //         return $items->count();
+        //     });
+
+        return view(
+            'admin.pdf',
+            compact(
+                'sum_date',
+                'sum_address',
+                'sum_overview',
+                'show',
+                'j_se',
+                'j_cs',
+                'j_fs',
+                'uj_se',
+                'uj_cs',
+                'uj_fs',
+                'cj_se',
+                'cj_cs',
+                'cj_fs',
+                'join_male_female',
+                'unjoin_male_female',
+                'cancle_join_male_female',
+                'j_male',
+                'j_female',
+                'unj_male',
+                'unj_female',
+                'cancle_j_male',
+                'cancle_j_female',
+                'count_alljoin',
+                'count_join',
+                'count_unjoin',
+                'count_cancle_join',
+                'sum_date_rate',
+                'sum_address_rate',
+                'sum_overview_rate',
+                'history',
+            )
+        );
+
         // dd(
         //     'count_join',
         //     $count_join,
@@ -90,24 +307,6 @@ class HistoryController extends Controller
         //     'history',
         //     $history
         // );
-
-
-        $show = History::where('activity_id', '=', $id)->first();
-
-        return view(
-            'admin.pdf',
-            compact(
-                'show',
-                'count_alljoin',
-                'count_join',
-                'count_unjoin',
-                'count_cancle_join',
-                'sum_date_rate',
-                'sum_address_rate',
-                'sum_overview_rate',
-                'history',
-            )
-        );
 
         // $pdf = PDF::loadView(
         //     'admin.pdf',
